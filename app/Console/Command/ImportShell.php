@@ -17,6 +17,7 @@ class ImportShell extends AppShell
 		$authors = array();
 		$publications = array();
 		$subjects = array();
+		$article_mapping = array();
 		
 		while ($article = mysql_fetch_assoc($result)) {  
 			if(array_key_exists($authors, $author_name)) {
@@ -54,17 +55,30 @@ class ImportShell extends AppShell
 				$subject_id = $this->Subject->id;
 				$subjects[$subject_name] = $subject_id;
 			}
+			
+			$this->Article->save(
+			    'Article' => array(
+			    	'id' => 1, 
+			    	'name' => 'one random field'
+				),
+			    'Subject' => array(
+			    	'Subject' => array($subject_id)
+				)
+			);
+			
+			$article_mapping[$article['id']] => $this->Article->id;
 		}
-        
-        //READ THE RECORDS FROM teslacollection tmp_article
-        //FOREACH RECORD
-        	//-CHECK AUTHOR - IF EXISTS ELSE CREATE
-        	//-CHECK PUBLICATION - IF EXISTS ELSE CREATE
-        	//-CHECK SUBJECT - IF EXISTS ELSE CREATE
-        	
-        //READ THE RECORDS FROM teslacollection tmp_article_pages
-        //FOREACH RECORD
-        	//IMPORT INTO ARTICLE_PAGE
+		
+		$result = mysql_query("select * from tmp_article_images");
+		
+		while ($article_page = mysql_fetch_assoc($result)) {  
+			$this->ArticlePage->create();
+			$this->ArticlePage->save(array(
+				'filename' => '',
+				'full_path' => '',
+				'article_id' => $article_mapping[$article_page['article_id']]
+			));
+		}
     }
 }
 ?>
