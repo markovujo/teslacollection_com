@@ -19,6 +19,11 @@ class ImportShell extends AppShell
     {
         $this->out('IMPORTING ARTICLES AND PAGES!!');
         
+       	$authors = array();
+		$publications = array();
+		$subjects = array();
+		$article_mapping = array();
+        
         $con = mysql_connect("localhost","root","");
 		if (!$con) {
   			die('Could not connect: ' . mysql_error());
@@ -27,19 +32,14 @@ class ImportShell extends AppShell
 		mysql_select_db("teslacollection", $con);
 		
 		#TRUNCATE TABLES FOR IMPORT
-		$result = mysql_query("TRUNCATE articles");
-		$result = mysql_query("TRUNCATE article_pages");
-		$result = mysql_query("TRUNCATE publications");
-		$result = mysql_query("TRUNCATE authors");
-		$result = mysql_query("TRUNCATE subjects");
-		$result = mysql_query("TRUNCATE articles_subjects");
+		$result = $this->Article->query("TRUNCATE TABLE articles");
+		$result = $this->Article->query("TRUNCATE TABLE article_pages");
+		$result = $this->Article->query("TRUNCATE TABLE publications");
+		$result = $this->Article->query("TRUNCATE TABLE authors");
+		$result = $this->Article->query("TRUNCATE TABLE subjects");
+		$result = $this->Article->query("TRUNCATE TABLE articles_subjects");
 		
 		$result = mysql_query("select * from tmp_articles ORDER BY volume, page");
-		
-		$authors = array();
-		$publications = array();
-		$subjects = array();
-		$article_mapping = array();
 		
 		while ($article = mysql_fetch_assoc($result)) {
 			$author_name = trim($article['author']);
