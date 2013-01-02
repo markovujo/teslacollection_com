@@ -6,5 +6,7 @@ class Publication extends AppModel
             'className'  => 'Article',
         )
     );
+    
+    public $actsAs = array('Containable');
 }
 ?>

@@ -6,5 +6,7 @@ class Subject extends AppModel
             'className' => 'Article',
         )
     );
+    
+    public $actsAs = array('Containable');
 }
 ?>

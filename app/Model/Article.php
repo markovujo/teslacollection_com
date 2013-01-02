@@ -23,5 +23,7 @@ class Article extends AppModel
             'className' => 'Subject',
         )
     );
+    
+    public $actsAs = array('Containable');
 }
 ?>

@@ -26,13 +26,58 @@ class ArticlesController extends AppController {
 		'Article',
 		'Author',
 		'Publication',
-		'Subject'
+		'Subject',
+		'ArticleSearch'
 	);
 
 	public function index()
 	{
-		$articles = $this->Article->find('all');
+		$selections = array(
+			'author' => array()
+			, 'publication' => array()
+			, 'subject' => array()
+		);
 		
-		$this->set('articles', $articles);
+		$ids = array_keys($selections);
+		if(!empty($ids)) {
+			foreach($ids AS $id) {
+				$Model = ucwords($id);
+				$results = $this->$Model->find('all', array(
+					'fields' => array(
+						$Model . '.id'
+						, $Model . '.name')
+					, 'contain' => array()
+					, 'order' => array($Model . '.name') 
+				));
+				
+				if($results) {
+					foreach($results AS $result) {
+						$record_id = $result[$Model]['id'];
+						$record_value = $result[$Model]['name'];
+						
+						$selections[$id][$record_id] = $record_value;
+					}
+				}
+			}
+		}
+		
+		$years = $this->Article->find('all', array(
+			'fields' => array('Article.year')
+			, 'group' => 'Article.year'
+			, 'contain' => false
+			, 'order' => array('Article.year')
+		));
+		
+		if($years) {
+			foreach($years AS $year) {
+				$id = $year['Article']['year'];
+				$value = $year['Article']['year'];
+				
+				$selections['years'][$id] = $value;
+			}
+		}
+		
+		$this->set('selections', $selections);
 	}
 }
+  

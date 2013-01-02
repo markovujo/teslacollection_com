@@ -6,5 +6,7 @@ class Author extends AppModel
             'className'  => 'Article',
         )
     );
+    
+    public $actsAs = array('Containable');
 }
 ?>
