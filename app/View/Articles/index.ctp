@@ -28,8 +28,17 @@
 	echo $this->Form->end('Submit');
 ?>
 
+<div class="articles_search_criteria>
+	<?php if(isset($criteria)):?>
+		<?php foreach($criteria AS $criteria):?>
+			<?php debug($criteria); ?>
+		<?php endforeach; ?>
+	<?php endif; ?>
+</div>
+
 <div class="articles_search_results">
 	<?php if(isset($articles)):?>
+		<div>There are <strong><?php echo count($articles) ?></strong></div> Articles found for this criteria.</div></div>
 		<?php foreach($articles AS $article):?>
 			<?php debug($article); ?>
 		<?php endforeach; ?>

@@ -77,9 +77,9 @@ class ArticlesController extends AppController {
 		}
 		
 		if(isset($this->data['ArticleSearch']) && !empty($this->data['ArticleSearch'])) {
-			//die(debug($this->data['ArticleSearch']));
-			$articles = $this->Article->search($this->data['ArticleSearch']);
-			$this->set('articles', $articles);
+			$result = $this->Article->search($this->data['ArticleSearch']);
+			$this->set('articles', $result['articles']);
+			$this->set('criteria', $result['criteria']);
 		}
 		
 		$this->set('selections', $selections);

@@ -1,6 +1,8 @@
 <div class="selection_box">
     <label for="<?php echo $selection_id; ?>"><?php echo $selection_name; ?>:</label>
-    <?php echo $this->Form->input($selection_id, array(
+    <?php 
+    $options = array_merge(array('ALL' => ' -- ALL --'), $options);
+    echo $this->Form->input($selection_id, array(
     	'type' => 'select'
     	, 'multiple' => 'multiple'
     	, 'class' => 'chzn-select'
