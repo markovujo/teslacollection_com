@@ -59,7 +59,6 @@ class ImportShell extends AppShell
 					$authors[$author_name] = $author_id;
 				}
 			}
-			//die(debug($authors));
 			
 			if(array_key_exists($publication_name, $publications)) {
 				$publication_id = $publications[$publication_name];
@@ -74,7 +73,6 @@ class ImportShell extends AppShell
 					$publications[$publication_name] = $publication_id;
 				}
 			}
-			//die(debug($publications));
 			
 			if(array_key_exists($subject_name, $subjects)) {
 				$subject_id = $subjects[$subject_name];
@@ -89,7 +87,6 @@ class ImportShell extends AppShell
 					$subjects[$subject_name] = $subject_id;
 				}
 			}
-			//die(debug($subjects));
 			
 			$this->Article->saveAll(array(
 			 	'Article' => array(

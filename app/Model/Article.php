@@ -84,10 +84,12 @@ class Article extends AppModel
 			, 'joins' => $joins
 		));
 
+		/* DEBUGGING ::
 		debug($params);
 		debug($conditions);
 		debug($return);
 		die();
+		*/
 		return $return;
 	}
 }

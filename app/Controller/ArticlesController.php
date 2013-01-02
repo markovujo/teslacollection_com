@@ -49,6 +49,7 @@ class ArticlesController extends AppController {
 					, 'order' => array($Model . '.name') 
 				));
 				
+				$selections[$id]['ALL'] = '-- ALL --';
 				if($results) {
 					foreach($results AS $result) {
 						$record_id = $result[$Model]['id'];
@@ -67,6 +68,7 @@ class ArticlesController extends AppController {
 			, 'order' => array('Article.year')
 		));
 		
+		$selections['year']['ALL'] = '-- ALL --';
 		if($years) {
 			foreach($years AS $year) {
 				$id = $year['Article']['year'];
@@ -77,9 +79,8 @@ class ArticlesController extends AppController {
 		}
 		
 		if(isset($this->data['ArticleSearch']) && !empty($this->data['ArticleSearch'])) {
-			$result = $this->Article->search($this->data['ArticleSearch']);
-			$this->set('articles', $result['articles']);
-			$this->set('criteria', $result['criteria']);
+			$search_results = $this->Article->search($this->data['ArticleSearch']);
+			$this->set('search_results', $search_results);
 		}
 		
 		$this->set('selections', $selections);

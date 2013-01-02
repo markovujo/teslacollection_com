@@ -28,18 +28,18 @@
 	echo $this->Form->end('Submit');
 ?>
 
-<div class="articles_search_criteria>
-	<?php if(isset($criteria)):?>
-		<?php foreach($criteria AS $criteria):?>
-			<?php debug($criteria); ?>
+<div class="articles_search_criteria">
+	<?php if(isset($search_results['criteria'])): ?>
+		<?php foreach($search_results['criteria'] AS $key => $ids):?>
+			<div><strong><?php echo ucwords($key); ?></strong> : <?php echo print_r($ids, true); ?></div>
 		<?php endforeach; ?>
 	<?php endif; ?>
 </div>
 
 <div class="articles_search_results">
-	<?php if(isset($articles)):?>
-		<div>There are <strong><?php echo count($articles) ?></strong></div> Articles found for this criteria.</div></div>
-		<?php foreach($articles AS $article):?>
+	<?php if(isset($search_results['articles'])):?>
+		<div>There are <strong><?php echo count($search_results['articles']) ?></strong> Articles found for this criteria.</div></div>
+		<?php foreach($search_results['articles'] AS $article):?>
 			<?php debug($article); ?>
 		<?php endforeach; ?>
 	<?php endif; ?>
