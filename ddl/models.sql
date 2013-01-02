@@ -25,11 +25,12 @@ CREATE TABLE article_pages
   article_id int(7),
   filename varchar(255),
   full_path varchar(255),
+  title varchar(255),
   text text,
   created datetime,
   modified datetime,
   INDEX(article_id),
-  FULLTEXT(text)
+  FULLTEXT(title, text)
 ) ENGINE=MYISAM;
 
 CREATE TABLE publications

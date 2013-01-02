@@ -121,7 +121,8 @@ class ImportShell extends AppShell
 			$article = array(
 				'id' => NULL,
 				'volume' => NULL,
-				'page' => NULL
+				'page' => NULL,
+				'title' => NULL
 			);
 			
 			if(isset($article_mapping[$article_page['article_id']])) {
@@ -142,11 +143,13 @@ class ImportShell extends AppShell
 				'article_id' => $article_id,
 				'filename' => trim($article_page['filename']),
 				'full_path' => trim($article_page['full_path']),
+				'title' => trim($article['title']),
 				'text' => trim($article_page['text'])
 			));
 			
 			$this->out('Article Id :: ' . $this->ArticlePage->id . 
 				' Article Page :: ' . $article_page['filename'] .
+				' Title :: ' . $article['title'] .
 				' volume : ' . $article['volume'] . 
 				' page : ' . $article['page']
 			);
