@@ -49,39 +49,45 @@ class ImportShell extends AppShell
 			if(array_key_exists($author_name, $authors)) {
 				$author_id = $authors[$author_name];
 			} else {
-				$this->Author->create();
-				$this->Author->save(array(
-					'name' => $author_name
-				));
-				
-				$author_id = $this->Author->id;
-				$authors[$author_name] = $author_id;
+				if($author_name != '') {
+					$this->Author->create();
+					$this->Author->save(array(
+						'name' => $author_name
+					));
+					
+					$author_id = $this->Author->id;
+					$authors[$author_name] = $author_id;
+				}
 			}
 			//die(debug($authors));
 			
 			if(array_key_exists($publication_name, $publications)) {
 				$publication_id = $publications[$publication_name];
 			} else {
-				$this->Publication->create();
-				$this->Publication->save(array(
-					'name' => $publication_name
-				));
-				
-				$publication_id = $this->Publication->id;
-				$publications[$publication_name] = $publication_id;
+				if($publication_name != '') {
+					$this->Publication->create();
+					$this->Publication->save(array(
+						'name' => $publication_name
+					));
+					
+					$publication_id = $this->Publication->id;
+					$publications[$publication_name] = $publication_id;
+				}
 			}
 			//die(debug($publications));
 			
 			if(array_key_exists($subject_name, $subjects)) {
 				$subject_id = $subjects[$subject_name];
 			} else {
-				$this->Subject->create();
-				$this->Subject->save(array(
-					'name' => $subject_name
-				));
-				
-				$subject_id = $this->Subject->id;
-				$subjects[$subject_name] = $subject_id;
+				if($subject_name != '') {
+					$this->Subject->create();
+					$this->Subject->save(array(
+						'name' => $subject_name
+					));
+					
+					$subject_id = $this->Subject->id;
+					$subjects[$subject_name] = $subject_id;
+				}
 			}
 			//die(debug($subjects));
 			
