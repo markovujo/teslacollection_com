@@ -26,8 +26,7 @@ class ArticlesController extends AppController {
 		'Article',
 		'Author',
 		'Publication',
-		'Subject',
-		'ArticleSearch'
+		'Subject'
 	);
 
 	public function index()
@@ -73,8 +72,14 @@ class ArticlesController extends AppController {
 				$id = $year['Article']['year'];
 				$value = $year['Article']['year'];
 				
-				$selections['years'][$id] = $value;
+				$selections['year'][$id] = $value;
 			}
+		}
+		
+		if(isset($this->data['ArticleSearch']) && !empty($this->data['ArticleSearch'])) {
+			//die(debug($this->data['ArticleSearch']));
+			$articles = $this->Article->search($this->data['ArticleSearch']);
+			$this->set('articles', $articles);
 		}
 		
 		$this->set('selections', $selections);
