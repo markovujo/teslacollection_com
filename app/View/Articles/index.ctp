@@ -47,7 +47,7 @@
 		</div>
 		<div style="clear: both"></div>
 		
-		<div style="text-align: center; background-color: #EEEEEE">
+		<div style="text-align: center; background-color: #E6EEEE">
 			<?php echo $this->Form->submit('Search'); ?>
 		</div>
 		<?php echo $this->Form->end(); ?>
