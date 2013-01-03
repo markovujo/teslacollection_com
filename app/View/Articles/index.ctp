@@ -129,9 +129,20 @@
 						if(isset($article['ArticlePage']) && !empty($article['ArticlePage'])) {
 							$filenames = array();
 							foreach($article['ArticlePage'] AS $article_page) {
-								$filenames[] = $this->Html->link($article_page['filename'], array('controller' => 'article_pages', 'action' => 'view', $article_page['id']));
+								$link = $this->Html->link($article_page['filename'], array(
+										'controller' => 'article_pages', 
+										'action' => 'view', 
+										$article_page['id']
+									), 
+									array(
+										'class' => 'tooltip_selector', 
+										'title' => $article_page['title'],
+										'data-id' => $article_page['id']
+									)
+								);
+								echo $link . "<br/>\n";
 							}
-							echo implode(",<br/>\n", $filenames);
+							//echo implode(",<br/>\n", $filenames);
 						}
 						?>
 					</td>

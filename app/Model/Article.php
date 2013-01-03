@@ -36,7 +36,7 @@ class Article extends AppModel
 		$contain = array(
 			'Author' => array('fields' => array('id', 'name')),
 			'Publication' => array('fields' => array('id', 'name')),
-			'ArticlePage' => array('fields' => array('id', 'filename')),
+			'ArticlePage' => array('fields' => array('id', 'filename', 'title')),
 			'Subject' => array('fields' => array('id', 'name')),
 		);
 		
