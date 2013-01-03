@@ -15,6 +15,7 @@ class Article extends AppModel
     public $hasMany = array(
         'ArticlePage' => array(
             'className'  => 'ArticlePage',
+    		'order' => 'filename'
         )
     );
     

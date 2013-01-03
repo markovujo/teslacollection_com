@@ -77,12 +77,13 @@
 	<?php if(isset($search_results['articles'])):?>
 		<table id="search_results">
 			  <col width="30%">
-  			  <col width="5%">
-  			  <col width="5%">
+  			  <col width="4%">
+  			  <col width="4%">
   			  <col width="15%">
   			  <col width="10%">
   			  <col width="10%">
   			  <col width="10%">
+  			  <col width="5%">
   			  <col width="15%">
 			<tr>
 				<th>Title</th>
@@ -92,6 +93,7 @@
 				<th>Author</th>
 				<th>Date</th>
 				<th>Subject</th>
+				<th>Page<br/>Range</th>
 				<th>Page</th>
 			</tr>
 			<?php 
@@ -121,6 +123,7 @@
 						}
 						?>
 					</td>
+					<td><?php echo str_replace(",", ",<br/>\n", $article['Article']['range_text']); ?></td>
 					<td>
 						<?php 
 						if(isset($article['ArticlePage']) && !empty($article['ArticlePage'])) {

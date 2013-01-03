@@ -30,6 +30,7 @@ CREATE TABLE article_pages
   created datetime,
   modified datetime,
   INDEX(article_id),
+  INDEX(filename),
   FULLTEXT(title, text)
 ) ENGINE=MYISAM;
 
