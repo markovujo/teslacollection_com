@@ -58,7 +58,7 @@ $siteDescription = '"The Tesla Collection" - the most comprehensive compilation 
 
 			<?php echo $this->fetch('content'); ?>
 		</div>
-		<div id="footer">
+		<div id="footer" style="width: 1100px">
 			&copy; <?php echo date('Y'); ?> - "The Tesla Collection"
 		</div>
 	</div>

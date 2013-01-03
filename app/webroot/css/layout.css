@@ -43,9 +43,8 @@ background: #FDE95E;
 
 #footer{
 clear: left;
-width: 100%;
-background: black;
-color: #FFF;
+width: 1000px;
+background: #E6EEEE;
 text-align: center;
 padding: 4px 0;
 }
