@@ -54,18 +54,34 @@
 	</div>
 </div>
 
-<div class="articles_search_criteria" style="margin: 25px 0px">
+<div class="articles_search_criteria" style="margin: 25px">
 	<?php if(isset($search_results['criteria'])): ?>
 		<?php foreach($search_results['criteria'] AS $key => $ids):?>
-			<div class="criteria_detail"><?php echo ucwords($key); ?> IN (<br/><?php echo implode(",<br/>\n", $ids); ?><br/>)</div>
+			<div class="criteria_detail">
+				<?php if(is_array($ids)) {
+					echo ucwords($key) . ' IN (<br/>' . implode(",<br/>\n", $ids) . '<br/>)';
+				} else {
+					echo ucwords($key) . " = '" . $ids . "'<br/>";
+				}
+				?>
+			</div>
 		<?php endforeach; ?>
+	<?php endif; ?>
+	
+	<?php if(isset($search_results['articles'])):?>
+		<div><strong><?php echo count($search_results['articles']) ?></strong> Article(s) found.</div></div>
 	<?php endif; ?>
 </div>
 
 <div class="articles_search_results" style="margin: 25px 0px">
 	<?php if(isset($search_results['articles'])):?>
-		<div>There are <strong><?php echo count($search_results['articles']) ?></strong> Articles found for this criteria.</div></div>
 		<table id="search_results">
+			  <col width="300">
+  			  <col width="100">
+  			  <col width="100">
+  			  <col width="100">
+  			  <col width="100">
+  			  <col width="100">
 			<tr>
 				<th>Title</th>
 				<th>Publication</th>
@@ -84,10 +100,10 @@
 				}
 			?>
 				<tr<?php echo ($class != '') ? ' class="' . $class .'"' : '';?>>
-					<td><?php echo $article['Article']['title']; ?></td>
+					<td><?php echo $this->Html->link($article['Article']['title'], array('controller' => 'articles', 'action' => 'view', 'id' => $article['Article']['id'])); ?></td>
 					<td><?php echo $article['Publication']['name']; ?></td>
 					<td><?php echo $article['Author']['name']; ?></td>
-					<td><?php echo $article['Article']['date']; ?></td>
+					<td><?php echo date('M d, Y', strtotime($article['Article']['date'])); ?></td>
 					<td>
 						<?php 
 						if(isset($article['Subject']) && !empty($article['Subject'])) {

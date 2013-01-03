@@ -80,10 +80,33 @@ class ArticlesController extends AppController {
 		
 		if(isset($this->data['ArticleSearch']) && !empty($this->data['ArticleSearch'])) {
 			$search_results = $this->Article->search($this->data['ArticleSearch']);
+			
+			if(isset($search_results['criteria']) && !empty($search_results['criteria'])) {
+				foreach($search_results['criteria'] AS $key => $ids) {
+					if(isset($selections[$key])) {
+						$new_values = array();
+						foreach($ids AS $id) {
+							if(isset($selections[$key][$id])) {
+								$new_values[$id] = $selections[$key][$id];
+							} else {
+								$new_values[$id] = $id;
+							}
+						}
+						$search_results['criteria'][$key] = $new_values;
+					}
+				}
+			}
+			
+			//die(debug($search_results));
 			$this->set('search_results', $search_results);
 		}
 		
 		$this->set('selections', $selections);
+	}
+	
+	public function view()
+	{
+		
 	}
 }
   
