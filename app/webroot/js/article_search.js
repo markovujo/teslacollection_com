@@ -17,5 +17,6 @@ $(function() {
 		position: { my: "right-15 center", at: "left bottom" }
 	});
 	
-	$('#search_results').tablesorter().tablesorterPager({container: $("#pager")}); 
+	//$('#search_results').tablesorter().tablesorterPager({container: $("#pager")}); 
+	$('#search_results').tablesorter(); 
 });
