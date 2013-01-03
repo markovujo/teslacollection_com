@@ -30,6 +30,7 @@ class Article extends AppModel
 	{
 		$conditions = array();
 		$joins = array();
+		$group = array('Article.id');
 		
 		$contain = array(
 			'Author' => array('fields' => array('id', 'name')),
@@ -58,13 +59,13 @@ class Article extends AppModel
 		
 		if(isset($params['subject_id']) && !empty($params['subject_id'])) {
 			if(!in_array('ALL', $params['subject_id'])) {
-				$conditions['ArticlesSubjects.subject_id'] = (array) $params['subject_id'];
+				$conditions['ArticlesSubject.subject_id'] = (array) $params['subject_id'];
 				$joins[] = array(
 			     	'table' => 'articles_subjects',
-			    	'alias' => 'ArticlesSubjects',
+			    	'alias' => 'ArticlesSubject',
 			    	'type' => 'LEFT',
 			    	'conditions' => array(
-			    		'Article.id = ArticlesSubjects.article_id'
+			    		'Article.id = ArticlesSubject.article_id'
 			       	)
 			    );
 			    $return['criteria']['subjects'] = $params['subject_id'];
@@ -78,15 +79,39 @@ class Article extends AppModel
 			}
 		}
 		
+		if(isset($params['text_search']) && !empty($params['text_search'])) {
+			# Sanitize the query 
+			App::uses('Sanitize', 'Utility');
+			$params['text_search'] = Sanitize::escape($params['text_search']);
+			
+			$conditions[] = array( 
+			   "MATCH(ArticlePage.title, ArticlePage.text)  
+			          AGAINST('" . $params['text_search'] . "' IN BOOLEAN MODE)" 
+			);
+			
+			$joins[] = array(
+		     	'table' => 'article_pages',
+		    	'alias' => 'ArticlePage',
+		    	'type' => 'INNER',
+		    	'conditions' => array(
+		    		'Article.id = ArticlePage.article_id'
+		       	)
+		    );
+			
+			$return['criteria']['text_search'] = $params['text_search'];
+		}
+		
 		$return['articles'] = $this->find('all', array(
 			'conditions' => $conditions
 			, 'contain' => $contain
 			, 'joins' => $joins
+			, 'group' => $group
 		));
 
-		/* DEBUGGING ::
+		/* DEBUGGING :: 
 		debug($params);
 		debug($conditions);
+		debug($joins);
 		debug($return);
 		die();
 		*/
