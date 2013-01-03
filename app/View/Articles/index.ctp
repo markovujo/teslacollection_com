@@ -75,7 +75,7 @@
 
 <div class="articles_search_results" style="margin: 25px 0px">
 	<?php if(isset($search_results['articles'])):?>
-		<table id="search_results">
+		<table id="search_results" class="tablesorter">
 			  <col width="30%">
   			  <col width="4%">
   			  <col width="4%">
@@ -85,71 +85,75 @@
   			  <col width="10%">
   			  <col width="5%">
   			  <col width="15%">
-			<tr>
-				<th>Title</th>
-				<th>Volume</th>
-				<th>Page</th>
-				<th>Publication</th>
-				<th>Author</th>
-				<th>Date</th>
-				<th>Subject</th>
-				<th>Page<br/>Range</th>
-				<th>Page</th>
-			</tr>
-			<?php 
-			$i=0;
-			foreach($search_results['articles'] AS $article): 
-				if($i%2 == 0) {
-					$class = "alt";
-				} else {
-					$class = '';
-				}
-			?>
-				<tr<?php echo ($class != '') ? ' class="' . $class .'"' : '';?>>
-					<td><?php echo $this->Html->link($article['Article']['title'], array('controller' => 'articles', 'action' => 'view', $article['Article']['id'])); ?></td>
-					<td><?php echo $article['Article']['volume']; ?></td>
-					<td><?php echo $article['Article']['page']; ?></td>
-					<td><?php echo $article['Publication']['name']; ?></td>
-					<td><?php echo $article['Author']['name']; ?></td>
-					<td><?php echo date('F d, Y', strtotime($article['Article']['date'])); ?></td>
-					<td>
-						<?php 
-						if(isset($article['Subject']) && !empty($article['Subject'])) {
-							$subjects = array();
-							foreach($article['Subject'] AS $subject) {
-								$subjects[] = $subject['name'];
-							}
-							echo implode(",", $subjects);
-						}
-						?>
-					</td>
-					<td><?php echo str_replace(",", ",<br/>\n", $article['Article']['range_text']); ?></td>
-					<td>
-						<?php 
-						if(isset($article['ArticlePage']) && !empty($article['ArticlePage'])) {
-							$filenames = array();
-							foreach($article['ArticlePage'] AS $article_page) {
-								$link = $this->Html->link($article_page['filename'], array(
-										'controller' => 'article_pages', 
-										'action' => 'view', 
-										$article_page['id']
-									), 
-									array(
-										'class' => 'tooltip_selector', 
-										'title' => $article_page['title'],
-										'data-id' => $article_page['id']
-									)
-								);
-								echo $link . "<br/>\n";
-							}
-							//echo implode(",<br/>\n", $filenames);
-						}
-						?>
-					</td>
+  			<thead>
+				<tr>
+					<th>Full Article</th>
+					<th>Volume</th>
+					<th>Page</th>
+					<th>Publication</th>
+					<th>Author</th>
+					<th>Date</th>
+					<th>Subject</th>
+					<th>Page<br/>Range</th>
+					<th>Page</th>
 				</tr>
-			<?php 
-			$i++;
-			endforeach; ?>
+			</thead>
+			<tbody> 
+				<?php 
+				$i=0;
+				foreach($search_results['articles'] AS $article): 
+					if($i%2 == 0) {
+						$class = "odd";
+					} else {
+						$class = '';
+					}
+				?>
+					<tr<?php echo ($class != '') ? ' class="' . $class .'"' : '';?>>
+						<td><?php echo $this->Html->link($article['Article']['title'], array('controller' => 'articles', 'action' => 'view', $article['Article']['id'])); ?></td>
+						<td><?php echo $article['Article']['volume']; ?></td>
+						<td><?php echo $article['Article']['page']; ?></td>
+						<td><?php echo $article['Publication']['name']; ?></td>
+						<td><?php echo $article['Author']['name']; ?></td>
+						<td><?php echo date('F d, Y', strtotime($article['Article']['date'])); ?></td>
+						<td>
+							<?php 
+							if(isset($article['Subject']) && !empty($article['Subject'])) {
+								$subjects = array();
+								foreach($article['Subject'] AS $subject) {
+									$subjects[] = $subject['name'];
+								}
+								echo implode(",", $subjects);
+							}
+							?>
+						</td>
+						<td><?php echo str_replace(",", ",<br/>\n", $article['Article']['range_text']); ?></td>
+						<td>
+							<?php 
+							if(isset($article['ArticlePage']) && !empty($article['ArticlePage'])) {
+								$filenames = array();
+								foreach($article['ArticlePage'] AS $article_page) {
+									$link = $this->Html->link($article_page['filename'], array(
+											'controller' => 'article_pages', 
+											'action' => 'view', 
+											$article_page['id']
+										), 
+										array(
+											'class' => 'tooltip_selector', 
+											'title' => $article_page['title'],
+											'data-id' => $article_page['id']
+										)
+									);
+									echo $link . "<br/>\n";
+								}
+								//echo implode(",<br/>\n", $filenames);
+							}
+							?>
+						</td>
+					</tr>
+				<?php 
+				$i++;
+				endforeach; ?>
+			</tbody> 
 		</table>
 	<?php endif; ?>
 </div>

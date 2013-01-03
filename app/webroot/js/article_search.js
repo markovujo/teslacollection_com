@@ -7,21 +7,15 @@ $(function() {
 			title = '';
 			if ( element.is( "[title]" ) ) {
 				title = element.attr( "title" );
-			} else {
-				title = '';
 			}
 			
 			if ( element.is( "[data-id]" ) ) {
 				var id = element.data('id');
-				return '<img class="tooltip_thumbnail"alt="' + title + '" src="/article_pages/view_thumbnail/' + id + '">';
+				return '<img class="tooltip_thumbnail" alt="' + title + '" src="/article_pages/view_thumbnail/' + id + '">';
 			}
-			
-			/*
-			if ( element.is( "img" ) ) {
-				return element.attr( "alt" );
-			}
-			*/
 		},
-		position: { my: "right-15 center", at: "left center" }
+		position: { my: "right-15 center", at: "left bottom" }
 	});
+	
+	$('#search_results').tablesorter();
 });
