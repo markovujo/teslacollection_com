@@ -28,7 +28,7 @@
 	background-color:#EEEEEE;
 }
 
-#search_results tr td a:link
+#search_results tr td a:link, #search_results tr td a:visited
 {
 	color: #d82323;
 	font-size: 1em;

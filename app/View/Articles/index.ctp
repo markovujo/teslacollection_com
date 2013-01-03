@@ -76,14 +76,18 @@
 <div class="articles_search_results" style="margin: 25px 0px">
 	<?php if(isset($search_results['articles'])):?>
 		<table id="search_results">
-			  <col width="300">
-  			  <col width="100">
-  			  <col width="100">
-  			  <col width="100">
-  			  <col width="100">
-  			  <col width="100">
+			  <col width="30%">
+  			  <col width="5%">
+  			  <col width="5%">
+  			  <col width="15%">
+  			  <col width="10%">
+  			  <col width="10%">
+  			  <col width="10%">
+  			  <col width="15%">
 			<tr>
 				<th>Title</th>
+				<th>Volume</th>
+				<th>Page</th>
 				<th>Publication</th>
 				<th>Author</th>
 				<th>Date</th>
@@ -100,10 +104,12 @@
 				}
 			?>
 				<tr<?php echo ($class != '') ? ' class="' . $class .'"' : '';?>>
-					<td><?php echo $this->Html->link($article['Article']['title'], array('controller' => 'articles', 'action' => 'view', 'id' => $article['Article']['id'])); ?></td>
+					<td><?php echo $this->Html->link($article['Article']['title'], array('controller' => 'articles', 'action' => 'view', $article['Article']['id'])); ?></td>
+					<td><?php echo $article['Article']['volume']; ?></td>
+					<td><?php echo $article['Article']['page']; ?></td>
 					<td><?php echo $article['Publication']['name']; ?></td>
 					<td><?php echo $article['Author']['name']; ?></td>
-					<td><?php echo date('M d, Y', strtotime($article['Article']['date'])); ?></td>
+					<td><?php echo date('F d, Y', strtotime($article['Article']['date'])); ?></td>
 					<td>
 						<?php 
 						if(isset($article['Subject']) && !empty($article['Subject'])) {
@@ -120,7 +126,7 @@
 						if(isset($article['ArticlePage']) && !empty($article['ArticlePage'])) {
 							$filenames = array();
 							foreach($article['ArticlePage'] AS $article_page) {
-								$filenames[] = $article_page['filename'];
+								$filenames[] = $this->Html->link($article_page['filename'], array('controller' => 'article_pages', 'action' => 'view', $article_page['id']));
 							}
 							echo implode(",<br/>\n", $filenames);
 						}

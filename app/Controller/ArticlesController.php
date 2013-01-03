@@ -104,9 +104,9 @@ class ArticlesController extends AppController {
 		$this->set('selections', $selections);
 	}
 	
-	public function view()
+	public function view($id)
 	{
-		
+		die(debug($this->data));
 	}
 }
   
