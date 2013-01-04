@@ -104,9 +104,16 @@ class ArticlesController extends AppController {
 		$this->set('selections', $selections);
 	}
 	
+	public function search()
+	{
+		$this->autoRender = false;
+		$this->layout = 'ajax';
+		echo print_r($this->data);
+	}
+	
 	public function view($id)
 	{
-		die(debug($this->data));
+		die(debug($_POST));
 	}
 }
   

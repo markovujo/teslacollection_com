@@ -18,5 +18,22 @@ $(function() {
 	});
 	
 	//$('#search_results').tablesorter().tablesorterPager({container: $("#pager")}); 
-	$('#search_results').tablesorter(); 
+	$('#search_results').tablesorter();
+	
+	$('#search_submit').click(function() {
+		var data = $('#article_search_form').serialize();
+		console.dir(data);
+		$.ajax("/articles/search", function(data) {
+		   //alert(data);
+		});
+		return false;
+	});
+	
+	$('#search_reset').click(function() {
+		$("#publication_selection option:selected").removeAttr("selected");
+		$("#author_selection option:selected").removeAttr("selected");
+		$("#year_selection option:selected").removeAttr("selected");
+		$("#subject_selection option:selected").removeAttr("selected");
+		$("#search_text").val('');
+	});
 });

@@ -1,4 +1,4 @@
-<div class="selection_box" style="float: left; background-color: #E6EEEE;">
+<div class="selection_box" style="float: left; background-color: #E6EEEE; width: 200px;">
     <label for="<?php echo $selection_id; ?>"><?php echo $selection_name; ?>:</label>
     <?php
     echo $this->Form->input($selection_id, array(
@@ -8,6 +8,7 @@
     	, 'class' => 'selection-box'
     	, 'options' => $options
     	, 'label' => false
+    	, 'id' => $id
     	, 'div' => array(
     		'class' => 'formSelection searchBox'
     	)

@@ -4,6 +4,7 @@
     echo $this->Form->input($selection_id, array(
     	'type' => 'text',
     	'name' => $name,
+    	'id' => $id,
     	'label' => false,
         'style' => 'width: 200px;'
     )); ?>
