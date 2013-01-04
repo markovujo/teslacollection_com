@@ -24,7 +24,7 @@ $(function() {
 		var data = $('#article_search_form').serialize();
 		console.dir(data);
 		$.ajax("/articles/search", function(data) {
-		   //alert(data);
+		   console.log(data);
 		});
 		return false;
 	});
