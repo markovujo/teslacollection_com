@@ -60,6 +60,7 @@
 	</div>
 </div>
 
+<!-- 
 <div class="articles_search_criteria" style="border-style: solid; border-width: 3px; padding: 5px; width: 1000px">
 	<?php if(isset($search_results['criteria'])): ?>
 		<?php foreach($search_results['criteria'] AS $key => $ids):?>
@@ -74,111 +75,39 @@
 		<?php endforeach; ?>
 		<div style="clear : both" />
 	<?php endif; ?>
-	
-	<?php if(isset($search_results['articles'])):?>
-		<div><strong><?php echo count($search_results['articles']) ?></strong> Article(s) found.</div></div>
-	<?php endif; ?>
 </div>
+-->
 
-<!-- 
-<div id="pager" class="pager">
-	<form>
-		<img src="../addons/pager/icons/first.png" class="first"/>
-		<img src="../addons/pager/icons/prev.png" class="prev"/>
-		<input type="text" class="pagedisplay"/>
-		<img src="../addons/pager/icons/next.png" class="next"/>
-		<img src="../addons/pager/icons/last.png" class="last"/>
-		<select class="pagesize">
-			<option selected="selected"  value="10">10</option>
-			<option value="20">20</option>
-			<option value="30">30</option>
-			<option  value="40">40</option>
-		</select>
-	</form>
-</div>
- -->
+<div id="articles_search_results" style="margin: 25px 0px; width: 75%;">
+	<div id="articles_search_criteria" style="text-align: center">
+		<p><strong><span id="article_result_count"></span></strong> Article(s) found.</p>
+	</div>
 
-<div class="articles_search_results" style="margin: 25px 0px">
-	<?php if(isset($search_results['articles'])):?>
-		<table id="search_results" class="tablesorter">
-			  <col width="30%">
-  			  <col width="4%">
-  			  <col width="4%">
-  			  <col width="15%">
-  			  <col width="10%">
-  			  <col width="10%">
-  			  <col width="10%">
-  			  <col width="5%">
-  			  <col width="15%">
-  			<thead>
-				<tr>
-					<th>Full Article</th>
-					<th>Volume</th>
-					<th>Page</th>
-					<th>Publication</th>
-					<th>Author</th>
-					<th>Date</th>
-					<th>Subject</th>
-					<th>Page<br/>Range</th>
-					<th>Page</th>
-				</tr>
-			</thead>
-			<tbody> 
-				<?php 
-				$i=0;
-				foreach($search_results['articles'] AS $article): 
-					if($i%2 == 0) {
-						$class = "odd";
-					} else {
-						$class = '';
-					}
-				?>
-					<tr<?php echo ($class != '') ? ' class="' . $class .'"' : '';?>>
-						<td><?php echo $this->Html->link($article['Article']['title'], array('controller' => 'articles', 'action' => 'view', $article['Article']['id'])); ?></td>
-						<td><?php echo $article['Article']['volume']; ?></td>
-						<td><?php echo $article['Article']['page']; ?></td>
-						<td><?php echo $article['Publication']['name']; ?></td>
-						<td><?php echo $article['Author']['name']; ?></td>
-						<td><?php echo date('F d, Y', strtotime($article['Article']['date'])); ?></td>
-						<td>
-							<?php 
-							if(isset($article['Subject']) && !empty($article['Subject'])) {
-								$subjects = array();
-								foreach($article['Subject'] AS $subject) {
-									$subjects[] = $subject['name'];
-								}
-								echo implode(",", $subjects);
-							}
-							?>
-						</td>
-						<td><?php echo str_replace(",", ",<br/>\n", $article['Article']['range_text']); ?></td>
-						<td>
-							<?php 
-							if(isset($article['ArticlePage']) && !empty($article['ArticlePage'])) {
-								$filenames = array();
-								foreach($article['ArticlePage'] AS $article_page) {
-									$link = $this->Html->link($article_page['filename'], array(
-											'controller' => 'article_pages', 
-											'action' => 'view', 
-											$article_page['id']
-										), 
-										array(
-											'class' => 'tooltip_selector', 
-											'title' => $article_page['title'],
-											'data-id' => $article_page['id']
-										)
-									);
-									echo $link . "<br/>\n";
-								}
-								//echo implode(",<br/>\n", $filenames);
-							}
-							?>
-						</td>
-					</tr>
-				<?php 
-				$i++;
-				endforeach; ?>
-			</tbody> 
-		</table>
-	<?php endif; ?>
+	<table id="search_results" class="tablesorter">
+		<col width="30%">
+  		<col width="4%">
+  		<col width="4%">
+  		<col width="15%">
+  		<col width="10%">
+  		<col width="10%">
+  		<col width="10%">
+  		<col width="5%">
+  		<col width="15%">
+  		<thead>
+			<tr>
+				<th>Full Article</th>
+				<th>Volume</th>
+				<th>Page</th>
+				<th>Publication</th>
+				<th>Author</th>
+				<th>Date</th>
+				<th>Subject</th>
+				<th>Page<br/>Range</th>
+				<th>Page</th>
+			</tr>
+		</thead>
+		<tbody> 
+
+		</tbody> 
+	</table>
 </div>

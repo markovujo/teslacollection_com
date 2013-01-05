@@ -106,14 +106,76 @@ class ArticlesController extends AppController {
 	
 	public function search()
 	{
+		$search_results = array();
+		
+		$selections = array(
+			'author' => array()
+			, 'publication' => array()
+			, 'subject' => array()
+		);
+		
+		$ids = array_keys($selections);
+		if(!empty($ids)) {
+			foreach($ids AS $id) {
+				$Model = ucwords($id);
+				$results = $this->{$Model}->find('all', array(
+					'fields' => array(
+						$Model . '.id'
+						, $Model . '.name')
+					, 'contain' => array()
+					, 'order' => array($Model . '.name') 
+				));
+				
+				if($results) {
+					foreach($results AS $result) {
+						$record_id = $result[$Model]['id'];
+						$record_value = $result[$Model]['name'];
+						
+						$selections[$id][$record_id] = $record_value;
+					}
+				}
+			}
+		}
+		
+		$years = $this->Article->find('all', array(
+			'fields' => array('Article.year')
+			, 'group' => 'Article.year'
+			, 'contain' => false
+			, 'order' => array('Article.year')
+		));
+		
+		if($years) {
+			foreach($years AS $year) {
+				$id = $year['Article']['year'];
+				$value = $year['Article']['year'];
+				
+				$selections['year'][$id] = $value;
+			}
+		}
+		
+		if(isset($this->data['ArticleSearch']) && !empty($this->data['ArticleSearch'])) {
+			$search_results = $this->Article->search($this->data['ArticleSearch']);
+			
+			if(isset($search_results['criteria']) && !empty($search_results['criteria'])) {
+				foreach($search_results['criteria'] AS $key => $ids) {
+					if(isset($selections[$key])) {
+						$new_values = array();
+						foreach($ids AS $id) {
+							if(isset($selections[$key][$id])) {
+								$new_values[$id] = $selections[$key][$id];
+							} else {
+								$new_values[$id] = $id;
+							}
+						}
+						$search_results['criteria'][$key] = $new_values;
+					}
+				}
+			}
+		}
+		
 		$this->autoRender = false;
 		$this->layout = 'ajax';
-		echo print_r($this->data);
-	}
-	
-	public function view($id)
-	{
-		die(debug($_POST));
+		return (json_encode($search_results));
 	}
 }
   
