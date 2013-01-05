@@ -63,9 +63,9 @@ class DATABASE_CONFIG {
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'teslaco1_tesla',
-		'password' => 'Kiss1234k$',
-		'database' => 'teslaco1_collection',
+		'login' => '*',
+		'password' => '*',
+		'database' => '*',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
