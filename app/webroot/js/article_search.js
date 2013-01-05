@@ -30,7 +30,7 @@ $(function() {
 				   
 				   var article_page_text = '';
 				   for (var i = 0; i < article['ArticlePage'].length; i++) {
-					   var link = '<a href="article_pages/view/' + article['ArticlePage'][i]['id'] + '" ' +
+					   var link = '<a href="' + document.URL  + '/article_pages/view/' + article['ArticlePage'][i]['id'] + '" ' +
 				   		'class="tooltip_selector" ' +
 				   		'title="' + article['ArticlePage'][i]['title'] + '" ' +
 				   		'data-geo="" ' +
@@ -71,7 +71,7 @@ $(function() {
            			
            			if ( element.is( "[data-id]" ) ) {
            				var id = element.data('id');
-           				return '<img class="tooltip_thumbnail" alt="' + title + '" src="/article_pages/view_thumbnail/' + id + '">';
+           				return '<img class="tooltip_thumbnail" alt="' + title + '" src="' + document.URL + '/article_pages/view_thumbnail/' + id + '">';
            			}
            		},
            		position: { my: "right-15 top-100", at: "left top", collision: "flip" }

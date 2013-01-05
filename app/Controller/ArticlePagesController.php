@@ -70,7 +70,7 @@ class ArticlePagesController extends AppController {
 			$path = str_replace('/var/www/html/teslacollection_com/app/', '', $article_page['ArticlePage']['full_path']);
 			$path = substr($path, 0, strrpos($path, '/')) . DS;
 			$name = str_replace('.jpg', '', $article_page['ArticlePage']['filename']);
-			
+		
 	        $params = array(
 	            'id'        => $article_page['ArticlePage']['filename'],
 	            'name'      => $name,
