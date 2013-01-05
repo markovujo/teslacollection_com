@@ -53,7 +53,7 @@
 		<div style="clear: both"></div>
 		
 		<div style="text-align: center; background-color: #E6EEEE; width: 1000px; height: 25px;">
-			<span id="article_result_ajax"><img src="<?php echo $this->here ?>/img/ajax_spinner_25_25.gif" /></span>
+			<span id="article_result_ajax"><img src="<?php echo $this->here ?>/img/ajax_spinner_25_25.gif" style="height: 7px" /></span>
 			<?php echo $this->Form->button('Search', array('type'=>'submit', 'id' => 'search_submit')); ?>
 			<?php echo $this->Form->button('Reset', array('type'=>'reset', 'id' => 'search_reset')); ?>
 		</div>
