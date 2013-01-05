@@ -7,7 +7,8 @@ $(function() {
 	
 	$('#search_submit').click(function() {
 		var formData = $('#article_search_form').serialize();
-		
+	
+		$('#article_result_count').text('<img src="' + document.URL + '/img/ajax_spinner_25_25.gif" />');
 		$.ajax({
             type: 'POST',
             url: document.URL + '/articles/search',
