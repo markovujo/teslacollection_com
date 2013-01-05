@@ -80,8 +80,7 @@
 
 <div id="articles_search_results" style="margin: 25px 0px; width: 75%;">
 	<div id="articles_search_criteria" style="text-align: center">
-		<p><strong><span id="article_result_count"></span></strong> Article(s) found.</p>
-		<p style="float: right"><img src="<?php $this->here ?>/img/ajax_spinner_25_25.gif" /></p>
+		<p><strong><span id="article_result_count"></span></strong> Article(s) found. <span id="article_result_ajax"></span><img src="<?php $this->here ?>/img/ajax_spinner_25_25.gif" /></span></p>
 	</div>
 
 	<table id="search_results" class="tablesorter">
