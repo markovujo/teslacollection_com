@@ -10,7 +10,7 @@ $(function() {
 		
 		$.ajax({
             type: 'POST',
-            url: document.URL . '/articles/search',
+            url: document.URL + '/articles/search',
             data: formData,
             dataType: 'json',
             success: function(data) {
