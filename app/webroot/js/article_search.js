@@ -4,11 +4,12 @@ $(function() {
 	});
 	
 	$('#articles_search_results').hide();
+	$('#article_result_ajax').hide();
 	
 	$('#search_submit').click(function() {
 		var formData = $('#article_search_form').serialize();
 	
-		$('#article_result_count').text('<img src="' + document.URL + '/img/ajax_spinner_25_25.gif" />');
+		$('#article_result_ajax').show();
 		$.ajax({
             type: 'POST',
             url: document.URL + '/articles/search',
@@ -56,6 +57,7 @@ $(function() {
                
                $('#article_result_count').text(data.articles.length);
                $('#articles_search_results').show();
+               $('#article_result_ajax').hide();
                
                $(".tooltip_selector").tooltip({
            		items: "img, [data-geo], [title]",
