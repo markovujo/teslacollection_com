@@ -52,7 +52,8 @@
 		</div>
 		<div style="clear: both"></div>
 		
-		<div style="text-align: center; background-color: #E6EEEE; width: 1000px">
+		<div style="text-align: center; background-color: #E6EEEE; width: 1000px; height: 25px;">
+			<span id="article_result_ajax"><img src="<?php echo $this->here ?>/img/ajax_spinner_25_25.gif" /></span>
 			<?php echo $this->Form->button('Search', array('type'=>'submit', 'id' => 'search_submit')); ?>
 			<?php echo $this->Form->button('Reset', array('type'=>'reset', 'id' => 'search_reset')); ?>
 		</div>
@@ -80,7 +81,7 @@
 
 <div id="articles_search_results" style="margin: 25px 0px; width: 75%;">
 	<div id="articles_search_criteria" style="text-align: center">
-		<p><strong><span id="article_result_count"></span></strong> Article(s) found. <span id="article_result_ajax"><img src="<?php echo $this->here ?>/img/ajax_spinner_25_25.gif" /></span></p>
+		<p><strong><span id="article_result_count"></span></strong> Article(s) found.</p>
 	</div>
 
 	<table id="search_results" class="tablesorter">
