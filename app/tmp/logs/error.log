@@ -1,0 +1,643 @@
+2012-12-27 22:09:58 Error: Fatal Error (1): Call to a member function find() on a non-object in [/var/www/html/teslacollection_com/app/Controller/ArticlesController.php, line 34]
+2012-12-27 22:09:58 Error: [FatalErrorException] Call to a member function find() on a non-object
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/var/www/html/t...', 34)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/var/www/html/t...', 34, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/var/www/html/t...', 34, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-12-27 22:10:07 Error: Fatal Error (4): syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ',' or ';' in [/var/www/html/teslacollection_com/app/Model/Article.php, line 15]
+2012-12-27 22:10:07 Error: [FatalErrorException] syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ',' or ';'
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 15)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 15, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 15, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-12-27 22:10:29 Error: Fatal Error (4): syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ',' or ';' in [/var/www/html/teslacollection_com/app/Model/Subject.php, line 4]
+2012-12-27 22:10:29 Error: [FatalErrorException] syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ',' or ';'
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 4)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 4, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 4, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-01 18:26:21 Error: Fatal Error (4): syntax error, unexpected '=', expecting ')' in [/var/www/html/teslacollection_com/app/Controller/ArticlesController.php, line 39]
+2013-01-01 18:26:21 Error: [FatalErrorException] syntax error, unexpected '=', expecting ')'
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 39)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 39, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 39, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-01 18:39:22 Error: Fatal Error (4): syntax error, unexpected ',', expecting ')' in [/var/www/html/teslacollection_com/app/Controller/ArticlesController.php, line 55]
+2013-01-01 18:39:22 Error: [FatalErrorException] syntax error, unexpected ',', expecting ')'
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 55)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 55, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 55, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-01 19:26:56 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Authorname' in 'order clause'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Author`...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Author`...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Author`...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Author), Array)
+#5 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(49): Model->find('all', Array)
+#6 [internal function]: ArticlesController->index('home')
+#7 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#8 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#10 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-01-01 20:24:08 Error: Fatal Error (1): Call to a member function find() on a non-object in [/var/www/html/teslacollection_com/app/Model/ArticleSearch.php, line 41]
+2013-01-01 20:24:08 Error: [FatalErrorException] Call to a member function find() on a non-object
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/var/www/html/t...', 41)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/var/www/html/t...', 41, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/var/www/html/t...', 41, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-01 20:27:23 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'loadModel' at line 1
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('loadModel', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('loadModel', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(611): DboSource->fetchAll('loadModel', Array, Array)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(788): DboSource->query('loadModel', Array, Object(ArticleSearch))
+#5 /var/www/html/teslacollection_com/app/Model/ArticleSearch.php(8): Model->__call('loadModel', Array)
+#6 /var/www/html/teslacollection_com/app/Model/ArticleSearch.php(8): ArticleSearch->loadModel('Article')
+#7 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(81): ArticleSearch->search(Array)
+#8 [internal function]: ArticlesController->index('home')
+#9 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#11 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#12 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-01-01 20:29:16 Error: Fatal Error (1): Call to a member function find() on a non-object in [/var/www/html/teslacollection_com/app/Model/ArticleSearch.php, line 35]
+2013-01-01 20:29:16 Error: [FatalErrorException] Call to a member function find() on a non-object
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/var/www/html/t...', 35)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/var/www/html/t...', 35, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/var/www/html/t...', 35, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-01 21:42:13 Error: Fatal Error (1): Call to a member function find() on a non-object in [/var/www/html/teslacollection_com/app/Model/ArticleSearch.php, line 35]
+2013-01-01 21:42:13 Error: [FatalErrorException] Call to a member function find() on a non-object
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/var/www/html/t...', 35)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/var/www/html/t...', 35, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/var/www/html/t...', 35, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-01 21:45:25 Error: Fatal Error (1): Call to a member function find() on a non-object in [/var/www/html/teslacollection_com/app/Model/ArticleSearch.php, line 35]
+2013-01-01 21:45:25 Error: [FatalErrorException] Call to a member function find() on a non-object
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/var/www/html/t...', 35)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/var/www/html/t...', 35, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/var/www/html/t...', 35, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-01 21:51:28 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'search' at line 1
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('search', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('search', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(611): DboSource->fetchAll('search', Array, Array)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(788): DboSource->query('search', Array, Object(ArticleSearch))
+#5 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(81): Model->__call('search', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(81): ArticleSearch->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-01 21:51:54 Error: Fatal Error (1): Call to a member function find() on a non-object in [/var/www/html/teslacollection_com/app/Model/Article.php, line 56]
+2013-01-01 21:51:54 Error: [FatalErrorException] Call to a member function find() on a non-object
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/var/www/html/t...', 56)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/var/www/html/t...', 56, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/var/www/html/t...', 56, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-01 21:52:30 Error: [MissingTableException] Table article_searches for model ArticleSearch was not found in datasource default.
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(3186): Model->setSource('article_searche...')
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(1305): Model->getDataSource()
+#2 /var/www/html/teslacollection_com/lib/Cake/View/Helper/FormHelper.php(197): Model->schema()
+#3 /var/www/html/teslacollection_com/lib/Cake/View/Helper/FormHelper.php(443): FormHelper->_introspectModel('ArticleSearch', 'fields')
+#4 /var/www/html/teslacollection_com/app/View/Articles/index.ctp(2): FormHelper->create('ArticleSearch')
+#5 /var/www/html/teslacollection_com/lib/Cake/View/View.php(923): include('/var/www/html/t...')
+#6 /var/www/html/teslacollection_com/lib/Cake/View/View.php(886): View->_evaluate('/var/www/html/t...', Array)
+#7 /var/www/html/teslacollection_com/lib/Cake/View/View.php(476): View->_render('/var/www/html/t...')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(956): View->render(NULL, NULL)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-01 21:53:02 Error: [MissingTableException] Table article_searches for model ArticleSearch was not found in datasource default.
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(3186): Model->setSource('article_searche...')
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(1305): Model->getDataSource()
+#2 /var/www/html/teslacollection_com/lib/Cake/View/Helper/FormHelper.php(197): Model->schema()
+#3 /var/www/html/teslacollection_com/lib/Cake/View/Helper/FormHelper.php(443): FormHelper->_introspectModel('ArticleSearch', 'fields')
+#4 /var/www/html/teslacollection_com/app/View/Articles/index.ctp(2): FormHelper->create('ArticleSearch')
+#5 /var/www/html/teslacollection_com/lib/Cake/View/View.php(923): include('/var/www/html/t...')
+#6 /var/www/html/teslacollection_com/lib/Cake/View/View.php(886): View->_evaluate('/var/www/html/t...', Array)
+#7 /var/www/html/teslacollection_com/lib/Cake/View/View.php(476): View->_render('/var/www/html/t...')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(956): View->render(NULL, NULL)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-01 22:00:07 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Subject.id' in 'where clause'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(59): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(81): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-01 22:00:41 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Subject.id' in 'where clause'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(59): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(81): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-01 22:02:49 Error: Fatal Error (1): Allowed memory size of 134217728 bytes exhausted (tried to allocate 31457280 bytes) in [/var/www/html/teslacollection_com/lib/Cake/basics.php, line 115]
+2013-01-01 22:02:49 Error: [FatalErrorException] Allowed memory size of 134217728 bytes exhausted (tried to allocate 31457280 bytes)
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Allowed memory ...', '/var/www/html/t...', 115)
+#1 [internal function]: ErrorHandler::handleError(1, 'Allowed memory ...', '/var/www/html/t...', 115, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Allowed memory ...', '/var/www/html/t...', 115, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-01 22:10:38 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ArticlePage.id' in 'field list'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(72): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(81): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-01 22:13:36 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ArticlePage.id' in 'field list'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(72): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(81): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-01 22:20:30 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Subject.id' in 'where clause'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(59): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(81): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-01 22:21:07 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Subject.id' in 'where clause'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(59): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(81): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-01 22:21:15 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Subject.id' in 'where clause'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(59): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(81): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-01 22:21:21 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Subject.id' in 'where clause'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(59): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(81): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-01 22:21:46 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Subject.id' in 'where clause'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(59): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(81): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-01 22:23:40 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Subject.id' in 'where clause'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(59): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(81): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-01 23:47:23 Error: Fatal Error (1): Call to undefined function ucword() in [/var/www/html/teslacollection_com/app/View/Articles/index.ctp, line 39]
+2013-01-01 23:47:23 Error: [FatalErrorException] Call to undefined function ucword()
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to undefin...', '/var/www/html/t...', 39)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', '/var/www/html/t...', 39, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', '/var/www/html/t...', 39, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-01 23:51:39 Error: Fatal Error (1): Call to a member function find() on a non-object in [/var/www/html/teslacollection_com/app/Controller/ArticlesController.php, line 53]
+2013-01-01 23:51:39 Error: [FatalErrorException] Call to a member function find() on a non-object
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/var/www/html/t...', 53)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/var/www/html/t...', 53, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/var/www/html/t...', 53, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-01 23:52:27 Error: Fatal Error (1): Call to a member function find() on a non-object in [/var/www/html/teslacollection_com/app/Controller/ArticlesController.php, line 53]
+2013-01-01 23:52:27 Error: [FatalErrorException] Call to a member function find() on a non-object
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/var/www/html/t...', 53)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/var/www/html/t...', 53, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/var/www/html/t...', 53, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-01 23:52:42 Error: Fatal Error (1): Call to a member function find() on a non-object in [/var/www/html/teslacollection_com/app/Controller/ArticlesController.php, line 54]
+2013-01-01 23:52:42 Error: [FatalErrorException] Call to a member function find() on a non-object
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/var/www/html/t...', 54)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/var/www/html/t...', 54, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/var/www/html/t...', 54, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-01 23:52:47 Error: Fatal Error (1): Call to a member function find() on a non-object in [/var/www/html/teslacollection_com/app/Controller/ArticlesController.php, line 54]
+2013-01-01 23:52:47 Error: [FatalErrorException] Call to a member function find() on a non-object
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/var/www/html/t...', 54)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/var/www/html/t...', 54, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/var/www/html/t...', 54, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-02 16:11:00 Error: Fatal Error (4): syntax error, unexpected end of file in [/var/www/html/teslacollection_com/app/Model/Article.php, line 108]
+2013-01-02 16:11:00 Error: [FatalErrorException] syntax error, unexpected end of file
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 108)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 108, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 108, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-02 16:11:19 Error: Fatal Error (1): Class 'Sanitize' not found in [/var/www/html/teslacollection_com/app/Model/Article.php, line 84]
+2013-01-02 16:11:19 Error: [FatalErrorException] Class 'Sanitize' not found
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Class 'Sanitize...', '/var/www/html/t...', 84)
+#1 [internal function]: ErrorHandler::handleError(1, 'Class 'Sanitize...', '/var/www/html/t...', 84, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Class 'Sanitize...', '/var/www/html/t...', 84, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-02 16:15:27 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ArticlePage.title' in 'where clause'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(98): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(83): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-02 16:16:24 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ArticlePage.title' in 'where clause'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(98): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(83): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-02 16:20:29 Error: [PDOException] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'teslacollection_com.articles_pages' doesn't exist
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(110): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(83): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-02 17:48:24 Error: Fatal Error (4): syntax error, unexpected '?>' in [/var/www/html/teslacollection_com/app/View/Articles/index.ctp, line 7]
+2013-01-02 17:48:24 Error: [FatalErrorException] syntax error, unexpected '?>'
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 7)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 7, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 7, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-02 17:48:31 Error: Fatal Error (1): Call to a member function image() on a non-object in [/var/www/html/teslacollection_com/app/View/Articles/index.ctp, line 7]
+2013-01-02 17:48:31 Error: [FatalErrorException] Call to a member function image() on a non-object
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/var/www/html/t...', 7)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/var/www/html/t...', 7, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/var/www/html/t...', 7, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-02 18:00:19 Error: Fatal Error (4): syntax error, unexpected '<' in [/var/www/html/teslacollection_com/app/View/Articles/index.ctp, line 17]
+2013-01-02 18:00:19 Error: [FatalErrorException] syntax error, unexpected '<'
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 17)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 17, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 17, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-02 18:16:34 Error: Fatal Error (1): Call to undefined function css() in [/var/www/html/teslacollection_com/app/View/Layouts/default.ctp, line 32]
+2013-01-02 18:16:34 Error: [FatalErrorException] Call to undefined function css()
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to undefin...', '/var/www/html/t...', 32)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', '/var/www/html/t...', 32, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', '/var/www/html/t...', 32, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-02 19:32:53 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ArticlesSubjects.subject_id' in 'where clause'
+#0 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(459): PDOStatement->execute(Array)
+#1 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(425): DboSource->_execute('SELECT `Article...', Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(669): DboSource->execute('SELECT `Article...', Array, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Model/Datasource/DboSource.php(1080): DboSource->fetchAll('SELECT `Article...', false)
+#4 /var/www/html/teslacollection_com/lib/Cake/Model/Model.php(2637): DboSource->read(Object(Article), Array)
+#5 /var/www/html/teslacollection_com/app/Model/Article.php(109): Model->find('all', Array)
+#6 /var/www/html/teslacollection_com/app/Controller/ArticlesController.php(82): Article->search(Array)
+#7 [internal function]: ArticlesController->index('home')
+#8 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(ArticlesController), Array)
+#9 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlesController), Object(CakeRequest), Object(CakeResponse))
+#11 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-01-02 19:42:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-02 20:05:04 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-02 20:05:06 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-02 20:27:44 Error: Fatal Error (1): Call to a member function find() on a non-object in [/var/www/html/teslacollection_com/app/Controller/ArticlesController.php, line 44]
+2013-01-02 20:27:44 Error: [FatalErrorException] Call to a member function find() on a non-object
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/var/www/html/t...', 44)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/var/www/html/t...', 44, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/var/www/html/t...', 44, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-02 20:27:47 Error: Fatal Error (1): Call to a member function find() on a non-object in [/var/www/html/teslacollection_com/app/Controller/ArticlesController.php, line 44]
+2013-01-02 20:27:47 Error: [FatalErrorException] Call to a member function find() on a non-object
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/var/www/html/t...', 44)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/var/www/html/t...', 44, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/var/www/html/t...', 44, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-02 22:02:32 Error: Fatal Error (4): syntax error, unexpected '?>' in [/var/www/html/teslacollection_com/app/View/Articles/index.ctp, line 97]
+2013-01-02 22:02:32 Error: [FatalErrorException] syntax error, unexpected '?>'
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 97)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 97, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 97, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-02 22:29:31 Error: [MissingControllerException] Controller class ArticlePagesController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-02 23:07:58 Error: Fatal Error (4): syntax error, unexpected 'if' (T_IF) in [/var/www/html/teslacollection_com/app/Controller/ArticlePagesController.php, line 43]
+2013-01-02 23:07:58 Error: [FatalErrorException] syntax error, unexpected 'if' (T_IF)
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 43)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 43, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 43, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-02 23:18:27 Error: [NotFoundException] The requested file /var/www/html/teslacollection_com/app//home/tesla/images/tesla_collection/Volume 10/Volume 10  Page 062.jpg was not found
+#0 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(956): MediaView->render(NULL, NULL)
+#1 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#2 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlePagesController), Object(CakeRequest), Object(CakeResponse))
+#3 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#4 {main}
+2013-01-02 23:19:04 Error: [NotFoundException] The requested file /var/www/html/teslacollection_com/app//home/tesla/images/tesla_collection/Volume 10/Volume 10  Page 062.jpg was not found
+#0 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(956): MediaView->render(NULL, NULL)
+#1 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#2 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlePagesController), Object(CakeRequest), Object(CakeResponse))
+#3 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#4 {main}
+2013-01-02 23:20:06 Error: [NotFoundException] The requested file /var/www/html/teslacollection_com/app//var/www/html/teslacollection_com/app/outside_webroot_dir/Volume 10  Page 062.jpg was not found
+#0 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(956): MediaView->render(NULL, NULL)
+#1 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#2 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlePagesController), Object(CakeRequest), Object(CakeResponse))
+#3 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#4 {main}
+2013-01-02 23:20:20 Error: [NotFoundException] The requested file /var/www/html/teslacollection_com/app/outside_webroot_dir/Volume 10  Page 062.jpg was not found
+#0 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(956): MediaView->render(NULL, NULL)
+#1 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#2 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlePagesController), Object(CakeRequest), Object(CakeResponse))
+#3 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#4 {main}
+2013-01-02 23:38:21 Error: Fatal Error (4): syntax error, unexpected ')' in [/var/www/html/teslacollection_com/app/Controller/ArticlePagesController.php, line 54]
+2013-01-02 23:38:22 Error: [FatalErrorException] syntax error, unexpected ')'
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 54)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 54, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 54, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-02 23:40:59 Error: Fatal Error (4): syntax error, unexpected ')' in [/var/www/html/teslacollection_com/app/Controller/ArticlePagesController.php, line 46]
+2013-01-02 23:40:59 Error: [FatalErrorException] syntax error, unexpected ')'
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 46)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 46, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 46, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-02 23:43:44 Error: [NotFoundException] The requested file /var/www/html/teslacollection_com/app/files/Volume 10/Volume 10  Page 062.jpg was not found
+#0 /var/www/html/teslacollection_com/lib/Cake/Controller/Controller.php(956): MediaView->render(NULL, NULL)
+#1 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#2 /var/www/html/teslacollection_com/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(ArticlePagesController), Object(CakeRequest), Object(CakeResponse))
+#3 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#4 {main}
+2013-01-02 23:55:19 Error: Fatal Error (4): syntax error, unexpected ',' in [/var/www/html/teslacollection_com/app/Controller/ArticlePagesController.php, line 51]
+2013-01-02 23:55:19 Error: [FatalErrorException] syntax error, unexpected ','
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 51)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 51, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 51, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-03 15:39:35 Error: Fatal Error (4): syntax error, unexpected ''data-thumbnail'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in [/var/www/html/teslacollection_com/app/View/Articles/index.ctp, line 140]
+2013-01-03 15:39:35 Error: [FatalErrorException] syntax error, unexpected ''data-thumbnail'' (T_CONSTANT_ENCAPSED_STRING), expecting ')'
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 140)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 140, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 140, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-03 16:42:17 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:17 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:17 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:17 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:19 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:19 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:19 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:19 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:40 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:40 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:40 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:40 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:44 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:44 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:44 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-03 16:42:44 Error: [MissingControllerException] Controller class AddonsController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-04 16:23:35 Error: Fatal Error (4): syntax error, unexpected ''name'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in [/var/www/html/teslacollection_com/app/View/Articles/index.ctp, line 49]
+2013-01-04 16:23:35 Error: [InternalErrorException] Internal Server Error
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 49)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 49, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 49, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-04 16:23:51 Error: Fatal Error (4): syntax error, unexpected ''name'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in [/var/www/html/teslacollection_com/app/View/Articles/index.ctp, line 49]
+2013-01-04 16:23:51 Error: [FatalErrorException] syntax error, unexpected ''name'' (T_CONSTANT_ENCAPSED_STRING), expecting ')'
+#0 /var/www/html/teslacollection_com/lib/Cake/Error/ErrorHandler.php(161): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/html/t...', 49)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/html/t...', 49, Array)
+#2 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/html/t...', 49, Array)
+#3 /var/www/html/teslacollection_com/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-01-04 16:35:58 Error: [MissingControllerException] Controller class ArticleController could not be found.
+#0 /var/www/html/teslacollection_com/app/webroot/index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-04 18:29:56 Error: Array
+(
+    [ArticleSearch] => Array
+        (
+            [publication_id] => 
+            [author_id] => Array
+                (
+                    [0] => 102
+                    [1] => 104
+                    [2] => 41
+                )
+
+            [year_id] => Array
+                (
+                    [0] => 1893
+                    [1] => 1894
+                    [2] => 1895
+                    [3] => 1896
+                    [4] => 1897
+                    [5] => 1898
+                )
+
+            [subject_id] => 
+            [text_search] => 
+        )
+
+)
+
