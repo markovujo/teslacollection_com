@@ -8,3 +8,4 @@ app/Config/core.php
 /dist
 .DS_Store
 /tags
+app/webroot/error_log
