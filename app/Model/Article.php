@@ -112,12 +112,13 @@ class Article extends AppModel
 			, 'group' => $group
 		));
 		
-		/* DEBUGGING :: */
+		/* DEBUGGING :: 
 		debug($params);
 		debug($conditions);
 		debug($joins);
 		debug($return['articles']);
 		die();
+		*/
 		
 		return $return;
 	}
