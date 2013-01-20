@@ -12,16 +12,12 @@ class Article extends AppModel
         )
     );
     
-    public $hasMany = array(
-        'ArticlePage' => array(
-            'className'  => 'ArticlePage',
-    		'order' => 'filename'
-        )
-    );
-    
     public $hasAndBelongsToMany = array(
         'Subject' => array(
             'className' => 'Subject',
+        )
+        , 'Page' => array(
+            'className' => 'Page',
         )
     );
     
@@ -36,8 +32,8 @@ class Article extends AppModel
 		$contain = array(
 			'Author' => array('fields' => array('id', 'name')),
 			'Publication' => array('fields' => array('id', 'name')),
-			'ArticlePage' => array('fields' => array('id', 'filename', 'title')),
 			'Subject' => array('fields' => array('id', 'name')),
+			'Page' => array('fields' => array('id', 'filename', 'title')),
 		);
 		
 		$return = array(
@@ -81,23 +77,30 @@ class Article extends AppModel
 		}
 		
 		if(isset($params['text_search']) && !empty($params['text_search'])) {
-			# Sanitize the query 
 			App::uses('Sanitize', 'Utility');
 			$params['text_search'] = Sanitize::escape($params['text_search']);
 			
-			$conditions[] = array( 
-			   "MATCH(ArticlePage.title, ArticlePage.text)  
-			          AGAINST('" . $params['text_search'] . "' IN BOOLEAN MODE)" 
-			);
-			
 			$joins[] = array(
-		     	'table' => 'article_pages',
-		    	'alias' => 'ArticlePage',
-		    	'type' => 'INNER',
+		     	'table' => 'articles_pages',
+		    	'alias' => 'ArticlesPage',
+		    	'type' => 'LEFT',
 		    	'conditions' => array(
-		    		'Article.id = ArticlePage.article_id'
+		    		'Article.id = ArticlesPage.article_id'
 		       	)
 		    );
+		    $joins[] = array(
+		     	'table' => 'pages',
+		    	'alias' => 'Page',
+		    	'type' => 'LEFT',
+		    	'conditions' => array(
+		    		'Page.id = ArticlesPage.page_id'
+		       	)
+		    );
+			
+			$conditions[] = array( 
+			   "MATCH(Page.title, Page.text)  
+			          AGAINST('" . $params['text_search'] . "' IN BOOLEAN MODE)" 
+			);
 			
 			$return['criteria']['text_search'] = $params['text_search'];
 		}
@@ -108,14 +111,14 @@ class Article extends AppModel
 			, 'joins' => $joins
 			, 'group' => $group
 		));
-
-		/* DEBUGGING :: 
+		
+		/* DEBUGGING :: */
 		debug($params);
 		debug($conditions);
 		debug($joins);
-		debug($return);
+		debug($return['articles']);
 		die();
-		*/
+		
 		return $return;
 	}
 }

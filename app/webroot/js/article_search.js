@@ -29,12 +29,12 @@ $(function() {
 				   var subject_text = subjects.join(', ');
 				   
 				   var article_page_text = '';
-				   for (var i = 0; i < article['ArticlePage'].length; i++) {
-					   var link = '<a href="' + document.URL  + '/article_pages/view/' + article['ArticlePage'][i]['id'] + '" ' +
+				   for (var i = 0; i < article['Page'].length; i++) {
+					   var link = '<a href="' + document.URL  + '/article_pages/view/' + article['Page'][i]['id'] + '" ' +
 				   		'class="tooltip_selector" ' +
-				   		'title="' + article['ArticlePage'][i]['title'] + '" ' +
+				   		'title="' + article['Page'][i]['title'] + '" ' +
 				   		'data-geo="" ' +
-						'data-id= "' + article['ArticlePage'][i]['id'] + '">' + article['ArticlePage'][i]['filename'] + '</a><br/>';
+						'data-id= "' + article['Page'][i]['id'] + '">' + article['Page'][i]['filename'] + '</a><br/>';
 					   article_page_text += link;
 				   }
 				   

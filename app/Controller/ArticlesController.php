@@ -28,6 +28,8 @@ class ArticlesController extends AppController {
 		'Publication',
 		'Subject'
 	);
+	
+	var $components = array('RequestHandler');
 
 	public function index()
 	{
@@ -175,6 +177,7 @@ class ArticlesController extends AppController {
 		
 		$this->autoRender = false;
 		$this->layout = 'ajax';
+		$this->RequestHandler->respondAs('json');
 		return (json_encode($search_results));
 	}
 }
