@@ -29,6 +29,16 @@ class Article extends AppModel
 		$joins = array();
 		$group = array('Article.id');
 		
+		$fields = array(
+			'Article.id',
+			'Article.title',
+			'Article.volume',
+			'Article.page',
+			'Article.date',
+			'Article.year',
+			'Article.range_text'
+		);
+		
 		$contain = array(
 			'Author' => array('fields' => array('id', 'name')),
 			'Publication' => array('fields' => array('id', 'name')),
@@ -102,6 +112,7 @@ class Article extends AppModel
 			, 'contain' => $contain
 			, 'joins' => $joins
 			, 'group' => $group
+			, 'fields' => $fields
 		));
 		
 		/* DEBUGGING :: 
