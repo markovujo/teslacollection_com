@@ -78,7 +78,7 @@ $(function() {
            	});
             },
             error: function(message){
-                alert(message);
+                console.log(message);
             }
         });
 		

@@ -11,15 +11,13 @@ class ArticlesController extends AdminAppController {
  *
  * @var mixed
  */
-	public $scaffold;
+	//public $scaffold;
 	
-	/*
 	public function index()
 	{
 		$Articles = $this->Article->find('all');
 		
+		$this->layout = 'admin';
 		$this->set('Articles', $Articles);
 	}
-	*/
-
 }
