@@ -15,9 +15,6 @@ class ArticlesController extends AdminAppController {
 	
 	public function index()
 	{
-		$Articles = $this->Article->find('all');
-		
 		$this->layout = 'admin';
-		$this->set('Articles', $Articles);
 	}
 }

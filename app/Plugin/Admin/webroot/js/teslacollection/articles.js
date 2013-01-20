@@ -14,7 +14,7 @@ Ext.onReady(function(){
         return value ? Ext.Date.dateFormat(value, 'M d, Y') : '';
     }
 
-    Ext.define('Plant', {
+    Ext.define('Article', {
         extend: 'Ext.data.Model',
         fields: [
             // the 'name' below matches the tag name to read, except 'availDate'
@@ -29,13 +29,11 @@ Ext.onReady(function(){
         ]
     });
 
-    console.log('HEY!');
-
     // create the Data Store
     var store = Ext.create('Ext.data.Store', {
         // destroy the store if the grid is destroyed
         autoDestroy: true,
-        model: 'Plant',
+        model: 'Article',
         proxy: {
             type: 'ajax',
             // load remote data using HTTP
@@ -52,14 +50,10 @@ Ext.onReady(function(){
             direction:'ASC'
         }]
     });
-    
-    console.log('HEY!!');
 
     var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {
         clicksToEdit: 1
     });
-    
-    console.log('HEY!!!');
 
     // create the grid and specify what field you want
     // to use for the editor at each header.
@@ -130,7 +124,7 @@ Ext.onReady(function(){
         selModel: {
             selType: 'cellmodel'
         },
-        renderTo: 'editor-grid',
+        renderTo: 'article-grid',
         width: 600,
         height: 300,
         title: 'Edit Plants?',
@@ -152,8 +146,6 @@ Ext.onReady(function(){
         }],
         plugins: [cellEditing]
     });
-    
-    console.log('HEY!!!!');
 
     // manually trigger the data store load
     store.load({
@@ -168,6 +160,4 @@ Ext.onReady(function(){
             });
         }
     });
-    
-    console.log('HEY!!!!!');
 });
