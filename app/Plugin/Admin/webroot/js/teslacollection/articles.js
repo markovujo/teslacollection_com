@@ -1,23 +1,11 @@
-Ext.Loader.setConfig({
-    enabled: true
-});
-Ext.Loader.setPath('Ext.ux', '../ux');
-
 Ext.require([
     'Ext.selection.CellModel',
     'Ext.grid.*',
     'Ext.data.*',
     'Ext.util.*',
     'Ext.state.*',
-    'Ext.form.*',
-    'Ext.ux.CheckColumn'
+    'Ext.form.*'
 ]);
-
-if (window.location.search.indexOf('scopecss') !== -1) {
-    // We are using ext-all-scoped.css, so all rendered ExtJS Components must have a
-    // reset wrapper round them to provide localized CSS resetting.
-    Ext.scopeResetCSS = true;
-}
 
 Ext.onReady(function(){
     Ext.QuickTips.init();
@@ -41,6 +29,7 @@ Ext.onReady(function(){
         ]
     });
 
+    console.log('HEY!');
 
     // create the Data Store
     var store = Ext.create('Ext.data.Store', {
@@ -50,7 +39,7 @@ Ext.onReady(function(){
         proxy: {
             type: 'ajax',
             // load remote data using HTTP
-            url: 'plants.xml',
+            url: 'js/teslacollection/plants.xml',
             // specify a XmlReader (coincides with the XML format of the returned data)
             reader: {
                 type: 'xml',
@@ -63,10 +52,14 @@ Ext.onReady(function(){
             direction:'ASC'
         }]
     });
+    
+    console.log('HEY!!');
 
     var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {
         clicksToEdit: 1
     });
+    
+    console.log('HEY!!!');
 
     // create the grid and specify what field you want
     // to use for the editor at each header.
@@ -123,12 +116,6 @@ Ext.onReady(function(){
                 disabledDaysText: 'Plants are not available on the weekends'
             }
         }, {
-            xtype: 'checkcolumn',
-            header: 'Indoor?',
-            dataIndex: 'indoor',
-            width: 55,
-            stopSelection: false
-        }, {
             xtype: 'actioncolumn',
             width:30,
             sortable: false,
@@ -165,6 +152,8 @@ Ext.onReady(function(){
         }],
         plugins: [cellEditing]
     });
+    
+    console.log('HEY!!!!');
 
     // manually trigger the data store load
     store.load({
@@ -179,4 +168,6 @@ Ext.onReady(function(){
             });
         }
     });
+    
+    console.log('HEY!!!!!');
 });

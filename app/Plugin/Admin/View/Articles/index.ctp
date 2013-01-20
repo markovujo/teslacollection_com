@@ -1,3 +1,6 @@
+<?php echo $this->Html->script('/admin/js/teslacollection/articles.js', $options = array('plugin' => 'admin')); ?>
+<?php //echo $this->Html->script('/admin/js/teslacollection/array-grid.js', $options = array('plugin' => 'admin')); ?>
+
 <h1>Cell Editing Grid Example</h1>
 <ul>
   <li>This example shows how to enable users to edit the contents of a grid.</li>
@@ -6,4 +9,5 @@
   <li>Note how this unordered list retains default styling while the unordered list in the "Light" dropdown is styled as a picker.</li>
 </ul>
 
+<div id="grid-example"></div>
 <div id="editor-grid"></div>
