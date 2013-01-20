@@ -6,7 +6,7 @@
 App::uses('AppController', 'Controller');
 
 /**
- * ArticlePage Controller
+ * Pages Controller
  *
  */
 class ArticlePagesController extends AppController {
@@ -23,7 +23,7 @@ class ArticlePagesController extends AppController {
  * @var array
  */
 	public $uses = array(
-		'ArticlePage',
+		'Page',
 		'Article'
 	);
 
@@ -34,20 +34,20 @@ class ArticlePagesController extends AppController {
 	
 	public function view($id)
 	{
-		$article_page = $this->ArticlePage->find('first', array(
+		$article_page = $this->Page->find('first', array(
 			'conditions' => array(
-				'ArticlePage.id' => (int) $id
+				'Page.id' => (int) $id
 			)
 		));
 		
 		if($article_page) {
 			$this->viewClass = 'Media';
-			$path = str_replace('/var/www/html/teslacollection_com/app/', '', $article_page['ArticlePage']['full_path']);
+			$path = str_replace('/var/www/html/teslacollection_com/app/', '', $article_page['Page']['full_path']);
 			$path = substr($path, 0, strrpos($path, '/')) . DS;
-			$name = str_replace('.jpg', '', $article_page['ArticlePage']['filename']);
+			$name = str_replace('.jpg', '', $article_page['Page']['filename']);
 			
 	        $params = array(
-	            'id'        => $article_page['ArticlePage']['filename'],
+	            'id'        => $article_page['Page']['filename'],
 	            'name'      => $name,
 	            'download'  => true,
 	            'extension' => 'jpg',
@@ -59,20 +59,20 @@ class ArticlePagesController extends AppController {
 	
 	public function view_thumbnail($id)
 	{
-		$article_page = $this->ArticlePage->find('first', array(
+		$article_page = $this->Page->find('first', array(
 			'conditions' => array(
-				'ArticlePage.id' => (int) $id
+				'Page.id' => (int) $id
 			)
 		));
 		
 		if($article_page) {
 			$this->viewClass = 'Media';
-			$path = str_replace('/var/www/html/teslacollection_com/app/', '', $article_page['ArticlePage']['full_path']);
+			$path = str_replace('/var/www/html/teslacollection_com/app/', '', $article_page['Page']['full_path']);
 			$path = substr($path, 0, strrpos($path, '/')) . DS;
-			$name = str_replace('.jpg', '', $article_page['ArticlePage']['filename']);
+			$name = str_replace('.jpg', '', $article_page['Page']['filename']);
 		
 	        $params = array(
-	            'id'        => $article_page['ArticlePage']['filename'],
+	            'id'        => $article_page['Page']['filename'],
 	            'name'      => $name,
 	            'download'  => false,
 	            'extension' => 'jpg',
