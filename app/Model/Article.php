@@ -33,7 +33,7 @@ class Article extends AppModel
 			'Author' => array('fields' => array('id', 'name')),
 			'Publication' => array('fields' => array('id', 'name')),
 			'Subject' => array('fields' => array('id', 'name')),
-			'Page' => array('fields' => array('id', 'filename', 'title')),
+			'Page' => array('fields' => array('id', 'filename')),
 		);
 		
 		$return = array(
@@ -88,17 +88,9 @@ class Article extends AppModel
 		    		'Article.id = ArticlesPage.article_id'
 		       	)
 		    );
-		    $joins[] = array(
-		     	'table' => 'pages',
-		    	'alias' => 'Page',
-		    	'type' => 'LEFT',
-		    	'conditions' => array(
-		    		'Page.id = ArticlesPage.page_id'
-		       	)
-		    );
 			
 			$conditions[] = array( 
-			   "MATCH(Page.title, Page.text)  
+			   "MATCH(ArticlesPage.title, ArticlesPage.text)  
 			          AGAINST('" . $params['text_search'] . "' IN BOOLEAN MODE)" 
 			);
 			

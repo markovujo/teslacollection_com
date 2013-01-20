@@ -27,6 +27,7 @@ ALTER TABLE articles_pages ADD text text;
 ALTER TABLE articles_pages ADD created datetime;
 ALTER TABLE articles_pages ENGINE = MyISAM;
 ALTER TABLE articles_pages ADD FULLTEXT(title, text);
+ALTER TABLE pages DROP COLUMN title;
 
 UPDATE 
   articles_pages,
