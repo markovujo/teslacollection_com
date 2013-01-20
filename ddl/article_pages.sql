@@ -21,3 +21,25 @@ from
   article_pages pages
 where
   articles.id = pages.article_id
+  
+ALTER TABLE articles_pages ADD title varchar(255);
+ALTER TABLE articles_pages ADD text text;
+ALTER TABLE articles_pages ADD created datetime;
+ALTER TABLE articles_pages ENGINE = MyISAM;
+ALTER TABLE articles_pages ADD FULLTEXT(title, text);
+
+UPDATE 
+  articles_pages,
+  articles
+SET 
+  articles_pages.title = articles.title
+where
+  articles_pages.article_id = articles.id;
+
+UPDATE 
+  articles_pages,
+  pages
+SET 
+  articles_pages.text = pages.text
+where
+  articles_pages.page_id = pages.id;
