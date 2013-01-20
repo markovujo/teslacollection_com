@@ -14,7 +14,7 @@ Ext.onReady(function(){
         return value ? Ext.Date.dateFormat(value, 'M d, Y') : '';
     }
 
-    Ext.define('Article', {
+    Ext.define('Plant', {
         extend: 'Ext.data.Model',
         fields: [
             // the 'name' below matches the tag name to read, except 'availDate'
@@ -33,7 +33,7 @@ Ext.onReady(function(){
     var store = Ext.create('Ext.data.Store', {
         // destroy the store if the grid is destroyed
         autoDestroy: true,
-        model: 'Article',
+        model: 'Plant',
         proxy: {
             type: 'ajax',
             // load remote data using HTTP
