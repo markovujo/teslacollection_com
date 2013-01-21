@@ -28,8 +28,6 @@ class ArticlesController extends AppController {
 		'Publication',
 		'Subject'
 	);
-	
-	var $components = array('RequestHandler');
 
 	public function index()
 	{
