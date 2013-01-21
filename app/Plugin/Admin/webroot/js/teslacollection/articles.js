@@ -41,6 +41,7 @@ Ext.onReady(function() {
             // specify a XmlReader (coincides with the XML format of the returned data)
             reader: {
                 type: 'json',
+                root: 'records'
             }
         },
         sorters: [{
@@ -213,6 +214,7 @@ Ext.onReady(function() {
     store.load({
         // store loading is asynchronous, use a load listener or callback to handle results
         callback: function(){
+        	/*
             Ext.Msg.show({
                 title: 'Store Load Callback',
                 msg: 'store was loaded, data available for processing',
@@ -220,6 +222,7 @@ Ext.onReady(function() {
                 icon: Ext.Msg.INFO,
                 buttons: Ext.Msg.OK
             });
+            */
         }
     });
 });
