@@ -2,9 +2,8 @@ Ext.require([
     'Ext.selection.CellModel',
     'Ext.grid.*',
     'Ext.data.*',
-    'Ext.util.*',
-    'Ext.state.*',
-    'Ext.form.*'
+    'Ext.form.*',
+    'Ext.window.*'
 ]);
 
 Ext.onReady(function(){
@@ -12,6 +11,7 @@ Ext.onReady(function(){
     	url : 'articles/getAll'
     });
     
+    console.log('1');
     var recordFields = [
          {name : 'id', mapping: 'id'},
          {name : 'volume', mapping: 'volume'},
@@ -24,6 +24,7 @@ Ext.onReady(function(){
          {name : 'range_text', mapping: 'range_text'},
          {name : 'status', mapping: 'status'},
     ];
+    console.log('2');
     
     var remoteJsonStore = new Ext.data.JsonStore({
     	proxy : remoteProxy,
@@ -35,6 +36,7 @@ Ext.onReady(function(){
     	fields : recordFields,
     	idProperty : 'id'
     });
+    console.log('3');
     
     var textFieldEditor = new Ext.form.TextField();
     
@@ -46,18 +48,36 @@ Ext.onReady(function(){
     		store: {
     			xtype : 'jsonstore',
     			root: 'records',
-    			fields: ['publications'],
+    			fields: ['id', 'name'],
     			proxy : new Ext.data.ScriptTagProxy({
     				url : 'publications/getAll'
     			})
     		}
     };
+    console.log('4');
+    
+    var comboEditorAuthor = {
+    		xtype : 'combo',
+    		triggerAction: 'all',
+    		displayField : 'name',
+    		valueField : 'id',
+    		store: {
+    			xtype : 'jsonstore',
+    			root: 'records',
+    			fields: ['id', 'name'],
+    			proxy : new Ext.data.ScriptTagProxy({
+    				url : 'authors/getAll'
+    			})
+    		}
+    };
+    console.log('5');
     
     var numberFieldEditor = {
     		xtype: 'numberfield',
     		minLength : 5,
     		maxLength : 5
     };
+    console.log('6');
     
     var columnModel = [
             {
@@ -125,6 +145,7 @@ Ext.onReady(function(){
             	editor : textFieldEditor
             }
     ];
+    console.log('7');
     
     var pagingToolbar = {
     	xtype : 'paging',
@@ -132,7 +153,9 @@ Ext.onReady(function(){
     	pageSize : 50,
     	displayInfo : true
     };
+    console.log('8');
     
+    /*
     var grid = {
     	xtype : 'editorgrid',
     	columns : columnModel,
@@ -145,14 +168,52 @@ Ext.onReady(function(){
     		forceFit : true
     	}
     };
+    */
+    var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {
+        clicksToEdit: 1
+    });
+
+    // create the grid and specify what field you want
+    // to use for the editor at each header.
+    var grid = Ext.create('Ext.grid.Panel', {
+        store: remoteJsonStore,
+        columns: columnModel,
+        selModel: {
+            selType: 'cellmodel'
+        },
+        width: 800,
+        height: 800,
+        title: 'Articles',
+        frame: true,
+        tbar: [{
+            text: 'Add Article',
+            handler : function(){
+                // Create a model instance
+            	/*
+                var r = Ext.create('Article', {
+                    common: 'New Plant 1',
+                    light: 'Mostly Shady',
+                    price: 0,
+                    availDate: Ext.Date.clearTime(new Date()),
+                    indoor: false
+                });
+                store.insert(0, r);
+                cellEditing.startEditByPosition({row: 0, column: 0});
+                */
+            }
+        }],
+        plugins: [cellEditing]
+    });
+    console.log('9');
     
-    new Ext.Window({
+    new Ext.window.Window({
     	height : 800,
     	width : 800,
     	border : false,
     	layout : 'fit',
     	items : grid
     }).show();
+    console.log('10');
     
     remoteJsonStore.load({
     	params : {
@@ -160,4 +221,5 @@ Ext.onReady(function(){
     		limit : 50
     	}
     });
+    console.log('11');
 });

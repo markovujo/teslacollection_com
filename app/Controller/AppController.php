@@ -43,10 +43,30 @@ class AppController extends Controller
 		
 		$conditions = array();
 		
+		if (!empty($this->params->query['start'])) {
+			$start = (int) $this->params->query['start'];
+		} else {
+			$start = null;
+		}
+		
+		if (!empty($this->params->query['limit'])) {
+			$limit = (int) $this->params->query['limit'];
+		} else {
+			$limit = null;
+		}
+		
+		if (!empty($this->params->query['page'])) {
+			$page = (int) $this->params->query['page'];
+		} else {
+			$page = null;
+		}
+		
 		$model = substr($this->name, 0, -1);
 		$records = $this->{$model}->find('all', array(
 			'conditions' => $conditions,
-			'contain' => false
+			'contain' => false,
+			'limit' => $limit, 
+			'offset' => $page
 		));
 		
 		$results = array(
