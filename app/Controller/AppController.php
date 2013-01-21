@@ -32,4 +32,26 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+	
+	public function getAll($params = NULL)
+	{
+		$this->autoRender = false;
+		$this->layout = 'ajax';
+		$this->RequestHandler->respondAs('json');
+		
+		$conditions = array();
+		
+		$model = substr($this->name, 0, -1);
+		$records = $this->{$model}->find('all', array(
+			'conditions' => $conditions,
+			'contain' => false
+		));
+		
+		$results = array(
+			'totalCount' => count($records),
+			'records' => $records
+		);
+		
+		return (json_encode($results));
+	}
 }

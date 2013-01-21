@@ -108,6 +108,10 @@ class ArticlesController extends AppController {
 	
 	public function search()
 	{
+		$this->autoRender = false;
+		$this->layout = 'ajax';
+		$this->RequestHandler->respondAs('json');
+		
 		$search_results = array();
 		
 		$selections = array(
@@ -175,9 +179,6 @@ class ArticlesController extends AppController {
 			}
 		}
 		
-		$this->autoRender = false;
-		$this->layout = 'ajax';
-		$this->RequestHandler->respondAs('json');
 		return (json_encode($search_results));
 	}
 }
