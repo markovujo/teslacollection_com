@@ -255,8 +255,6 @@ Ext.onReady(function() {
             sortable: false,
             items: [{
                 text: 'Delete',
-                iconCls: 'icon-delete',
-                action: 'delete',
                 tooltip: 'Delete Article?',
                 handler: function(grid, rowIndex, colIndex) {
                     store.removeAt(rowIndex); 
@@ -268,7 +266,7 @@ Ext.onReady(function() {
         },
         renderTo: 'article-grid',
         width: 1200,
-        height: 1200,
+        height: 1000,
         title: 'Collection Articles',
         frame: true,
         tbar: [
@@ -304,9 +302,7 @@ Ext.onReady(function() {
     		                buttons: Ext.Msg.OK
     		            });
     			   },
-    			   params: { 
-    				   'records': records 
-    			   }
+    			   jsonData : Ext.JSON.encode(records)
     			});
         	}
         }       

@@ -11,13 +11,13 @@ class AdminAppController extends AppController
 		
 		$response = array(
 			'success' => true,
-			'errors' => array()
+			'errors' => array(),
+			'records' => array()
 		);
 		
-		die(get_object_vars($_REQUEST['records']));
-		if(!empty($_REQUEST['records'])) {
-			foreach($_REQUEST['records'] AS $record) {
-				die(debug($record));
+		if(!empty($this->params->data)) {
+			foreach($this->params->data AS $data) {
+				$response['records'][] = $data;
 			}
 		}
 		
