@@ -138,15 +138,15 @@ Ext.onReady(function() {
         }, {
             header: 'Title',
             dataIndex: 'title',
-            width: 70,
-            align: 'right',
+            width: 400,
+            align: 'left',
             editor: {
                 xtype: 'textfield',
             }
         }, {
         	header: 'Publication',
             dataIndex: 'publication_id',
-            width: 130,
+            width: 200,
             editor: new Ext.form.field.ComboBox({
                 typeAhead: true,
                 triggerAction: 'all',
@@ -160,10 +160,26 @@ Ext.onReady(function() {
                 autoShow: true,
                 listClass: 'x-combo-list-small'
             })
+	        , renderer: function(value){
+	            if(value != 0 && value != "")
+	            {
+	                console.log('value :: ' + value);
+	                console.log(publicationStore.findRecord("id", value));
+	            	if(publicationStore.findRecord("id", value) != null) {
+	            		console.log('YUP!');
+	                    return publicationStore.findRecord("id", value).get('name');
+	                } else { 
+	                	console.log('NOPE!');
+	                    return value;
+	                }
+	            }
+	            else
+	                return "";  // display nothing if value is empty
+	        }
         }, {
         	header: 'Author',
             dataIndex: 'author_id',
-            width: 130,
+            width: 200,
             editor: new Ext.form.field.ComboBox({
                 typeAhead: true,
                 triggerAction: 'all',
@@ -235,8 +251,8 @@ Ext.onReady(function() {
             selType: 'cellmodel'
         },
         renderTo: 'article-grid',
-        width: 1000,
-        height: 1000,
+        width: 1200,
+        height: 1200,
         title: 'Collection Articles',
         frame: true,
         tbar: [{
