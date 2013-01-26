@@ -57,7 +57,6 @@ Ext.onReady(function() {
     var publicationStore = Ext.create('Ext.data.Store', {
         autoDestroy: true,
         model: 'Publication',
-        autoLoad: true,
         proxy: {
             type: 'ajax',
             url: document.URL + 'publications/getAll',
@@ -72,6 +71,8 @@ Ext.onReady(function() {
         }]
     });
     
+    publicationStore.load();
+    
 	Ext.define('Author', {
         extend: 'Ext.data.Model',
         fields: [
@@ -83,7 +84,6 @@ Ext.onReady(function() {
     var authorStore = Ext.create('Ext.data.Store', {
         autoDestroy: true,
         model: 'Author',
-        autoLoad: true,
         proxy: {
             type: 'ajax',
             url: document.URL + 'authors/getAll',
@@ -97,6 +97,8 @@ Ext.onReady(function() {
             direction:'ASC'
         }]
     });
+    
+    authorStore.load();
     
     var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {
         clicksToEdit: 1
@@ -155,21 +157,15 @@ Ext.onReady(function() {
                 valueField : 'id',
                 displayField : 'name',
                 emptyText:'Select Author',
-                //selectOnFocus:true,
-                //lazyRender: true,
                 autoShow: true,
                 listClass: 'x-combo-list-small'
             })
 	        , renderer: function(value){
 	            if(value != 0 && value != "")
 	            {
-	                console.log('value :: ' + value);
-	                console.log(publicationStore.findRecord("id", value));
 	            	if(publicationStore.findRecord("id", value) != null) {
-	            		console.log('YUP!');
 	                    return publicationStore.findRecord("id", value).get('name');
 	                } else { 
-	                	console.log('NOPE!');
 	                    return value;
 	                }
 	            }
@@ -188,10 +184,20 @@ Ext.onReady(function() {
                 valueField : 'id',
                 displayField : 'name',
                 emptyText:'Select Author',
-                //selectOnFocus:true,
-                //lazyRender: true,
                 listClass: 'x-combo-list-small'
             })
+	        , renderer: function(value){
+	            if(value != 0 && value != "")
+	            {
+	            	if(authorStore.findRecord("id", value) != null) {
+	                    return authorStore.findRecord("id", value).get('name');
+	                } else { 
+	                    return value;
+	                }
+	            }
+	            else
+	                return "";  // display nothing if value is empty
+	        }
         }, {
             header: 'Date',
             dataIndex: 'date',
