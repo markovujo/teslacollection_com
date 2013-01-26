@@ -34,7 +34,7 @@ Ext.onReady(function() {
         model: 'Article',
         proxy: {
             type: 'ajax',
-            url: '/articles/getAll',
+            url: document.URL + 'articles/getAll',
             reader: {
                 type: 'json',
                 root: 'records'
@@ -60,7 +60,7 @@ Ext.onReady(function() {
         autoLoad: true,
         proxy: {
             type: 'ajax',
-            url: '/publications/getAll',
+            url: document.URL + 'publications/getAll',
             reader: {
                 type: 'json',
                 root: 'records'
@@ -86,7 +86,7 @@ Ext.onReady(function() {
         autoLoad: true,
         proxy: {
             type: 'ajax',
-            url: '/authors/getAll',
+            url: document.URL + 'authors/getAll',
             reader: {
                 type: 'json',
                 root: 'records'
