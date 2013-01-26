@@ -14,7 +14,7 @@ class AdminAppController extends AppController
 			'errors' => array()
 		);
 		
-		//die(print_r($this->params['data']['records']));
+		die(debug($this->params));
 		if(!empty($this->params['data']['records'])) {
 			foreach($this->params['data']['records'] AS $data) {
 				die($data);
