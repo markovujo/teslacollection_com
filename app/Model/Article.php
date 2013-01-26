@@ -18,6 +18,7 @@ class Article extends AppModel
         )
         , 'Page' => array(
             'className' => 'Page',
+        	'fields' => array(),
         )
     );
     
@@ -43,7 +44,9 @@ class Article extends AppModel
 			'Author' => array('fields' => array('id', 'name')),
 			'Publication' => array('fields' => array('id', 'name')),
 			'Subject' => array('fields' => array('id', 'name')),
-			'Page' => array('fields' => array('id', 'filename')),
+			'Page' => array(
+				'fields' => array('id', 'filename', 'ArticlesPage.id')
+			),
 		);
 		
 		$return = array(
