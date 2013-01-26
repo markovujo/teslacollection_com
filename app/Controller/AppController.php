@@ -41,6 +41,7 @@ class AppController extends Controller
 		$this->layout = 'ajax';
 		$this->RequestHandler->respondAs('json');
 		
+		$model = substr($this->name, 0, -1);
 		$conditions = array();
 		
 		if (!empty($this->params->query['start'])) {
@@ -61,12 +62,27 @@ class AppController extends Controller
 			$page = null;
 		}
 		
-		$model = substr($this->name, 0, -1);
+		if (!empty($this->params->query['page'])) {
+			$offset = ((int) $this->params->query['page'] - 1) * $limit;
+		} else {
+			$offset = null;
+		}
+		
+		if (!empty($this->params->query['query'])) {
+			App::uses('Sanitize', 'Utility');
+			$query = Sanitize::escape($this->params->query['query']);
+			$conditions['or'][] = array($model . '.name LIKE' => "%$query%");
+			$conditions['or'][] = array($model . '.name' => $query);
+			
+		} else {
+			$page = null;
+		}
+		
 		$records = $this->{$model}->find('all', array(
 			'conditions' => $conditions,
 			'contain' => false,
 			'limit' => $limit, 
-			'offset' => $page
+			'offset' => $offset
 		));
 		
 		$results = array(
