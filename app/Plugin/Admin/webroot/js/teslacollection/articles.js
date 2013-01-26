@@ -104,6 +104,7 @@ Ext.onReady(function() {
         clicksToEdit: 1
     });
     
+    /*
     cellEditing.on('edit', function(editor, e) {
         // commit the changes right after editing finished
     	console.log('HEY THERE RECORD');
@@ -111,6 +112,7 @@ Ext.onReady(function() {
     	console.log(e);
         e.record.commit();
     });
+    */
     
     // create the grid and specify what field you want
     // to use for the editor at each header.
@@ -269,16 +271,45 @@ Ext.onReady(function() {
         height: 1200,
         title: 'Collection Articles',
         frame: true,
-        tbar: [{
+        tbar: [
+        {
+        	text: 'Save',
+        	handler : function() {
+        		console.log(store.getModifiedRecords());
+        		var modified_records = store.getModifiedRecords();
+        		
+        		Ext.Ajax.request({
+    			   url: document.URL + 'articles/saveAll',    // where you wanna post
+    			   success: function() {
+    				   Ext.Msg.show({
+    		                title: 'Success',
+    		                msg: 'Your data has been successfully saved!',
+    		                modal: false,
+    		                icon: Ext.Msg.INFO,
+    		                buttons: Ext.Msg.OK
+    		            });
+    			   },
+    			   failture: function() {
+    				   Ext.Msg.show({
+    		                title: 'Failure',
+    		                msg: 'Your data has FAILED to save!',
+    		                modal: false,
+    		                icon: Ext.Msg.FAIL,
+    		                buttons: Ext.Msg.OK
+    		            });
+    			   },
+    			   params: { 
+    				   'records': modified_records 
+    			   }
+    			});
+        	}
+        }       
+        , {
             text: 'Add Article',
             handler : function(){
-                // Create a model instance
                 var r = Ext.create('Article', {
-                    common: 'Test',
-                    light: 'Mostly Shady',
-                    price: 0,
-                    availDate: Ext.Date.clearTime(new Date()),
-                    indoor: false
+                    volume: 1,
+                    page: 1
                 });
                 store.insert(0, r);
                 cellEditing.startEditByPosition({row: 0, column: 0});
@@ -288,16 +319,6 @@ Ext.onReady(function() {
     });
     
     store.load({
-        callback: function(){
-        	/*
-            Ext.Msg.show({
-                title: 'Store Load Callback',
-                msg: 'store was loaded, data available for processing',
-                modal: false,
-                icon: Ext.Msg.INFO,
-                buttons: Ext.Msg.OK
-            });
-            */
-        }
+        callback: function(){}
     });
 });
