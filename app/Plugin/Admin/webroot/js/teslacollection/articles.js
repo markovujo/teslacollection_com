@@ -104,6 +104,14 @@ Ext.onReady(function() {
         clicksToEdit: 1
     });
     
+    cellEditing.on('edit', function(editor, e) {
+        // commit the changes right after editing finished
+    	console.log('HEY THERE RECORD');
+    	console.log(editor);
+    	console.log(e);
+        e.record.commit();
+    });
+    
     // create the grid and specify what field you want
     // to use for the editor at each header.
     var grid = Ext.create('Ext.grid.Panel', {
