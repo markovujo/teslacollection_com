@@ -183,7 +183,7 @@ Ext.onReady(function() {
             renderer: formatDate,
             editor: {
                 xtype: 'datefield',
-                format: 'm/d/y'
+                format: 'Y-m-d'
             }
         }, {
             header: 'Year',
