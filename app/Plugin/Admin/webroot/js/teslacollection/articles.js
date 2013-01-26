@@ -275,14 +275,14 @@ Ext.onReady(function() {
         {
         	text: 'Save',
         	handler : function() {
-        		var data = [];
+        		var records = [];
         		var modified_records = store.getModifiedRecords();
         		for (var i = 0, ln = modified_records.length; i < ln; i++) {
         		    var changes = modified_records[i].getChanges();
         		    changes['id'] = modified_records[i].getId();
-        			data.push(changes);
+        		    records.push(changes);
         		}
-        		console.dir(data);
+        		console.dir(records);
         		
         		Ext.Ajax.request({
     			   url: document.URL + 'articles/saveAll',    // where you wanna post
@@ -305,7 +305,7 @@ Ext.onReady(function() {
     		            });
     			   },
     			   params: { 
-    				   'data': data 
+    				   'records': records 
     			   }
     			});
         	}

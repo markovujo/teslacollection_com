@@ -14,10 +14,10 @@ class AdminAppController extends AppController
 			'errors' => array()
 		);
 		
-		die(debug($this->params));
-		if(!empty($this->params['data']['records'])) {
-			foreach($this->params['data']['records'] AS $data) {
-				die($data);
+		die(get_object_vars($_REQUEST['records']));
+		if(!empty($_REQUEST['records'])) {
+			foreach($_REQUEST['records'] AS $record) {
+				die(debug($record));
 			}
 		}
 		
