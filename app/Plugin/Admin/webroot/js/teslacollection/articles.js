@@ -29,16 +29,64 @@ Ext.onReady(function() {
         ]
     });
 	
-    // create the Data Store
     var store = Ext.create('Ext.data.Store', {
-        // destroy the store if the grid is destroyed
         autoDestroy: true,
         model: 'Article',
         proxy: {
             type: 'ajax',
-            // load remote data using HTTP
-            url: 'articles/getAll',
-            // specify a XmlReader (coincides with the XML format of the returned data)
+            url: '/articles/getAll',
+            reader: {
+                type: 'json',
+                root: 'records'
+            }
+        },
+        sorters: [{
+            property: 'common',
+            direction:'ASC'
+        }]
+    });
+    
+	Ext.define('Publication', {
+        extend: 'Ext.data.Model',
+        fields: [
+             {name : 'id', mapping: 'Publication.id'},
+             {name : 'name', mapping: 'Publication.name'}
+        ]
+    });
+	
+    var publicationStore = Ext.create('Ext.data.Store', {
+        autoDestroy: true,
+        model: 'Publication',
+        autoLoad: true,
+        proxy: {
+            type: 'ajax',
+            url: '/publications/getAll',
+            reader: {
+                type: 'json',
+                root: 'records'
+            }
+        },
+        sorters: [{
+            property: 'common',
+            direction:'ASC'
+        }]
+    });
+    
+	Ext.define('Author', {
+        extend: 'Ext.data.Model',
+        fields: [
+             {name : 'id', mapping: 'Author.id'},
+             {name : 'name', mapping: 'Author.name'}
+        ]
+    });
+	
+    var authorStore = Ext.create('Ext.data.Store', {
+        autoDestroy: true,
+        model: 'Author',
+        autoLoad: true,
+        proxy: {
+            type: 'ajax',
+            url: '/authors/getAll',
             reader: {
                 type: 'json',
                 root: 'records'
@@ -103,14 +151,13 @@ Ext.onReady(function() {
                 typeAhead: true,
                 triggerAction: 'all',
                 selectOnTab: true,
-                store: [
-                    ['Shade','Shade'],
-                    ['Mostly Shady','Mostly Shady'],
-                    ['Sun or Shade','Sun or Shade'],
-                    ['Mostly Sunny','Mostly Sunny'],
-                    ['Sunny','Sunny']
-                ],
-                lazyRender: true,
+                store: publicationStore,
+                valueField : 'id',
+                displayField : 'name',
+                emptyText:'Select Author',
+                //selectOnFocus:true,
+                //lazyRender: true,
+                autoShow: true,
                 listClass: 'x-combo-list-small'
             })
         }, {
@@ -121,14 +168,12 @@ Ext.onReady(function() {
                 typeAhead: true,
                 triggerAction: 'all',
                 selectOnTab: true,
-                store: [
-                    ['Shade','Shade'],
-                    ['Mostly Shady','Mostly Shady'],
-                    ['Sun or Shade','Sun or Shade'],
-                    ['Mostly Sunny','Mostly Sunny'],
-                    ['Sunny','Sunny']
-                ],
-                lazyRender: true,
+                store: authorStore,
+                valueField : 'id',
+                displayField : 'name',
+                emptyText:'Select Author',
+                //selectOnFocus:true,
+                //lazyRender: true,
                 listClass: 'x-combo-list-small'
             })
         }, {
@@ -165,8 +210,8 @@ Ext.onReady(function() {
                 triggerAction: 'all',
                 selectOnTab: true,
                 store: [
-                    ['created','created'],
-                    ['disabled','disabled']
+                    ['active','active'],
+                    ['inactive','inactive']
                 ],
                 lazyRender: true,
                 listClass: 'x-combo-list-small'
@@ -177,8 +222,10 @@ Ext.onReady(function() {
             width: 130,
             sortable: false,
             items: [{
-                icon: '../shared/icons/fam/delete.gif',
-                tooltip: 'Delete Plant',
+                text: 'Delete',
+                iconCls: 'icon-delete',
+                action: 'delete',
+                tooltip: 'Delete Article?',
                 handler: function(grid, rowIndex, colIndex) {
                     store.removeAt(rowIndex); 
                 }
@@ -210,9 +257,7 @@ Ext.onReady(function() {
         plugins: [cellEditing]
     });
     
-    // manually trigger the data store load
     store.load({
-        // store loading is asynchronous, use a load listener or callback to handle results
         callback: function(){
         	/*
             Ext.Msg.show({
