@@ -38,4 +38,71 @@ class AppModel extends Model {
 		
 		return $queryData;
 	}
+	
+	public function beforeDelete($cascade = true)
+	{
+		
+	}
+	
+	function delete($id = null, $cascade = true)
+	{
+		if (!empty($id)) {
+            $this->id = $id;
+        }
+        
+        if($this->exists()) {
+	        $id = $this->id;
+			$updates = array();
+			if($this->hasField('deleted')) {
+				if(!$this->field('deleted')){
+					$set_value = null;
+					switch ($this->getColumnType('deleted')){
+						case 'datetime':
+							$set_value = date("Y-m-d H:i:s");
+							break;
+						case 'boolean':
+							$set_value = 1;
+							break;
+						case 'integer':
+							$set_value = time();
+							break;
+					}
+					if(!empty($set_value)) {
+						$updates['deleted'] = $set_value;
+					}
+				}
+			}
+
+			if($this->hasField('status')) {
+				if(array_key_exists('softDelete', get_object_vars($this))){
+					$updates['status'] = 'DELETED';
+				}
+			}
+			if(!empty($updates)) {
+				if ($this->beforeDelete($cascade)) {
+					$filters = $this->Behaviors->trigger($this, 'beforeDelete', array($cascade), array(
+						'break' => true, 'breakOn' => false
+					));
+					if (!$filters || !$this->exists()) {
+						return false;
+					}
+
+					// Soft Delete
+					$update_fields = array_keys($updates);
+					$this->set($updates);
+					if($this->save(null, false, $update_fields)) {
+						$this->Behaviors->trigger($this, 'afterDelete');
+						$this->afterDelete();
+						$this->_clearCache();
+						$this->id = false;
+						return true;
+					}
+				}
+			} else {
+				return parent::delete($id, $cascade);
+			}
+        }
+        
+		return false;
+	}
 }

@@ -265,6 +265,8 @@ Ext.onReady(function() {
                 icon: document.URL + 'img/delete.gif',
                 tooltip: 'Delete Article',
                 handler: function(grid, rowIndex, colIndex) {
+                	//Need to work on before delete logic
+                	//set status = 'deleted', deleted timestamp set
                     store.removeAt(rowIndex); 
                 }
             }]
