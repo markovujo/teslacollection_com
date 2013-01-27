@@ -32,7 +32,7 @@ class AdminAppController extends AppController
 						$response['records'][$this->Model->alias] = $data;
 					} else {
 						$errors[] = $this->Model->validationErrors;
-						$errors[] = $this->ModelName->invalidFields();
+						$errors[] = $this->Model->invalidFields();
 					}
 				}
 			}
@@ -54,28 +54,16 @@ class AdminAppController extends AppController
 			)
 		);
 		
-		/*
-		if(!empty($this->params->data)) {
-			foreach($this->params->data AS $data) {
-				if(isset($data['id']) && $data['id'] > 0) {
-					if($this->Model->save($data)) { 
-						$response['records'][$this->Model->alias] = $data;
-					} else {
-						$errors[] = $this->Model->validationErrors;
-						$errors[] = $this->ModelName->invalidFields();
-					}
+		if($this->params['data']) {
+			foreach($this->params['data'] AS $id) {
+				if($this->Model->delete($id)) {
+					$response['records'][$this->Model->alias] = $id;
 				} else {
-					$this->Model->create(); 
-					if($this->Model->save($data)) { 
-						$response['records'][$this->Model->alias] = $data;
-					} else {
-						$errors[] = $this->Model->validationErrors;
-						$errors[] = $this->ModelName->invalidFields();
-					}
+					$errors[] = $this->Model->validationErrors;
+					$errors[] = $this->Model->invalidFields();
 				}
 			}
 		}
-		*/
 		
 		return (json_encode($response));
 	}

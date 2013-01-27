@@ -331,13 +331,41 @@ Ext.onReady(function() {
             items: [{
                 icon: document.URL + 'img/delete.gif',
                 tooltip: 'Delete Article',
-                handler: function(grid, rowIndex, colIndex) {
-                	//Need to work on before delete logic
-                	//set status = 'deleted', deleted timestamp set
-                	//TODO : ID should not be editable
-                	//DELETE LOGIC
-                	//Date afterRender is weird for saving
-                    store.removeAt(rowIndex); 
+                handler: function(grid, rowIndex, colIndex) {                	
+                	var record = store.getAt(rowIndex);
+                	var recordId = record.get('id');
+                	var recordTitle = record.get('title');
+                	
+            		Ext.Msg.confirm('Confirm Delete', 'Are you sure you want to delete Article (' + recordId +') - ' + recordTitle, function(btn) {
+            			if(btn == 'yes'){
+            				var data = [];
+            				data.push(recordId);
+            				console.log(data);
+            				Ext.Ajax.request({
+        	    			   url: document.URL + 'articles/delete',
+        	    			   success: function(response) {
+        	    				   Ext.Msg.show({
+        	    		                title: 'Success',
+        	    		                msg: 'Your data has been successfully Deleted!',
+        	    		                modal: false,
+        	    		                icon: Ext.Msg.INFO,
+        	    		                buttons: Ext.Msg.OK
+        	    		            });
+        	    				   store.removeAt(rowIndex);
+        	    			   },
+        	    			   failture: function(response) {
+        	    				   Ext.Msg.show({
+        	    		                title: 'Failure',
+        	    		                msg: 'Your data has FAILED to delete!',
+        	    		                modal: false,
+        	    		                icon: Ext.Msg.FAIL,
+        	    		                buttons: Ext.Msg.OK
+        	    		            });
+        	    			   },
+        	    			   jsonData : Ext.JSON.encode(data)
+        	    			});
+	                    }
+	                }, this);
                 }
             }]
         }],
@@ -368,7 +396,7 @@ Ext.onReady(function() {
         		}
         		
         		Ext.Ajax.request({
-    			   url: document.URL + 'articles/saveAll',    // where you wanna post
+    			   url: document.URL + 'articles/saveAll',
     			   success: function(response) {
     				   Ext.Msg.show({
     		                title: 'Success',

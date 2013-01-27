@@ -39,11 +39,6 @@ class AppModel extends Model {
 		return $queryData;
 	}
 	
-	public function beforeDelete($cascade = true)
-	{
-		
-	}
-	
 	function delete($id = null, $cascade = true)
 	{
 		if (!empty($id)) {
@@ -78,10 +73,12 @@ class AppModel extends Model {
 					$updates['status'] = 'DELETED';
 				}
 			}
+			
 			if(!empty($updates)) {
 				if ($this->beforeDelete($cascade)) {
 					$filters = $this->Behaviors->trigger($this, 'beforeDelete', array($cascade), array(
-						'break' => true, 'breakOn' => false
+						'break' => true, 
+						'breakOn' => false
 					));
 					if (!$filters || !$this->exists()) {
 						return false;
@@ -93,7 +90,6 @@ class AppModel extends Model {
 					if($this->save(null, false, $update_fields)) {
 						$this->Behaviors->trigger($this, 'afterDelete');
 						$this->afterDelete();
-						$this->_clearCache();
 						$this->id = false;
 						return true;
 					}
