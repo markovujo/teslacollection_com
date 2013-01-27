@@ -69,27 +69,27 @@ class AppModel extends Model {
 			}
 
 			if($this->hasField('status')) {
-				if(array_key_exists('softDelete', get_object_vars($this))){
-					$updates['status'] = 'DELETED';
-				}
+				$updates['status'] = 'deleted';
 			}
-			
 			if(!empty($updates)) {
 				if ($this->beforeDelete($cascade)) {
+					/*
 					$filters = $this->Behaviors->trigger($this, 'beforeDelete', array($cascade), array(
 						'break' => true, 
 						'breakOn' => false
 					));
+					
 					if (!$filters || !$this->exists()) {
 						return false;
 					}
+					*/
 
 					// Soft Delete
 					$update_fields = array_keys($updates);
 					$this->set($updates);
 					if($this->save(null, false, $update_fields)) {
-						$this->Behaviors->trigger($this, 'afterDelete');
-						$this->afterDelete();
+						//$this->Behaviors->trigger($this, 'afterDelete');
+						//$this->afterDelete();
 						$this->id = false;
 						return true;
 					}
