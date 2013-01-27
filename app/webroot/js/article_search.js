@@ -6,6 +6,43 @@ $(function() {
 	$('#articles_search_results').hide();
 	$('#article_result_ajax').hide();
 	
+	$("#title_text").autocomplete({
+      source: function( request, response ) {
+    	var data = {
+    		'data' : {
+    			'ArticleSearch' : {
+	    			'title_text' : request.term
+	    		}
+    		}
+    	};
+    	
+        $.ajax({
+          type: 'POST',
+          url: document.URL + 'articles/search',
+          dataType: "json",
+          data: data,
+          success: function( data ) {
+            response( $.map( data.articles, function( item ) {
+              return {
+                label: item.Article.title,
+                value: item.Article.title
+              }
+            }));
+          }
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+        
+      },
+      open: function() {
+        
+      },
+      close: function() {
+    	 $('#search_submit').click();
+      }
+    });
+	
 	$('#search_submit').click(function() {
 		var formData = $('#article_search_form').serialize();
 	
@@ -90,6 +127,7 @@ $(function() {
 		$("#author_selection option:selected").removeAttr("selected");
 		$("#year_selection option:selected").removeAttr("selected");
 		$("#subject_selection option:selected").removeAttr("selected");
+		$("#title_text").val('');
 		$("#search_text").val('');
 		$('#articles_search_results').hide();
 	});
