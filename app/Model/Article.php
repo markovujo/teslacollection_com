@@ -53,6 +53,12 @@ class Article extends AppModel
 			'criteria' => array()
 		);
 		
+		if(isset($params['limit']) && !empty($params['limit'])) {
+			$limit = (int) $params['limit'];
+		} else {
+			$limit = NULL;
+		}
+		
 		if(isset($params['author_id']) && !empty($params['author_id'])) {
 			if(!in_array('ALL', $params['author_id'])) {
 				$conditions['Author.id'] = (array) $params['author_id'];
@@ -137,6 +143,7 @@ class Article extends AppModel
 			, 'joins' => $joins
 			, 'group' => $group
 			, 'fields' => $fields
+			, 'limit' => $limit
 		));
 		
 		/* DEBUGGING :: 

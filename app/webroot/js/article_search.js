@@ -33,13 +33,14 @@ $(function() {
       },
       minLength: 3,
       select: function( event, ui ) {
-        
+    	 $('#title_text').val(ui.item.label);
+    	 $('#search_submit').click();
       },
       open: function() {
         
       },
       close: function() {
-    	 $('#search_submit').click();
+    	 
       }
     });
 	
