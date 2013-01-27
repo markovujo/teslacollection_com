@@ -129,10 +129,12 @@ Ext.onReady(function() {
             dataIndex: 'title'
         }, {
             type: 'string',
-            dataIndex: 'publication_id'
+            dataIndex: 'publication_id',
+            disabled: true
         }, {
             type: 'string',
-            dataIndex: 'author_id'
+            dataIndex: 'author_id',
+            disabled: true
         }, {
             type: 'date',
             dataIndex: 'date'
