@@ -256,8 +256,10 @@ Ext.onReady(function() {
                 listClass: 'x-combo-list-small'
             })
         }, {
+        	header: 'Delete',
+            dataIndex: 'delete',
             xtype: 'actioncolumn',
-            width:30,
+            width:70,
             sortable: false,
             items: [{
                 icon: document.URL + 'img/delete.gif',
