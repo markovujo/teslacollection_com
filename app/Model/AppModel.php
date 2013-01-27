@@ -31,4 +31,11 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+	
+	public function beforeFind($queryData = array())
+	{
+		$queryData['conditions'][$this->name . '.status !='] = 'deleted';
+		
+		return $queryData;
+	}
 }

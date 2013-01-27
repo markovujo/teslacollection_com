@@ -127,9 +127,11 @@ Ext.onReady(function() {
             id: 'id',
             header: 'ID',
             dataIndex: 'id',
+            width: 70,
             editor: {
                 allowBlank: true
-            }
+            },
+            disabled : true
         }, {
             header: 'Volume',
             dataIndex: 'volume',
@@ -255,12 +257,11 @@ Ext.onReady(function() {
             })
         }, {
             xtype: 'actioncolumn',
-            header: 'Delete',
-            width: 130,
+            width:30,
             sortable: false,
             items: [{
-                text: 'Delete',
-                tooltip: 'Delete Article?',
+                icon: document.URL + 'img/delete.gif',
+                tooltip: 'Delete Article',
                 handler: function(grid, rowIndex, colIndex) {
                     store.removeAt(rowIndex); 
                 }
@@ -276,8 +277,8 @@ Ext.onReady(function() {
             selType: 'cellmodel'
         },
         renderTo: 'article-grid',
-        width: 1200,
-        height: 1000,
+        width: 1500,
+        height: 800,
         title: 'Collection Articles',
         frame: true,
         tbar: [
