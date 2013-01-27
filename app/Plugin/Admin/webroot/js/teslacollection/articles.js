@@ -284,7 +284,8 @@ Ext.onReady(function() {
         		
         		Ext.Ajax.request({
     			   url: document.URL + 'articles/saveAll',    // where you wanna post
-    			   success: function() {
+    			   success: function(response) {
+    				   console.log(response);
     				   Ext.Msg.show({
     		                title: 'Success',
     		                msg: 'Your data has been successfully saved!',
@@ -292,8 +293,10 @@ Ext.onReady(function() {
     		                icon: Ext.Msg.INFO,
     		                buttons: Ext.Msg.OK
     		            });
+    				   store.commitChanges();
     			   },
-    			   failture: function() {
+    			   failture: function(response) {
+    				   console.log(response);
     				   Ext.Msg.show({
     		                title: 'Failure',
     		                msg: 'Your data has FAILED to save!',
