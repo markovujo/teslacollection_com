@@ -12,6 +12,13 @@ class PublicationsController extends AdminAppController {
  * @var mixed
  */
 	//public $scaffold;
+	var $uses = array('Publication');
+	
+	public function __construct($id = false, $table = NULL, $ds = NULL)
+	{
+		$this->Model = $this->Publication;
+		parent::__construct($id, $table, $ds);
+	}
 	
 	public function index()
 	{

@@ -310,8 +310,8 @@ Ext.onReady(function() {
             text: 'Add Article',
             handler : function(){
                 var r = Ext.create('Article', {
-                    volume: 1,
-                    page: 1
+                    volume: 0,
+                    page: 0
                 });
                 store.insert(0, r);
                 cellEditing.startEditByPosition({row: 0, column: 0});

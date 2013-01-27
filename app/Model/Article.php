@@ -110,6 +110,9 @@ class Article extends AppModel
 			$return['criteria']['text_search'] = $params['text_search'];
 		}
 		
+		$conditions['Article.status'] = 'active';
+		
+		
 		$return['articles'] = $this->find('all', array(
 			'conditions' => $conditions
 			, 'contain' => $contain
