@@ -85,8 +85,11 @@ class AppController extends Controller
 			'offset' => $offset
 		));
 		
+		$totalCount = $this->{$model}->find('count');
+		
 		$results = array(
-			'totalCount' => count($records),
+			'totalCount' => $totalCount,
+			'recordCount' => count($records),
 			'records' => $records
 		);
 		

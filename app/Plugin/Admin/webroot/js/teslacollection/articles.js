@@ -29,15 +29,19 @@ Ext.onReady(function() {
         ]
     });
 	
+	var myPageSize = 50;
+	
     var store = Ext.create('Ext.data.Store', {
-        autoDestroy: true,
+    	autoLoad: false,
         model: 'Article',
+        pageSize: myPageSize, // items per page
         proxy: {
             type: 'ajax',
             url: document.URL + 'articles/getAll',
             reader: {
                 type: 'json',
-                root: 'records'
+                root: 'records',
+                totalProperty: "totalCount"
             }
         },
         sorters: [{
@@ -123,8 +127,11 @@ Ext.onReady(function() {
             header: 'ID',
             dataIndex: 'id',
             editor: {
-                allowBlank: true
+                allowBlank: true,
+                disable: true,
+                editing: false
             }
+        	, hidden: true
         }, {
             header: 'Volume',
             dataIndex: 'volume',
@@ -261,6 +268,12 @@ Ext.onReady(function() {
                 }
             }]
         }],
+        dockedItems: [{
+            xtype: 'pagingtoolbar',
+            store: store,   // same store GridPanel is using
+            dock: 'bottom',
+            displayInfo: true
+        }],
         selModel: {
             selType: 'cellmodel'
         },
@@ -280,12 +293,10 @@ Ext.onReady(function() {
         		    changes['id'] = modified_records[i].getId();
         		    records.push(changes);
         		}
-        		console.dir(records);
         		
         		Ext.Ajax.request({
     			   url: document.URL + 'articles/saveAll',    // where you wanna post
     			   success: function(response) {
-    				   console.log(response);
     				   Ext.Msg.show({
     		                title: 'Success',
     		                msg: 'Your data has been successfully saved!',
@@ -296,7 +307,6 @@ Ext.onReady(function() {
     				   store.commitChanges();
     			   },
     			   failture: function(response) {
-    				   console.log(response);
     				   Ext.Msg.show({
     		                title: 'Failure',
     		                msg: 'Your data has FAILED to save!',
@@ -324,6 +334,9 @@ Ext.onReady(function() {
     });
     
     store.load({
-        callback: function(){}
+    	params:{
+            start: 0,
+            limit: myPageSize
+        }
     });
 });
