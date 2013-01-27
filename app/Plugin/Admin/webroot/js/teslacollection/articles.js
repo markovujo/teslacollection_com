@@ -1,9 +1,13 @@
+Ext.Loader.setConfig({enabled: true});
+Ext.Loader.setPath('Ext.ux', 'js/ext/ext-4.1.1a/examples/ux/');
 Ext.require([
     'Ext.selection.CellModel',
     'Ext.grid.*',
     'Ext.data.*',
     'Ext.form.*',
-    'Ext.window.*'
+    'Ext.window.*',
+    'Ext.toolbar.Paging',
+    'Ext.ux.grid.FiltersFeature',
 ]);
 
 Ext.onReady(function() {
@@ -109,19 +113,51 @@ Ext.onReady(function() {
         clicksToEdit: 1
     });
     
-    /*
-    cellEditing.on('edit', function(editor, e) {
-        // commit the changes right after editing finished
-    	console.log('HEY THERE RECORD');
-    	console.log(editor);
-    	console.log(e);
-        e.record.commit();
-    });
-    */
+    var filters = {
+        ftype: 'filters',
+        filters: [{
+            type: 'numeric',
+            dataIndex: 'id'
+        }, {
+            type: 'numeric',
+            dataIndex: 'volume'
+        }, {
+            type: 'numeric',
+            dataIndex: 'page'
+        }, {
+            type: 'string',
+            dataIndex: 'title'
+        }, {
+            type: 'string',
+            dataIndex: 'publication_id'
+        }, {
+            type: 'string',
+            dataIndex: 'author_id'
+        }, {
+            type: 'date',
+            dataIndex: 'date'
+        }, {
+            type: 'numeric',
+            dataIndex: 'year'
+        }, {
+            type: 'string',
+            dataIndex: 'range_text'
+        }, {
+            type: 'list',
+            dataIndex: 'status',
+            options: ['small', 'medium', 'large', 'extra large'],
+            phpMode: true
+        }, {
+            type: 'string',
+            dataIndex: 'delete',
+            disabled: true
+        }]
+    };
     
     // create the grid and specify what field you want
     // to use for the editor at each header.
     var grid = Ext.create('Ext.grid.Panel', {
+    	features: [filters],
         store: store,
         columns: [{
             id: 'id',
@@ -131,7 +167,10 @@ Ext.onReady(function() {
             editor: {
                 allowBlank: true
             },
-            disabled : true
+            filterable: true,
+            filter: {
+                type: 'numeric'
+            }
         }, {
             header: 'Volume',
             dataIndex: 'volume',
@@ -142,6 +181,9 @@ Ext.onReady(function() {
                 allowBlank: false,
                 minValue: 0,
                 maxValue: 23
+            },
+            filter: {
+                type: 'numeric'
             }
         }, {
             header: 'Page',
@@ -153,6 +195,9 @@ Ext.onReady(function() {
                 allowBlank: false,
                 minValue: 0,
                 maxValue: 100000
+            },
+            filter: {
+                type: 'numeric'
             }
         }, {
             header: 'Title',
@@ -161,6 +206,9 @@ Ext.onReady(function() {
             align: 'left',
             editor: {
                 xtype: 'textfield',
+            },
+            filter: {
+                type: 'string'
             }
         }, {
         	header: 'Publication',
@@ -176,18 +224,20 @@ Ext.onReady(function() {
                 emptyText:'Select Author',
                 autoShow: true,
                 listClass: 'x-combo-list-small'
-            })
+            }),
+            filter: {
+                type: 'string'
+            }
 	        , renderer: function(value){
-	            if(value != 0 && value != "")
-	            {
+	            if(value != 0 && value != "") {
 	            	if(publicationStore.findRecord("id", value) != null) {
 	                    return publicationStore.findRecord("id", value).get('name');
 	                } else { 
 	                    return value;
 	                }
-	            }
-	            else
+	            } else {
 	                return "";  // display nothing if value is empty
+	            }
 	        }
         }, {
         	header: 'Author',
@@ -202,18 +252,20 @@ Ext.onReady(function() {
                 displayField : 'name',
                 emptyText:'Select Author',
                 listClass: 'x-combo-list-small'
-            })
+            }),
+            filter: {
+                type: 'string'
+            }
 	        , renderer: function(value){
-	            if(value != 0 && value != "")
-	            {
+	            if(value != 0 && value != "") {
 	            	if(authorStore.findRecord("id", value) != null) {
 	                    return authorStore.findRecord("id", value).get('name');
 	                } else { 
 	                    return value;
 	                }
-	            }
-	            else
+	            } else {
 	                return "";  // display nothing if value is empty
+	            }
 	        }
         }, {
             header: 'Date',
@@ -223,6 +275,9 @@ Ext.onReady(function() {
             editor: {
                 xtype: 'datefield',
                 format: 'Y-m-d'
+            },
+            filter: {
+                type: 'date'
             }
         }, {
             header: 'Year',
@@ -231,6 +286,9 @@ Ext.onReady(function() {
             align: 'right',
             editor: {
                 xtype: 'textfield',
+            },
+            filter: {
+                type: 'numeric'
             }
         }, {
             header: 'Range',
@@ -239,6 +297,9 @@ Ext.onReady(function() {
             align: 'right',
             editor: {
                 xtype: 'textfield',
+            },
+            filter: {
+                type: 'string'
             }
         }, {
         	header: 'Status',
@@ -254,7 +315,11 @@ Ext.onReady(function() {
                 ],
                 lazyRender: true,
                 listClass: 'x-combo-list-small'
-            })
+            }),
+            filter: {
+                type: 'list',
+                options: ['active', 'inactive']
+            }
         }, {
         	header: 'Delete',
             dataIndex: 'delete',
@@ -267,6 +332,9 @@ Ext.onReady(function() {
                 handler: function(grid, rowIndex, colIndex) {
                 	//Need to work on before delete logic
                 	//set status = 'deleted', deleted timestamp set
+                	//TODO : ID should not be editable
+                	//DELETE LOGIC
+                	//Date afterRender is weird for saving
                     store.removeAt(rowIndex); 
                 }
             }]
