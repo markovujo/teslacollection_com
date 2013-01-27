@@ -44,6 +44,8 @@ class AppController extends Controller
 		$model = substr($this->name, 0, -1);
 		$conditions = array();
 		
+		App::uses('Sanitize', 'Utility');
+		
 		if (!empty($this->params->query['start'])) {
 			$start = (int) $this->params->query['start'];
 		} else {
@@ -69,7 +71,6 @@ class AppController extends Controller
 		}
 		
 		if (!empty($this->params->query['query'])) {
-			App::uses('Sanitize', 'Utility');
 			$query = Sanitize::escape($this->params->query['query']);
 			$conditions['or'][] = array($model . '.name LIKE' => "%$query%");
 			$conditions['or'][] = array($model . '.name' => $query);
@@ -78,6 +79,36 @@ class AppController extends Controller
 			$page = null;
 		}
 		
+		if (!empty($this->params->query['filter'])) {
+			foreach($this->params->query['filter'] AS $filter) {
+				if(isset($filter['data']['comparison'])) {
+					$value = Sanitize::escape($filter['data']['value']);
+					$field_name = $model . '.' . $filter['field'];
+					switch($filter['data']['comparison']) {
+						case 'lte':
+							$conditions[$field_name . ' <='] = $value;
+							break;
+						case 'gte':
+							$conditions[$field_name . ' >='] = $value;
+							break;
+						case 'lt':
+							$conditions[$field_name . ' <='] = $value;
+							break;
+						case 'gt':
+							$conditions[$field_name . ' >='] = $value;
+							break;
+						case 'eq':
+							$conditions[$field_name] = $value;
+							break;
+						default:
+							$conditions[$field_name] = $value;
+							break;
+					}
+				}
+			}
+		}
+		
+		//die(debug($conditions));
 		$records = $this->{$model}->find('all', array(
 			'conditions' => $conditions,
 			'contain' => false,

@@ -145,7 +145,7 @@ Ext.onReady(function() {
         }, {
             type: 'list',
             dataIndex: 'status',
-            options: ['small', 'medium', 'large', 'extra large'],
+            options: ['active', 'inactive'],
             phpMode: true
         }, {
             type: 'string',
@@ -400,7 +400,15 @@ Ext.onReady(function() {
                 store.insert(0, r);
                 cellEditing.startEditByPosition({row: 0, column: 0});
             }
-        }],
+        }, 
+        '->',
+        {
+            text: 'Clear Filter Data',
+            handler: function () {
+                grid.filters.clearFilters();
+            } 
+        }
+        ],
         plugins: [cellEditing]
     });
     
