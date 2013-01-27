@@ -11,7 +11,8 @@ $(function() {
     	var data = {
     		'data' : {
     			'ArticleSearch' : {
-	    			'title_text' : request.term
+	    			'title_text' : request.term,
+	    			'limit' : 10
 	    		}
     		}
     	};

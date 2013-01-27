@@ -29,9 +29,9 @@ $siteDescription = '"The Tesla Collection" - the most comprehensive compilation 
 	<?php
 		echo $this->Html->meta('icon');
 
+		echo $this->Html->css('http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css');
 		echo $this->Html->css('layout');
 		echo $this->Html->css('table');
-		echo $this->Html->css('http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css');
 		echo $this->Html->css('tablesorter/style.css');
 		
 		echo $this->Html->script('http://code.jquery.com/jquery-1.8.3.js');
