@@ -10,7 +10,8 @@ Ext.onReady(function() {
 	Ext.QuickTips.init();
 	
     function formatDate(value){
-        return value ? Ext.Date.dateFormat(value, 'M d, Y') : '';
+        //return value ? Ext.Date.dateFormat(value, 'M d, Y') : '';
+    	return value;
     }
 	
 	Ext.define('Article', {
@@ -127,11 +128,8 @@ Ext.onReady(function() {
             header: 'ID',
             dataIndex: 'id',
             editor: {
-                allowBlank: true,
-                disable: true,
-                editing: false
+                allowBlank: true
             }
-        	, hidden: true
         }, {
             header: 'Volume',
             dataIndex: 'volume',
