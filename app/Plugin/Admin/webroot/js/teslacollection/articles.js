@@ -405,6 +405,12 @@ Ext.onReady(function() {
         }, 
         '->',
         {
+            text: 'Clear Changes',
+            handler: function () {
+            	store.rejectChanges();
+            } 
+        },
+        {
             text: 'Clear Filter Data',
             handler: function () {
                 grid.filters.clearFilters();
