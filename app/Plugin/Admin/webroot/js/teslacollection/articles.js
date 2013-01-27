@@ -174,6 +174,32 @@ Ext.onReady(function() {
                 type: 'numeric'
             }
         }, {
+            header: 'Link',
+            dataIndex: 'link',
+            /*
+            width: 70,
+            align: 'right',
+            editor: {
+                xtype: 'numberfield',
+                allowBlank: false,
+                minValue: 0,
+                maxValue: 23
+            },
+            filter: {
+                type: 'numeric'
+            }
+            */
+            renderer: function(value, metaData, record, rowIndex, colIndex, store) {
+                //The <a> tag is used to create an anchor to link from
+                //the href attribute is used to address the document to link to
+                //the words between the open and close of the anchor tag will
+                //be displayed as a hyperlink (value).
+                //the target attribute defines where the linked document will
+                //be opened (_blank = open the document in a new browser window)
+                return '<a href="http://www.yourURL.com/" target="_blank">'
+                       + value +'</a>';
+             }//end renderer
+        }, {
             header: 'Volume',
             dataIndex: 'volume',
             width: 70,

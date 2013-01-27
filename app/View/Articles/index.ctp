@@ -43,9 +43,16 @@
 				));
 				
 				echo $this->element('selection_text', array(
+					'selection_id' => 'title_text'
+					, 'id' => 'title_text'
+					, 'selection_name' => 'Article Title'
+					, 'name' => 'data[ArticleSearch][title_text]'
+				));
+				
+				echo $this->element('selection_text', array(
 					'selection_id' => 'search_text'
 					, 'id' => 'search_text'
-					, 'selection_name' => 'Article Title/Body'
+					, 'selection_name' => 'Article Body'
 					, 'name' => 'data[ArticleSearch][text_search]'
 				));
 			?>

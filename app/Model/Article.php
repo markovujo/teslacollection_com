@@ -89,6 +89,15 @@ class Article extends AppModel
 			}
 		}
 		
+		if(isset($params['title_text']) && $params['title_text'] != '') {
+			App::uses('Sanitize', 'Utility');
+			$params['title_text'] = Sanitize::escape($params['title_text']);
+			
+			$conditions['Article.title LIKE'] = '%' . $params['title_text'] . '%';
+			
+			$return['criteria']['title_text'] = $params['title_text'];
+		}
+		
 		if(isset($params['text_search']) && !empty($params['text_search'])) {
 			App::uses('Sanitize', 'Utility');
 			$params['text_search'] = Sanitize::escape($params['text_search']);
@@ -96,14 +105,23 @@ class Article extends AppModel
 			$joins[] = array(
 		     	'table' => 'articles_pages',
 		    	'alias' => 'ArticlesPage',
-		    	'type' => 'LEFT',
+		    	'type' => 'INNER',
 		    	'conditions' => array(
 		    		'Article.id = ArticlesPage.article_id'
 		       	)
 		    );
+		    
+		    $joins[] = array(
+		     	'table' => 'pages',
+		    	'alias' => 'Page',
+		    	'type' => 'INNER',
+		    	'conditions' => array(
+		    		'ArticlesPage.page_id = Page.id'
+		       	)
+		    );
 			
 			$conditions[] = array( 
-			   "MATCH(ArticlesPage.title, ArticlesPage.text)  
+			   "MATCH(Page.text)  
 			          AGAINST('" . $params['text_search'] . "' IN BOOLEAN MODE)" 
 			);
 			
