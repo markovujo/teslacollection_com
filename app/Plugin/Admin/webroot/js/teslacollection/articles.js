@@ -158,25 +158,22 @@ Ext.onReady(function() {
     
     Ext.ns('TeslaCollection');
     TeslaCollection.ArticleModal = {
-    	article_id : '',
-    	win : '',
-    	store : '',
-        init:function()
+        openWindow: function(articleId)
         {
         	Ext.define('Page', {
                 extend: 'Ext.data.Model',
-                fields : [
-                   {name : 'filename', mapping: 'filename'},
-                   {name : 'full_path', mapping: 'full_path'},
-                   {name : 'status', mapping: 'status'},      
+                fields: [
+                     {name : 'filename', mapping: 'filename'},
+                     {name : 'full_path', mapping: 'full_path'},
+                     {name : 'status', mapping: 'status'}
                 ]
             });
         	
-        	this.store = Ext.create('Ext.data.JsonStore', {
+        	var pageStore = Ext.create('Ext.data.JsonStore', {
                 model: 'Page',
                 proxy: {
                     type: 'ajax',
-                    url: document.URL + 'articles/getArticlePages/' + this.article_id,
+                    url: document.URL + 'articles/getArticlePages/' + articleId,
                     reader: {
                         type: 'json',
                         root: 'records.Page'
@@ -184,51 +181,101 @@ Ext.onReady(function() {
                 }
             });
         	
-        	console.log('Init store for article id :: ' + this.article_id);
-        	
-        	var listView = Ext.create('Ext.grid.Panel', {
-                title: 'Article Pages',
-                store: this.store,
+        	var pagesGrid = Ext.create('Ext.grid.Panel', {
+                store: pageStore,
                 columns: [
-                  {
-                      text: 'Filename',
-                      dataIndex: 'filename'
-                  },{
-                      text: 'Full Path',
-                      dataIndex: 'full_path'
-                  }, {
-                  	text: 'Status',
-                  	dataIndex: 'status'
-                  }]
+                    {
+                        text     : 'Filename',
+                        flex     : 1,
+                        sortable : false,
+                        dataIndex: 'filename'
+                    },
+                    {
+                        text     : 'Full Path',
+                        width    : 75,
+                        sortable : false,
+                        dataIndex: 'full_path'
+                    },
+                    {
+                        text     : 'Status',
+                        width    : 75,
+                        sortable : true,
+                        dataIndex: 'status'
+                    },
+                    {
+                        xtype: 'actioncolumn',
+                        width: 50,
+                        title: 'Remove',
+                        items: [{
+                            icon: document.URL + 'img/delete.gif',
+                            tooltip: 'Remove Link',
+                            handler: function(grid, rowIndex, colIndex) {                	
+                            	var record = store.getAt(rowIndex);
+                            	var recordId = record.get('id');
+                            	var recordFilename = record.get('filename');
+                            	
+                        		Ext.Msg.confirm('Confirm Delete', 'Are you sure you want to delete Page Link (' + articleId + ' - ' + recordId + ') - ' + recordFilename, function(btn) {
+                        			if(btn == 'yes'){
+                        				var data = [];
+                        				data.push({
+                        					'article_id' : articleId,
+                        					'page_id' : recordId
+                        				});
+
+                        				var url = document.URL + 'articles/deleteArticlePageLink';
+                        				console.log(url);
+                        				Ext.Ajax.request({
+                    	    			   url: url,
+                    	    			   success: function(response) {
+                    	    				   Ext.Msg.show({
+                    	    		                title: 'Success',
+                    	    		                msg: 'Your ArticlePage Link has been successfully Deleted!',
+                    	    		                modal: false,
+                    	    		                icon: Ext.Msg.INFO,
+                    	    		                buttons: Ext.Msg.OK
+                    	    		            });
+                    	    				   page_store.removeAt(rowIndex);
+                    	    			   },
+                    	    			   failture: function(response) {
+                    	    				   Ext.Msg.show({
+                    	    		                title: 'Failure',
+                    	    		                msg: 'Your data has FAILED to remove links!',
+                    	    		                modal: false,
+                    	    		                icon: Ext.Msg.FAIL,
+                    	    		                buttons: Ext.Msg.OK
+                    	    		            });
+                    	    			   },
+                    	    			   jsonData : Ext.JSON.encode(data)
+                    	    			});
+            	                    }
+            	                }, this);
+                            }
+                        }]
+                    }
+                ],
+                height: 350,
+                width: 600,
+                title: 'Pages',
+                viewConfig: {
+                    stripeRows: true
+                }
             });
         	
-        	this.win = new Ext.Window({
+        	pageStore.load();
+        	
+        	var win = new Ext.Window({
                 width:640,
                 height:480,
-                //title: 'Article Pages',
+                title: 'Article',
                 autoScroll:true,
                 modal:true,
                 store: this.store,
                 items : [
-                   listView
+                    pagesGrid		
                 ]
             });
         	
-        	console.log('Init win for article id :: ' + this.article_id);
-        },
-        openWindow: function(article_id)
-        {
-            this.article_id = article_id;
-        
-            this.init();
-            this.loadStore();
-            this.win.show();
-            
-            console.log('openWindow for article id :: ' + this.article_id);
-        },
-        loadStore: function() {        	
-            this.store.load();
-            console.log('Loaded Store for article id :: ' + this.article_id);
+            win.show();
         }
     }
     
@@ -422,7 +469,7 @@ Ext.onReady(function() {
             			if(btn == 'yes'){
             				var data = [];
             				data.push(recordId);
-            				console.log(data);
+            				//console.log(data);
             				Ext.Ajax.request({
         	    			   url: document.URL + 'articles/delete',
         	    			   success: function(response) {

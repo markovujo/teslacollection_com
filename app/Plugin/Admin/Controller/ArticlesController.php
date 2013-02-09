@@ -12,7 +12,7 @@ class ArticlesController extends AdminAppController {
  * @var mixed
  */
 	//public $scaffold;
-	var $uses = array('Article', 'Page');
+	var $uses = array('Article', 'ArticlePages', 'Page');
 	
 	public function __construct($id = false, $table = NULL, $ds = NULL)
 	{
@@ -49,6 +49,32 @@ class ArticlesController extends AdminAppController {
 			if($article) {
 				if(isset($article['Page']) && !empty($article['Page'])) {
 					$response['records']['Page'] = $article['Page'];
+				}
+			}
+		}
+		
+		return (json_encode($response));
+	}
+	
+	public function deleteArticlePageLink() {
+		$this->autoRender = false;
+		$this->layout = 'ajax';
+		$this->RequestHandler->respondAs('json');
+		
+		$response = array(
+			'success' => true,
+			'errors' => array(),
+			'records' => array()
+		);
+		
+		die(debug($this->params['data']));
+		if($this->params['data']) {
+			foreach($this->params['data'] AS $id) {
+				if($this->ArticlesPage->delete($id)) {
+					$response['records']['ArticlesPage'] = $id;
+				} else {
+					$errors[] = $this->Model->validationErrors;
+					$errors[] = $this->Model->invalidFields();
 				}
 			}
 		}
