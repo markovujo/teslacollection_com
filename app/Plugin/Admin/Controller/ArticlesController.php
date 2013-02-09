@@ -54,19 +54,6 @@ class ArticlesController extends AdminAppController {
 					}
 				}
 			}
-		} else {
-			$pages = $this->Page->find('all', array(
-				'conditions' => array(
-					'Page.filename like' => '%Volume 01 Page 042.jpg%'
-				),
-				'contain' => false
-			));
-			
-			die(debug($this->params['data']));
-			die(debug($pages));
-			if($pages) {
-				$response['records'] = $page;
-			}
 		}
 		
 		$response['success'] = empty($response['errors']);

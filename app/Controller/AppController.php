@@ -71,10 +71,26 @@ class AppController extends Controller
 		}
 		
 		if (!empty($this->params->query['query'])) {
-			$query = Sanitize::escape($this->params->query['query']);
-			$conditions['or'][] = array($model . '.name LIKE' => "%$query%");
-			$conditions['or'][] = array($model . '.name' => $query);
+			$search_field = NULL;
 			
+			$model_search_fields = array(
+				'filename',
+				'name'
+			);
+			
+			if(!empty($model_search_fields)) {
+				foreach($model_search_fields AS $model_search_field) {
+					if($this->{$model}->hasField($model_search_field)) {
+						$search_field = $model_search_field;
+					}
+				}
+			}
+			
+			if(!is_null($search_field)) {
+				$query = Sanitize::escape($this->params->query['query']);
+				$conditions['or'][] = array($model . '.' . $search_field . ' LIKE' => "%$query%");
+				$conditions['or'][] = array($model . '.' . $search_field => $query);
+			}
 		} else {
 			$page = null;
 		}

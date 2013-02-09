@@ -172,27 +172,33 @@ Ext.onReady(function() {
                 ]
             });
         	
-        	var url = document_url + 'articles/getArticlePages';
-        	var pageComboStore = Ext.create('Ext.data.JsonStore', {
+            var pageComboStore = Ext.create('Ext.data.Store', {
+                autoDestroy: true,
                 model: 'Page',
                 proxy: {
                     type: 'ajax',
-                    url: url,
+                    url: document_url + 'pages/getAll',
                     reader: {
                         type: 'json',
                         root: 'records'
                     }
-                }
+                },
+                sorters: [{
+                    property: 'common',
+                    direction:'ASC'
+                }]
             });
         	
         	var pageCombo = Ext.create('Ext.form.field.ComboBox', {
-        	    fieldLabel: 'Pages',
-        	    displayField: 'name',
-        	    width: 500,
-        	    labelWidth: 130,
-        	    store: pageComboStore,
-        	    //queryMode: 'local',
-        	    typeAhead: true
+                typeAhead: true,
+                triggerAction: 'all',
+                selectOnTab: true,
+                store: pageComboStore,
+                valueField : 'id',
+                displayField : 'filename',
+                emptyText:'Select Page',
+                autoShow: true,
+                listClass: 'x-combo-list-small'
         	});
         	
         	var url = document_url + 'articles/getArticlePages/' + articleId;
