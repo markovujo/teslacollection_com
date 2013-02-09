@@ -17,6 +17,8 @@ Ext.onReady(function() {
         //return value ? Ext.Date.dateFormat(value, 'M d, Y') : '';
     	return value;
     }
+    
+    var document_url = document.URL.replace('#', '');
 	
 	Ext.define('Article', {
         extend: 'Ext.data.Model',
@@ -163,17 +165,19 @@ Ext.onReady(function() {
         	Ext.define('Page', {
                 extend: 'Ext.data.Model',
                 fields: [
+                     {name : 'id', mapping: 'id'},
                      {name : 'filename', mapping: 'filename'},
                      {name : 'full_path', mapping: 'full_path'},
                      {name : 'status', mapping: 'status'}
                 ]
             });
         	
+        	var url = document_url + 'articles/getArticlePages/' + articleId;
         	var pageStore = Ext.create('Ext.data.JsonStore', {
                 model: 'Page',
                 proxy: {
                     type: 'ajax',
-                    url: document.URL + 'articles/getArticlePages/' + articleId,
+                    url: url,
                     reader: {
                         type: 'json',
                         root: 'records.Page'
@@ -184,6 +188,12 @@ Ext.onReady(function() {
         	var pagesGrid = Ext.create('Ext.grid.Panel', {
                 store: pageStore,
                 columns: [
+                    {
+                    	text : 'ID',
+                    	flex : 1,
+                    	sortable : false,
+                    	dataIndex : 'id'
+                    },
                     {
                         text     : 'Filename',
                         flex     : 1,
@@ -199,7 +209,7 @@ Ext.onReady(function() {
                     {
                         text     : 'Status',
                         width    : 75,
-                        sortable : true,
+                        sortable : false,
                         dataIndex: 'status'
                     },
                     {
@@ -207,11 +217,13 @@ Ext.onReady(function() {
                         width: 50,
                         title: 'Remove',
                         items: [{
-                            icon: document.URL + 'img/delete.gif',
+                            icon: document_url + 'img/delete.gif',
                             tooltip: 'Remove Link',
                             handler: function(grid, rowIndex, colIndex) {                	
-                            	var record = store.getAt(rowIndex);
-                            	var recordId = record.get('id');
+                            	var record = pageStore.getAt(rowIndex);
+                            	var recordId = record.getId();
+                            	console.log(record);
+                            	console.log(recordId);
                             	var recordFilename = record.get('filename');
                             	
                         		Ext.Msg.confirm('Confirm Delete', 'Are you sure you want to delete Page Link (' + articleId + ' - ' + recordId + ') - ' + recordFilename, function(btn) {
@@ -223,7 +235,7 @@ Ext.onReady(function() {
                         				});
 
                         				var url = document.URL + 'articles/deleteArticlePageLink';
-                        				console.log(url);
+                        				var url = url.replace('#', '');
                         				Ext.Ajax.request({
                     	    			   url: url,
                     	    			   success: function(response) {
@@ -234,7 +246,7 @@ Ext.onReady(function() {
                     	    		                icon: Ext.Msg.INFO,
                     	    		                buttons: Ext.Msg.OK
                     	    		            });
-                    	    				   page_store.removeAt(rowIndex);
+                    	    				   pageStore.removeAt(rowIndex);
                     	    			   },
                     	    			   failture: function(response) {
                     	    				   Ext.Msg.show({

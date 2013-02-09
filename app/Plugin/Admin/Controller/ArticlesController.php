@@ -12,7 +12,7 @@ class ArticlesController extends AdminAppController {
  * @var mixed
  */
 	//public $scaffold;
-	var $uses = array('Article', 'ArticlePages', 'Page');
+	var $uses = array('Article', 'ArticlesPage', 'Page');
 	
 	public function __construct($id = false, $table = NULL, $ds = NULL)
 	{
@@ -42,7 +42,7 @@ class ArticlesController extends AdminAppController {
 					'Article.id' => $article_id
 				),
 		        'contain' => array( 
-		        	'Page' => array('fields' => array('filename', 'full_path', 'status')) 
+		        	'Page' => array('fields' => array('id', 'filename', 'full_path', 'status')) 
 		        ) 
 			));
 
@@ -53,6 +53,7 @@ class ArticlesController extends AdminAppController {
 			}
 		}
 		
+		$response['success'] = empty($response['errors']);
 		return (json_encode($response));
 	}
 	
@@ -67,18 +68,31 @@ class ArticlesController extends AdminAppController {
 			'records' => array()
 		);
 		
-		die(debug($this->params['data']));
 		if($this->params['data']) {
-			foreach($this->params['data'] AS $id) {
-				if($this->ArticlesPage->delete($id)) {
-					$response['records']['ArticlesPage'] = $id;
-				} else {
-					$errors[] = $this->Model->validationErrors;
-					$errors[] = $this->Model->invalidFields();
+			foreach($this->params['data'] AS $data) {
+				if(isset($data['article_id']) && $data['article_id'] > 0 && isset($data['page_id']) && $data['page_id'] > 0){
+					$pages = $this->ArticlesPage->find('all', array(
+						'conditions' => array(
+							'article_id' => $data['article_id'],
+							'page_id' => $data['page_id']
+						)
+					));
+					
+					if($pages) {
+						foreach($pages AS $page) {
+							if($this->ArticlesPage->delete($page['ArticlesPage']['id'])) {
+								$response['records']['ArticlesPage'] = $page['ArticlesPage']['id'];
+							} else {
+								$errors[] = $this->Model->validationErrors;
+								$errors[] = $this->Model->invalidFields();
+							}
+						}
+					}
 				}
 			}
 		}
 		
+		$response['success'] = empty($response['errors']);
 		return (json_encode($response));
 	}
 	
