@@ -156,6 +156,82 @@ Ext.onReady(function() {
         }]
     };
     
+    Ext.ns('TeslaCollection');
+    TeslaCollection.ArticleModal = {
+    	article_id : '',
+    	win : '',
+    	store : '',
+        init:function()
+        {
+        	Ext.define('Page', {
+                extend: 'Ext.data.Model',
+                fields : [
+                   {name : 'filename', mapping: 'filename'},
+                   {name : 'full_path', mapping: 'full_path'},
+                   {name : 'status', mapping: 'status'},      
+                ]
+            });
+        	
+        	this.store = Ext.create('Ext.data.JsonStore', {
+                model: 'Page',
+                proxy: {
+                    type: 'ajax',
+                    url: document.URL + 'articles/getArticlePages/' + this.article_id,
+                    reader: {
+                        type: 'json',
+                        root: 'records.Page'
+                    }
+                }
+            });
+        	
+        	console.log('Init store for article id :: ' + this.article_id);
+        	
+        	var listView = Ext.create('Ext.grid.Panel', {
+                title: 'Article Pages',
+                store: this.store,
+                columns: [
+                  {
+                      text: 'Filename',
+                      dataIndex: 'filename'
+                  },{
+                      text: 'Full Path',
+                      dataIndex: 'full_path'
+                  }, {
+                  	text: 'Status',
+                  	dataIndex: 'status'
+                  }]
+            });
+        	
+        	this.win = new Ext.Window({
+                width:640,
+                height:480,
+                //title: 'Article Pages',
+                autoScroll:true,
+                modal:true,
+                store: this.store,
+                items : [
+                   listView
+                ]
+            });
+        	
+        	console.log('Init win for article id :: ' + this.article_id);
+        },
+        openWindow: function(article_id)
+        {
+            this.article_id = article_id;
+        
+            this.init();
+            this.loadStore();
+            this.win.show();
+            
+            console.log('openWindow for article id :: ' + this.article_id);
+        },
+        loadStore: function() {        	
+            this.store.load();
+            console.log('Loaded Store for article id :: ' + this.article_id);
+        }
+    }
+    
     // create the grid and specify what field you want
     // to use for the editor at each header.
     var grid = Ext.create('Ext.grid.Panel', {
@@ -176,29 +252,9 @@ Ext.onReady(function() {
         }, {
             header: 'Link',
             dataIndex: 'link',
-            /*
-            width: 70,
-            align: 'right',
-            editor: {
-                xtype: 'numberfield',
-                allowBlank: false,
-                minValue: 0,
-                maxValue: 23
-            },
-            filter: {
-                type: 'numeric'
-            }
-            */
             renderer: function(value, metaData, record, rowIndex, colIndex, store) {
-                //The <a> tag is used to create an anchor to link from
-                //the href attribute is used to address the document to link to
-                //the words between the open and close of the anchor tag will
-                //be displayed as a hyperlink (value).
-                //the target attribute defines where the linked document will
-                //be opened (_blank = open the document in a new browser window)
-                return '<a href="http://www.yourURL.com/" target="_blank">'
-                       + value +'</a>';
-             }//end renderer
+            	return '<a href="#" onclick="TeslaCollection.ArticleModal.openWindow(' + record.getId() + ')"/>Link<a/>';
+             }
         }, {
             header: 'Volume',
             dataIndex: 'volume',
