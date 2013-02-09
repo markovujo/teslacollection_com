@@ -161,16 +161,39 @@ Ext.onReady(function() {
     Ext.ns('TeslaCollection');
     TeslaCollection.ArticleModal = {
         openWindow: function(articleId)
-        {
+        {        	
         	Ext.define('Page', {
                 extend: 'Ext.data.Model',
                 fields: [
-                     {name : 'id', mapping: 'id'},
-                     {name : 'filename', mapping: 'filename'},
-                     {name : 'full_path', mapping: 'full_path'},
-                     {name : 'status', mapping: 'status'}
+                     {name : 'id', mapping: 'Page.id'},
+                     {name : 'filename', mapping: 'Page.filename'},
+                     {name : 'full_path', mapping: 'Page.full_path'},
+                     {name : 'status', mapping: 'Page.status'}
                 ]
             });
+        	
+        	var url = document_url + 'articles/getArticlePages';
+        	var pageComboStore = Ext.create('Ext.data.JsonStore', {
+                model: 'Page',
+                proxy: {
+                    type: 'ajax',
+                    url: url,
+                    reader: {
+                        type: 'json',
+                        root: 'records'
+                    }
+                }
+            });
+        	
+        	var pageCombo = Ext.create('Ext.form.field.ComboBox', {
+        	    fieldLabel: 'Pages',
+        	    displayField: 'name',
+        	    width: 500,
+        	    labelWidth: 130,
+        	    store: pageComboStore,
+        	    //queryMode: 'local',
+        	    typeAhead: true
+        	});
         	
         	var url = document_url + 'articles/getArticlePages/' + articleId;
         	var pageStore = Ext.create('Ext.data.JsonStore', {
@@ -180,7 +203,7 @@ Ext.onReady(function() {
                     url: url,
                     reader: {
                         type: 'json',
-                        root: 'records.Page'
+                        root: 'records'
                     }
                 }
             });
@@ -278,12 +301,13 @@ Ext.onReady(function() {
         	var win = new Ext.Window({
                 width:640,
                 height:480,
-                title: 'Article',
+                title: 'Article (' + articleId + ')',
                 autoScroll:true,
                 modal:true,
                 store: this.store,
                 items : [
-                    pagesGrid		
+                   pageCombo,
+                   pagesGrid
                 ]
             });
         	

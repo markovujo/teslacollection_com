@@ -46,10 +46,26 @@ class ArticlesController extends AdminAppController {
 		        ) 
 			));
 
+			//die(debug($article));
 			if($article) {
 				if(isset($article['Page']) && !empty($article['Page'])) {
-					$response['records']['Page'] = $article['Page'];
+					foreach($article['Page'] AS $page) {
+						$response['records'][] = array('Page' => $page);
+					}
 				}
+			}
+		} else {
+			$pages = $this->Page->find('all', array(
+				'conditions' => array(
+					'Page.filename like' => '%Volume 01 Page 042.jpg%'
+				),
+				'contain' => false
+			));
+			
+			die(debug($this->params['data']));
+			die(debug($pages));
+			if($pages) {
+				$response['records'] = $page;
 			}
 		}
 		
