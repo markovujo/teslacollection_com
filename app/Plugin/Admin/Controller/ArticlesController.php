@@ -99,4 +99,39 @@ class ArticlesController extends AdminAppController {
 		return (json_encode($response));
 	}
 	
+	public function addArticlePageLink() {
+		$this->autoRender = false;
+		$this->layout = 'ajax';
+		$this->RequestHandler->respondAs('json');
+		
+		$response = array(
+			'success' => true,
+			'errors' => array(),
+			'records' => array()
+		);
+		
+		//die(debug($this->params['data']));
+		if($this->params['data']) {
+			foreach($this->params['data'] AS $data) {
+				if(isset($data['article_id']) && $data['article_id'] > 0 && isset($data['page_id']) && $data['page_id'] > 0){
+					$page = $this->ArticlesPage->find('first', array(
+						'conditions' => array(
+							'article_id' => $data['article_id'],
+							'page_id' => $data['page_id']
+						)
+					));
+					
+					if(empty($page)) {
+						$this->ArticlesPage->create();
+						if($this->ArticlesPage->save($data)) {
+							$response['records'][] = $this->ArticlesPage->id;
+						}
+					}
+				}
+			}
+		}
+		
+		$response['success'] = empty($response['errors']);
+		return (json_encode($response));
+	}
 }

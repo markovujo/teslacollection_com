@@ -172,6 +172,19 @@ Ext.onReady(function() {
                 ]
             });
         	
+        	var url = document_url + 'articles/getArticlePages/' + articleId;
+        	var pageStore = Ext.create('Ext.data.JsonStore', {
+                model: 'Page',
+                proxy: {
+                    type: 'ajax',
+                    url: url,
+                    reader: {
+                        type: 'json',
+                        root: 'records'
+                    }
+                }
+            });
+        	
             var pageComboStore = Ext.create('Ext.data.Store', {
                 autoDestroy: true,
                 model: 'Page',
@@ -198,21 +211,36 @@ Ext.onReady(function() {
                 displayField : 'filename',
                 emptyText:'Select Page',
                 autoShow: true,
-                listClass: 'x-combo-list-small'
-        	});
-        	
-        	var url = document_url + 'articles/getArticlePages/' + articleId;
-        	var pageStore = Ext.create('Ext.data.JsonStore', {
-                model: 'Page',
-                proxy: {
-                    type: 'ajax',
-                    url: url,
-                    reader: {
-                        type: 'json',
-                        root: 'records'
-                    }
+                width : 300,
+                listClass: 'x-combo-list-small',
+                listeners: {
+                	select: function(combo, record, index) {  
+                		var recordId = record[0].get('id');
+        				var data = [];
+        				data.push({
+        					'article_id' : articleId,
+        					'page_id' : recordId
+        				});
+        				
+                		Ext.Ajax.request({
+     	    			   url: document_url + 'articles/addArticlePageLink',
+     	    			   success: function(response) {
+     	    				  pageStore.add(record);
+     	    			   },
+     	    			   failture: function(response) {
+     	    				   Ext.Msg.show({
+     	    		                title: 'Failure',
+     	    		                msg: 'Your data has FAILED to link!',
+     	    		                modal: false,
+     	    		                icon: Ext.Msg.FAIL,
+     	    		                buttons: Ext.Msg.OK
+     	    		            });
+     	    			   },
+     	    			   jsonData : Ext.JSON.encode(data)
+     	    			});
+                	}
                 }
-            });
+        	});
         	
         	var pagesGrid = Ext.create('Ext.grid.Panel', {
                 store: pageStore,
@@ -294,8 +322,8 @@ Ext.onReady(function() {
                         }]
                     }
                 ],
-                height: 350,
-                width: 600,
+                height: 380,
+                width: 680,
                 title: 'Pages',
                 viewConfig: {
                     stripeRows: true
@@ -305,7 +333,7 @@ Ext.onReady(function() {
         	pageStore.load();
         	
         	var win = new Ext.Window({
-                width:640,
+                width:700,
                 height:480,
                 title: 'Article (' + articleId + ')',
                 autoScroll:true,
