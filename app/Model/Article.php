@@ -18,7 +18,7 @@ class Article extends AppModel
         )
         , 'Page' => array(
             'className' => 'Page',
-        	'fields' => array(),
+        	'fields' => array('id', 'filename', 'full_path', 'status')
         )
     );
     

@@ -12,7 +12,7 @@ class ArticlesController extends AdminAppController {
  * @var mixed
  */
 	//public $scaffold;
-	var $uses = array('Article', 'ArticlesPage', 'Page');
+	var $uses = array('Article', 'ArticlesPage', 'ArticlesSubject', 'Page');
 	
 	public function __construct($id = false, $table = NULL, $ds = NULL)
 	{
@@ -25,7 +25,53 @@ class ArticlesController extends AdminAppController {
 		$this->layout = 'admin';
 	}
 	
-	public function getArticlePages($article_id = null) {
+	public function addAssociations($type = 'Page') {
+		$this->autoRender = false;
+		$this->layout = 'ajax';
+		$this->RequestHandler->respondAs('json');
+		
+		$response = array(
+			'success' => true,
+			'errors' => array(),
+			'records' => array()
+		);
+		
+		$association_key = strtolower($type) . '_id';
+		$association_model_name = 'Articles' . $type;
+		$this->loadModel($association_model_name);
+		$this->AssociationModel = $this->{$association_model_name};
+		
+		//die(debug($this->params['data']));
+		if($this->params['data']) {
+			foreach($this->params['data'] AS $data) {
+				if(isset($data['article_id']) && $data['article_id'] > 0 && isset($data[$association_key]) && $data[$association_key] > 0){
+					$result = $this->AssociationModel->find('first', array(
+						'conditions' => array(
+							'article_id' => $data['article_id'],
+							$association_key => $data[$association_key]
+						)
+					));
+					
+					if(empty($result)) {
+						$this->AssociationModel->create();
+						if($this->AssociationModel->save($data)) {
+							if(!isset($response['records'][$this->AssociationModel->name])) {
+								$response['records'][$type] = array();
+							}
+							
+							$response['records'][$type][] = $result[$this->AssociationModel->name]['id'];
+						}
+					}
+				}
+			}
+		}
+		
+		$response['success'] = empty($response['errors']);
+		return (json_encode($response));
+	}
+	
+	public function getAssociations($type = 'Page', $article_id)
+	{
 		$this->autoRender = false;
 		$this->layout = 'ajax';
 		$this->RequestHandler->respondAs('json');
@@ -41,16 +87,14 @@ class ArticlesController extends AdminAppController {
 				'conditions' => array(
 					'Article.id' => $article_id
 				),
-		        'contain' => array( 
-		        	'Page' => array('fields' => array('id', 'filename', 'full_path', 'status')) 
-		        ) 
+		        'contain' => array($type)
 			));
 
 			//die(debug($article));
 			if($article) {
-				if(isset($article['Page']) && !empty($article['Page'])) {
-					foreach($article['Page'] AS $page) {
-						$response['records'][] = array('Page' => $page);
+				if(isset($article[$type]) && !empty($article[$type])) {
+					foreach($article[$type] AS $association) {
+						$response['records'][] = array($type => $association);
 					}
 				}
 			}
@@ -60,7 +104,7 @@ class ArticlesController extends AdminAppController {
 		return (json_encode($response));
 	}
 	
-	public function deleteArticlePageLink() {
+	public function deleteAssociations($type = 'Page') {
 		$this->autoRender = false;
 		$this->layout = 'ajax';
 		$this->RequestHandler->respondAs('json');
@@ -71,60 +115,33 @@ class ArticlesController extends AdminAppController {
 			'records' => array()
 		);
 		
+		$association_key = strtolower($type) . '_id';
+		$association_model_name = 'Articles' . $type;
+		$this->loadModel($association_model_name);
+		$this->AssociationModel = $this->{$association_model_name};
+		
 		if($this->params['data']) {
 			foreach($this->params['data'] AS $data) {
-				if(isset($data['article_id']) && $data['article_id'] > 0 && isset($data['page_id']) && $data['page_id'] > 0){
-					$pages = $this->ArticlesPage->find('all', array(
+				if(isset($data['article_id']) && $data['article_id'] > 0 && isset($data[$association_key]) && $data[$association_key] > 0){
+					$results = $this->AssociationModel->find('all', array(
 						'conditions' => array(
 							'article_id' => $data['article_id'],
-							'page_id' => $data['page_id']
+							$association_key => $data[$association_key]
 						)
 					));
 					
-					if($pages) {
-						foreach($pages AS $page) {
-							if($this->ArticlesPage->delete($page['ArticlesPage']['id'])) {
-								$response['records']['ArticlesPage'] = $page['ArticlesPage']['id'];
+					if($results) {
+						foreach($results AS $result) {
+							if($this->AssociationModel->delete($result[$this->AssociationModel->name]['id'])) {
+								if(!isset($response['records'][$this->AssociationModel->name])) {
+									$response['records'][$type] = array();
+								}
+								
+								$response['records'][$type][] = $result[$this->AssociationModel->name]['id'];
 							} else {
-								$errors[] = $this->Model->validationErrors;
-								$errors[] = $this->Model->invalidFields();
+								$errors[] = $this->AssociationModel->validationErrors;
+								$errors[] = $this->AssociationModel->invalidFields();
 							}
-						}
-					}
-				}
-			}
-		}
-		
-		$response['success'] = empty($response['errors']);
-		return (json_encode($response));
-	}
-	
-	public function addArticlePageLink() {
-		$this->autoRender = false;
-		$this->layout = 'ajax';
-		$this->RequestHandler->respondAs('json');
-		
-		$response = array(
-			'success' => true,
-			'errors' => array(),
-			'records' => array()
-		);
-		
-		//die(debug($this->params['data']));
-		if($this->params['data']) {
-			foreach($this->params['data'] AS $data) {
-				if(isset($data['article_id']) && $data['article_id'] > 0 && isset($data['page_id']) && $data['page_id'] > 0){
-					$page = $this->ArticlesPage->find('first', array(
-						'conditions' => array(
-							'article_id' => $data['article_id'],
-							'page_id' => $data['page_id']
-						)
-					));
-					
-					if(empty($page)) {
-						$this->ArticlesPage->create();
-						if($this->ArticlesPage->save($data)) {
-							$response['records'][] = $this->ArticlesPage->id;
 						}
 					}
 				}

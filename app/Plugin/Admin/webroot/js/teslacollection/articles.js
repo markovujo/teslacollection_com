@@ -111,6 +111,25 @@ Ext.onReady(function() {
     
     authorStore.load();
     
+	Ext.define('Page', {
+        extend: 'Ext.data.Model',
+        fields: [
+             {name : 'id', mapping: 'Page.id'},
+             {name : 'filename', mapping: 'Page.filename'},
+             {name : 'full_path', mapping: 'Page.full_path'},
+             {name : 'status', mapping: 'Page.status'}
+        ]
+    });
+    
+	Ext.define('Subject', {
+        extend: 'Ext.data.Model',
+        fields: [
+	         {name : 'id', mapping: 'Subject.id'},
+	         {name : 'name', mapping: 'Subject.name'},
+	         {name : 'status', mapping: 'Subject.status'},
+        ]
+    });
+    
     var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {
         clicksToEdit: 1
     });
@@ -162,17 +181,7 @@ Ext.onReady(function() {
     TeslaCollection.ArticleModal = {
         openWindow: function(articleId)
         {        	
-        	Ext.define('Page', {
-                extend: 'Ext.data.Model',
-                fields: [
-                     {name : 'id', mapping: 'Page.id'},
-                     {name : 'filename', mapping: 'Page.filename'},
-                     {name : 'full_path', mapping: 'Page.full_path'},
-                     {name : 'status', mapping: 'Page.status'}
-                ]
-            });
-        	
-        	var url = document_url + 'articles/getArticlePages/' + articleId;
+        	var url = document_url + 'articles/getAssociations/Page/' + articleId;
         	var pageStore = Ext.create('Ext.data.JsonStore', {
                 model: 'Page',
                 proxy: {
@@ -213,6 +222,7 @@ Ext.onReady(function() {
                 autoShow: true,
                 width : 300,
                 listClass: 'x-combo-list-small',
+                buttonAlign: 'center',
                 listeners: {
                 	select: function(combo, record, index) {  
                 		var recordId = record[0].get('id');
@@ -223,7 +233,7 @@ Ext.onReady(function() {
         				});
         				
                 		Ext.Ajax.request({
-     	    			   url: document_url + 'articles/addArticlePageLink',
+     	    			   url: document_url + 'articles/addAssociations/Page',
      	    			   success: function(response) {
      	    				  pageStore.add(record);
      	    			   },
@@ -276,11 +286,9 @@ Ext.onReady(function() {
                         items: [{
                             icon: document_url + 'img/delete.gif',
                             tooltip: 'Remove Link',
-                            handler: function(grid, rowIndex, colIndex) {                	
+                            handler: function(grid, rowIndex, colIndex) {               	
                             	var record = pageStore.getAt(rowIndex);
                             	var recordId = record.getId();
-                            	console.log(record);
-                            	console.log(recordId);
                             	var recordFilename = record.get('filename');
                             	
                         		Ext.Msg.confirm('Confirm Delete', 'Are you sure you want to delete Page Link (' + articleId + ' - ' + recordId + ') - ' + recordFilename, function(btn) {
@@ -291,14 +299,14 @@ Ext.onReady(function() {
                         					'page_id' : recordId
                         				});
 
-                        				var url = document.URL + 'articles/deleteArticlePageLink';
+                        				var url = document.URL + 'articles/deleteAssociations/Page';
                         				var url = url.replace('#', '');
                         				Ext.Ajax.request({
                     	    			   url: url,
                     	    			   success: function(response) {
                     	    				   Ext.Msg.show({
                     	    		                title: 'Success',
-                    	    		                msg: 'Your ArticlePage Link has been successfully Deleted!',
+                    	    		                msg: 'Association has been successfully Deleted!',
                     	    		                modal: false,
                     	    		                icon: Ext.Msg.INFO,
                     	    		                buttons: Ext.Msg.OK
@@ -339,11 +347,27 @@ Ext.onReady(function() {
                 autoScroll:true,
                 modal:true,
                 store: this.store,
-                items : [
-                   pageCombo,
-                   pagesGrid
-                ]
-            });
+                items : [{
+                   xtype : 'tabpanel',
+                   items : [{
+                	   xtype : 'panel',
+                	   title: 'Articles Pages',
+                	   items : [
+                	      pageCombo,
+                	      pagesGrid
+                	   ]
+                   }, {
+                	   xtype : 'panel',
+                	   title: 'Subjects',
+                	   /*
+                	   items : [
+                  	      pageCombo,
+                	      pagesGrid  
+                	   ]
+                	   */
+                   }]
+                }]
+        	});
         	
             win.show();
         }
