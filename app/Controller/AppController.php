@@ -42,7 +42,10 @@ class AppController extends Controller
 		$this->RequestHandler->respondAs('json');
 		
 		$model = substr($this->name, 0, -1);
+		$Model = $this->{$model};
 		$conditions = array();
+		$search_field = NULL;
+			
 		
 		App::uses('Sanitize', 'Utility');
 		
@@ -71,8 +74,6 @@ class AppController extends Controller
 		}
 		
 		if (!empty($this->params->query['query'])) {
-			$search_field = NULL;
-			
 			$model_search_fields = array(
 				'filename',
 				'name'
@@ -80,7 +81,7 @@ class AppController extends Controller
 			
 			if(!empty($model_search_fields)) {
 				foreach($model_search_fields AS $model_search_field) {
-					if($this->{$model}->hasField($model_search_field)) {
+					if($Model->hasField($model_search_field)) {
 						$search_field = $model_search_field;
 					}
 				}
@@ -124,15 +125,21 @@ class AppController extends Controller
 			}
 		}
 		
+		$order = array($this->Model->name . '.id');
+		if(!is_null($search_field)) {
+			$order = array($this->Model->name . '.' . $search_field);
+		}
+		
 		//die(debug($conditions));
-		$records = $this->{$model}->find('all', array(
+		$records = $Model->find('all', array(
 			'conditions' => $conditions,
 			'contain' => false,
 			'limit' => $limit, 
-			'offset' => $offset
+			'offset' => $offset,
+			'order' => $order
 		));
 		
-		$totalCount = $this->{$model}->find('count');
+		$totalCount = $Model->find('count');
 		
 		$results = array(
 			'totalCount' => $totalCount,
