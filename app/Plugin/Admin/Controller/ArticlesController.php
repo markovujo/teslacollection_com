@@ -44,18 +44,20 @@ class ArticlesController extends AdminAppController {
 		//die(debug($this->params['data']));
 		if($this->params['data']) {
 			foreach($this->params['data'] AS $data) {
-				if(isset($data['article_id']) && $data['article_id'] > 0 && isset($data[$association_key]) && $data[$association_key] > 0){
+				if(isset($data['article_id']) && $data['article_id'] > 0 && isset($data['association_id']) && $data['association_id'] > 0){
+					
+					$create_data = array(
+						'article_id' => $data['article_id'],
+						$association_key => $data['association_id']
+					);
 					$result = $this->AssociationModel->find('first', array(
-						'conditions' => array(
-							'article_id' => $data['article_id'],
-							$association_key => $data[$association_key]
-						)
+						'conditions' => $create_data
 					));
 					
 					if(empty($result)) {
 						$this->AssociationModel->create();
-						if($this->AssociationModel->save($data)) {
-							if(!isset($response['records'][$this->AssociationModel->name])) {
+						if($this->AssociationModel->save($create_data)) {
+							if(!isset($response['records'][$type])) {
 								$response['records'][$type] = array();
 							}
 							
@@ -122,22 +124,22 @@ class ArticlesController extends AdminAppController {
 		
 		if($this->params['data']) {
 			foreach($this->params['data'] AS $data) {
-				if(isset($data['article_id']) && $data['article_id'] > 0 && isset($data[$association_key]) && $data[$association_key] > 0){
+				if(isset($data['article_id']) && $data['article_id'] > 0 && isset($data['association_id']) && $data['association_id'] > 0){
 					$results = $this->AssociationModel->find('all', array(
 						'conditions' => array(
 							'article_id' => $data['article_id'],
-							$association_key => $data[$association_key]
+							$association_key => $data['association_id']
 						)
 					));
 					
 					if($results) {
 						foreach($results AS $result) {
 							if($this->AssociationModel->delete($result[$this->AssociationModel->name]['id'])) {
-								if(!isset($response['records'][$this->AssociationModel->name])) {
+								if(!isset($response['records'][$type])) {
 									$response['records'][$type] = array();
 								}
 								
-								$response['records'][$type][] = $result[$this->AssociationModel->name]['id'];
+								$response['records'][$type][] = $result[$this->AssociationModel->name][$association_key];
 							} else {
 								$errors[] = $this->AssociationModel->validationErrors;
 								$errors[] = $this->AssociationModel->invalidFields();

@@ -181,20 +181,55 @@ Ext.onReady(function() {
     TeslaCollection.ArticleModal = {
         openWindow: function(articleId)
         {        	
-        	var url = document_url + 'articles/getAssociations/Page/' + articleId;
-        	var pageStore = Ext.create('Ext.data.JsonStore', {
-                model: 'Page',
-                proxy: {
-                    type: 'ajax',
-                    url: url,
-                    reader: {
-                        type: 'json',
-                        root: 'records'
-                    }
+            /* Refactoring to remove code duplication
+        	Ext.define('TeslaCollection.ComboBox', {
+                extend: 'Ext.Grid',
+                alias: 'widget.mygrid',
+                
+                typeAhead: true,
+                triggerAction: 'all',
+                selectOnTab: true,
+                //store: pageComboStore,
+                //valueField : 'id',
+                //displayField : 'filename',
+                //emptyText:'Select Page',
+                request_url :  document_url + 'articles/addAssociations/Page',
+                autoShow: true,
+                width : 300,
+                listClass: 'x-combo-list-small',
+                buttonAlign: 'center',
+                listeners: {
+                	select: function(combo, record, index) {  
+                		var recordId = record[0].get('id');
+        				var data = [];
+        				data.push({
+        					'article_id' : articleId,
+        					'association_id' : recordId
+        				});
+        				
+                		Ext.Ajax.request({
+     	    			   url: this.request_url
+     	    			   success: function(response) {
+     	    				  pageStore.add(record);
+     	    			   },
+     	    			   failture: function(response) {
+     	    				   Ext.Msg.show({
+     	    		                title: 'Failure',
+     	    		                msg: 'Your data has FAILED to associate!',
+     	    		                modal: false,
+     	    		                icon: Ext.Msg.FAIL,
+     	    		                buttons: Ext.Msg.OK
+     	    		            });
+     	    			   },
+     	    			   jsonData : Ext.JSON.encode(data)
+     	    			});
+                	}
                 }
-            });
+                }
+        	);
+        	*/
         	
-            var pageComboStore = Ext.create('Ext.data.Store', {
+        	var pageComboStore = Ext.create('Ext.data.Store', {
                 autoDestroy: true,
                 model: 'Page',
                 proxy: {
@@ -210,6 +245,20 @@ Ext.onReady(function() {
                     direction:'ASC'
                 }]
             });
+            
+            var url = document_url + 'articles/getAssociations/Page/' + articleId;
+        	var pageStore = Ext.create('Ext.data.JsonStore', {
+                model: 'Page',
+                proxy: {
+                    type: 'ajax',
+                    url: url,
+                    reader: {
+                        type: 'json',
+                        root: 'records'
+                    }
+                }
+            });
+        	pageStore.load();
         	
         	var pageCombo = Ext.create('Ext.form.field.ComboBox', {
                 typeAhead: true,
@@ -229,7 +278,7 @@ Ext.onReady(function() {
         				var data = [];
         				data.push({
         					'article_id' : articleId,
-        					'page_id' : recordId
+        					'association_id' : recordId
         				});
         				
                 		Ext.Ajax.request({
@@ -289,14 +338,14 @@ Ext.onReady(function() {
                             handler: function(grid, rowIndex, colIndex) {               	
                             	var record = pageStore.getAt(rowIndex);
                             	var recordId = record.getId();
-                            	var recordFilename = record.get('filename');
+                            	var recordName = record.get('filename');
                             	
-                        		Ext.Msg.confirm('Confirm Delete', 'Are you sure you want to delete Page Link (' + articleId + ' - ' + recordId + ') - ' + recordFilename, function(btn) {
+                        		Ext.Msg.confirm('Confirm Delete', 'Are you sure you want to delete Page Link (' + articleId + ' - ' + recordId + ') - ' + recordName, function(btn) {
                         			if(btn == 'yes'){
                         				var data = [];
                         				data.push({
                         					'article_id' : articleId,
-                        					'page_id' : recordId
+                        					'association_id' : recordId
                         				});
 
                         				var url = document.URL + 'articles/deleteAssociations/Page';
@@ -338,7 +387,157 @@ Ext.onReady(function() {
                 }
             });
         	
-        	pageStore.load();
+        	var subjectComboStore = Ext.create('Ext.data.Store', {
+                autoDestroy: true,
+                model: 'Subject',
+                proxy: {
+                    type: 'ajax',
+                    url: document_url + 'subjects/getAll',
+                    reader: {
+                        type: 'json',
+                        root: 'records'
+                    }
+                },
+                sorters: [{
+                    property: 'common',
+                    direction:'ASC'
+                }]
+            });
+            
+            var url = document_url + 'articles/getAssociations/Subject/' + articleId;
+        	var subjectStore = Ext.create('Ext.data.JsonStore', {
+                model: 'Subject',
+                proxy: {
+                    type: 'ajax',
+                    url: url,
+                    reader: {
+                        type: 'json',
+                        root: 'records'
+                    }
+                }
+            });
+        	subjectStore.load();
+        	
+        	var subjectCombo = Ext.create('Ext.form.field.ComboBox', {
+                typeAhead: true,
+                triggerAction: 'all',
+                selectOnTab: true,
+                store: subjectComboStore,
+                valueField : 'id',
+                displayField : 'name',
+                emptyText:'Select Subject',
+                autoShow: true,
+                width : 300,
+                listClass: 'x-combo-list-small',
+                buttonAlign: 'center',
+                listeners: {
+                	select: function(combo, record, index) {  
+                		var recordId = record[0].get('id');
+        				var data = [];
+        				data.push({
+        					'article_id' : articleId,
+        					'association_id' : recordId
+        				});
+        				
+                		Ext.Ajax.request({
+     	    			   url: document_url + 'articles/addAssociations/Subject',
+     	    			   success: function(response) {
+     	    				  subjectStore.add(record);
+     	    			   },
+     	    			   failture: function(response) {
+     	    				   Ext.Msg.show({
+     	    		                title: 'Failure',
+     	    		                msg: 'Your data has FAILED to link!',
+     	    		                modal: false,
+     	    		                icon: Ext.Msg.FAIL,
+     	    		                buttons: Ext.Msg.OK
+     	    		            });
+     	    			   },
+     	    			   jsonData : Ext.JSON.encode(data)
+     	    			});
+                	}
+                }
+        	});
+        	
+        	var subjectsGrid = Ext.create('Ext.grid.Panel', {
+                store: subjectStore,
+                columns: [
+                    {
+                    	text : 'ID',
+                    	flex : 1,
+                    	sortable : false,
+                    	dataIndex : 'id'
+                    },
+                    {
+                        text     : 'Name',
+                        flex     : 1,
+                        sortable : false,
+                        dataIndex: 'name'
+                    },
+                    {
+                        text     : 'Status',
+                        width    : 75,
+                        sortable : false,
+                        dataIndex: 'status'
+                    },
+                    {
+                        xtype: 'actioncolumn',
+                        width: 50,
+                        title: 'Remove',
+                        items: [{
+                            icon: document_url + 'img/delete.gif',
+                            tooltip: 'Remove Link',
+                            handler: function(grid, rowIndex, colIndex) {               	
+                            	var record = subjectStore.getAt(rowIndex);
+                            	var recordId = record.getId();
+                            	var recordName = record.get('name');
+                            	
+                        		Ext.Msg.confirm('Confirm Delete', 'Are you sure you want to delete association Link (' + articleId + ' - ' + recordId + ') - ' + recordName, function(btn) {
+                        			if(btn == 'yes'){
+                        				var data = [];
+                        				data.push({
+                        					'article_id' : articleId,
+                        					'association_id' : recordId
+                        				});
+
+                        				var url = document.URL + 'articles/deleteAssociations/Subject';
+                        				var url = url.replace('#', '');
+                        				Ext.Ajax.request({
+                    	    			   url: url,
+                    	    			   success: function(response) {
+                    	    				   Ext.Msg.show({
+                    	    		                title: 'Success',
+                    	    		                msg: 'Association has been successfully Deleted!',
+                    	    		                modal: false,
+                    	    		                icon: Ext.Msg.INFO,
+                    	    		                buttons: Ext.Msg.OK
+                    	    		            });
+                    	    				   subjectStore.removeAt(rowIndex);
+                    	    			   },
+                    	    			   failture: function(response) {
+                    	    				   Ext.Msg.show({
+                    	    		                title: 'Failure',
+                    	    		                msg: 'Your data has FAILED to remove links!',
+                    	    		                modal: false,
+                    	    		                icon: Ext.Msg.FAIL,
+                    	    		                buttons: Ext.Msg.OK
+                    	    		            });
+                    	    			   },
+                    	    			   jsonData : Ext.JSON.encode(data)
+                    	    			});
+            	                    }
+            	                }, this);
+                            }
+                        }]
+                    }
+                ],
+                height: 380,
+                width: 680,
+                title: 'Subjects',
+                viewConfig: {
+                    stripeRows: true
+                }
+            });
         	
         	var win = new Ext.Window({
                 width:700,
@@ -349,23 +548,23 @@ Ext.onReady(function() {
                 store: this.store,
                 items : [{
                    xtype : 'tabpanel',
-                   items : [{
+                   items : [
+                   {
                 	   xtype : 'panel',
-                	   title: 'Articles Pages',
+                	   title: 'Article Pages',
                 	   items : [
                 	      pageCombo,
                 	      pagesGrid
                 	   ]
                    }, {
                 	   xtype : 'panel',
-                	   title: 'Subjects',
-                	   /*
+                	   title: 'Article Subjects',
                 	   items : [
-                  	      pageCombo,
-                	      pagesGrid  
+                  	      subjectCombo,
+                	      subjectsGrid  
                 	   ]
-                	   */
-                   }]
+                   }
+                   ]
                 }]
         	});
         	
@@ -373,8 +572,6 @@ Ext.onReady(function() {
         }
     }
     
-    // create the grid and specify what field you want
-    // to use for the editor at each header.
     var grid = Ext.create('Ext.grid.Panel', {
     	features: [filters],
         store: store,
