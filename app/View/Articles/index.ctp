@@ -43,9 +43,16 @@
 				));
 				
 				echo $this->element('selection_text', array(
+					'selection_id' => 'title_text'
+					, 'id' => 'title_text'
+					, 'selection_name' => 'Article Title'
+					, 'name' => 'data[ArticleSearch][title_text]'
+				));
+				
+				echo $this->element('selection_text', array(
 					'selection_id' => 'search_text'
 					, 'id' => 'search_text'
-					, 'selection_name' => 'Article Title/Body'
+					, 'selection_name' => 'Article Body'
 					, 'name' => 'data[ArticleSearch][text_search]'
 				));
 			?>
@@ -53,7 +60,8 @@
 		<div style="clear: both"></div>
 		
 		<div style="text-align: center; background-color: #E6EEEE; width: 1000px; height: 25px;">
-			<span id="article_result_ajax"><img src="<?php echo $this->here ?>/img/ajax_spinner_25_25.gif" style="height: 15px" /></span>
+			<?php //die(debug($this->here));?>
+			<span id="article_result_ajax"><img src="<?php echo $this->here ?>img/ajax_spinner_25_25.gif" style="height: 15px" /></span>
 			<?php echo $this->Form->button('Search', array('type'=>'submit', 'id' => 'search_submit')); ?>
 			<?php echo $this->Form->button('Reset', array('type'=>'reset', 'id' => 'search_reset')); ?>
 		</div>

@@ -57,3 +57,5 @@ color: #FFFF80;
 margin: 10px; /*Margins for inner DIV inside each column (to provide padding)*/
 margin-top: 0;
 }
+
+.ui-widget { font-size: .8em; }

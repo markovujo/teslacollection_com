@@ -12,16 +12,13 @@ class Article extends AppModel
         )
     );
     
-    public $hasMany = array(
-        'ArticlePage' => array(
-            'className'  => 'ArticlePage',
-    		'order' => 'filename'
-        )
-    );
-    
     public $hasAndBelongsToMany = array(
         'Subject' => array(
             'className' => 'Subject',
+        )
+        , 'Page' => array(
+            'className' => 'Page',
+        	'fields' => array('id', 'filename', 'full_path', 'status')
         )
     );
     
@@ -33,16 +30,34 @@ class Article extends AppModel
 		$joins = array();
 		$group = array('Article.id');
 		
+		$fields = array(
+			'Article.id',
+			'Article.title',
+			'Article.volume',
+			'Article.page',
+			'Article.date',
+			'Article.year',
+			'Article.range_text'
+		);
+		
 		$contain = array(
 			'Author' => array('fields' => array('id', 'name')),
 			'Publication' => array('fields' => array('id', 'name')),
-			'ArticlePage' => array('fields' => array('id', 'filename', 'title')),
 			'Subject' => array('fields' => array('id', 'name')),
+			'Page' => array(
+				'fields' => array('id', 'filename', 'ArticlesPage.id')
+			),
 		);
 		
 		$return = array(
 			'criteria' => array()
 		);
+		
+		if(isset($params['limit']) && !empty($params['limit'])) {
+			$limit = (int) $params['limit'];
+		} else {
+			$limit = NULL;
+		}
 		
 		if(isset($params['author_id']) && !empty($params['author_id'])) {
 			if(!in_array('ALL', $params['author_id'])) {
@@ -80,42 +95,65 @@ class Article extends AppModel
 			}
 		}
 		
+		if(isset($params['title_text']) && $params['title_text'] != '') {
+			App::uses('Sanitize', 'Utility');
+			$params['title_text'] = Sanitize::escape($params['title_text']);
+			
+			$conditions['Article.title LIKE'] = '%' . $params['title_text'] . '%';
+			
+			$return['criteria']['title_text'] = $params['title_text'];
+		}
+		
 		if(isset($params['text_search']) && !empty($params['text_search'])) {
-			# Sanitize the query 
 			App::uses('Sanitize', 'Utility');
 			$params['text_search'] = Sanitize::escape($params['text_search']);
 			
-			$conditions[] = array( 
-			   "MATCH(ArticlePage.title, ArticlePage.text)  
-			          AGAINST('" . $params['text_search'] . "' IN BOOLEAN MODE)" 
-			);
-			
 			$joins[] = array(
-		     	'table' => 'article_pages',
-		    	'alias' => 'ArticlePage',
+		     	'table' => 'articles_pages',
+		    	'alias' => 'ArticlesPage',
 		    	'type' => 'INNER',
 		    	'conditions' => array(
-		    		'Article.id = ArticlePage.article_id'
+		    		'Article.id = ArticlesPage.article_id'
+		       	)
+		    );
+		    
+		    $joins[] = array(
+		     	'table' => 'pages',
+		    	'alias' => 'Page',
+		    	'type' => 'INNER',
+		    	'conditions' => array(
+		    		'ArticlesPage.page_id = Page.id'
 		       	)
 		    );
 			
+			$conditions[] = array( 
+			   "MATCH(Page.text)  
+			          AGAINST('" . $params['text_search'] . "' IN BOOLEAN MODE)" 
+			);
+			
 			$return['criteria']['text_search'] = $params['text_search'];
 		}
+		
+		$conditions['Article.status'] = 'active';
+		
 		
 		$return['articles'] = $this->find('all', array(
 			'conditions' => $conditions
 			, 'contain' => $contain
 			, 'joins' => $joins
 			, 'group' => $group
+			, 'fields' => $fields
+			, 'limit' => $limit
 		));
-
+		
 		/* DEBUGGING :: 
 		debug($params);
 		debug($conditions);
 		debug($joins);
-		debug($return);
+		debug($return['articles']);
 		die();
 		*/
+		
 		return $return;
 	}
 }

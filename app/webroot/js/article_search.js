@@ -6,6 +6,45 @@ $(function() {
 	$('#articles_search_results').hide();
 	$('#article_result_ajax').hide();
 	
+	$("#title_text").autocomplete({
+      source: function( request, response ) {
+    	var data = {
+    		'data' : {
+    			'ArticleSearch' : {
+	    			'title_text' : request.term,
+	    			'limit' : 10
+	    		}
+    		}
+    	};
+    	
+        $.ajax({
+          type: 'POST',
+          url: document.URL + 'articles/search',
+          dataType: "json",
+          data: data,
+          success: function( data ) {
+            response( $.map( data.articles, function( item ) {
+              return {
+                label: item.Article.title,
+                value: item.Article.title
+              }
+            }));
+          }
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+    	 $('#title_text').val(ui.item.label);
+    	 $('#search_submit').click();
+      },
+      open: function() {
+        
+      },
+      close: function() {
+    	 
+      }
+    });
+	
 	$('#search_submit').click(function() {
 		var formData = $('#article_search_form').serialize();
 	
@@ -29,17 +68,17 @@ $(function() {
 				   var subject_text = subjects.join(', ');
 				   
 				   var article_page_text = '';
-				   for (var i = 0; i < article['ArticlePage'].length; i++) {
-					   var link = '<a href="' + document.URL  + '/article_pages/view/' + article['ArticlePage'][i]['id'] + '" ' +
+				   for (var i = 0; i < article['Page'].length; i++) {
+					   var link = '<a href="' + document.URL  + '/article_pages/view/' + article['Page'][i]['id'] + '" ' +
 				   		'class="tooltip_selector" ' +
-				   		'title="' + article['ArticlePage'][i]['title'] + '" ' +
+				   		'title="' + article['Page'][i]['title'] + '" ' +
 				   		'data-geo="" ' +
-						'data-id= "' + article['ArticlePage'][i]['id'] + '">' + article['ArticlePage'][i]['filename'] + '</a><br/>';
+						'data-id= "' + article['Page'][i]['id'] + '">' + article['Page'][i]['filename'] + '</a><br/>';
 					   article_page_text += link;
 				   }
 				   
 				   html_rows += "<tr>" +
-				   		"<td><a href='' style='color : #d82323'>" + article['Article']['title'] + "</a></td>" +
+				   		"<td><a href='" + document.URL + "articles/view/" + article['Article']['id'] + "' style='color : #d82323'>" + article['Article']['title'] + "</a></td>" +
 				   		"<td>" + article['Article']['volume'] + "</td>" +
 				   		"<td>" + article['Article']['page'] + "</td>" +
 				   		"<td>" + article['Publication']['name'] + "</td>" +
@@ -78,7 +117,7 @@ $(function() {
            	});
             },
             error: function(message){
-                alert(message);
+                console.log(message);
             }
         });
 		
@@ -90,6 +129,7 @@ $(function() {
 		$("#author_selection option:selected").removeAttr("selected");
 		$("#year_selection option:selected").removeAttr("selected");
 		$("#subject_selection option:selected").removeAttr("selected");
+		$("#title_text").val('');
 		$("#search_text").val('');
 		$('#articles_search_results').hide();
 	});
