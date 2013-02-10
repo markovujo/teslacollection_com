@@ -230,6 +230,7 @@ Ext.onReady(function() {
         	*/
         	
         	var pageComboStore = Ext.create('Ext.data.Store', {
+        		storeId:'pageComboStore',
                 autoDestroy: true,
                 model: 'Page',
                 proxy: {
@@ -264,7 +265,8 @@ Ext.onReady(function() {
                 typeAhead: true,
                 triggerAction: 'all',
                 selectOnTab: true,
-                store: pageComboStore,
+                //store: pageComboStore,
+                store: Ext.data.StoreManager.lookup('pageComboStore'),
                 valueField : 'id',
                 displayField : 'filename',
                 emptyText:'Select Page',
@@ -388,7 +390,7 @@ Ext.onReady(function() {
             });
         	
         	var subjectComboStore = Ext.create('Ext.data.Store', {
-                autoDestroy: true,
+        		storeId: 'subjectComboStore',
                 model: 'Subject',
                 proxy: {
                     type: 'ajax',
@@ -422,7 +424,7 @@ Ext.onReady(function() {
                 typeAhead: true,
                 triggerAction: 'all',
                 selectOnTab: true,
-                store: subjectComboStore,
+                store: Ext.data.StoreManager.lookup('subjectComboStore'),
                 valueField : 'id',
                 displayField : 'name',
                 emptyText:'Select Subject',
@@ -801,7 +803,7 @@ Ext.onReady(function() {
         renderTo: 'article-grid',
         width: 1500,
         height: 800,
-        title: 'Collection Articles',
+        title: 'Articles',
         frame: true,
         tbar: [
         {
@@ -865,7 +867,8 @@ Ext.onReady(function() {
             } 
         }
         ],
-        plugins: [cellEditing]
+        plugins: [cellEditing],
+        
     });
     
     store.load({
