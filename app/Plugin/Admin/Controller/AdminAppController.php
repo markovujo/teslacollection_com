@@ -13,14 +13,12 @@ class AdminAppController extends AppController
         'Session',
         'RequestHandler'
     );
-    */
     
-    /*
     public function beforeFilter() 
     {
-        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'plugin' => null);
-        $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login', 'plugin' => null);
-        $this->Auth->loginRedirect = array('controller' => 'articles', 'action' => 'index', 'plugin' => null);
+        $this->Auth->loginAction = array('plugin' => null, 'controller' => 'users', 'action' => 'login');
+        $this->Auth->logoutRedirect = array('plugin' => null, 'controller' => 'articles', 'action' => 'index');
+        $this->Auth->loginRedirect = array('plugin' => null, 'controller' => 'articles', 'action' => 'index');
     }
     */
 	

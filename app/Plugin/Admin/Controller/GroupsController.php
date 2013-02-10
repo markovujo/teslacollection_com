@@ -23,7 +23,7 @@ class GroupsController extends AdminAppController {
 	
 	public function beforeFilter() {
 	    parent::beforeFilter();
-	
-	    //$this->Auth->allow();
+	    
+	    //$this->Auth->allow('*');
 	}
 }

@@ -1,11 +1,19 @@
 <?php 
+
+App::uses('AuthComponent', 'Controller/Component');
 class User extends AppModel {
     public $belongsTo = array(
     	'Group'
     );
+
     public $actsAs = array(
     	'Acl' => array('type' => 'requester')
     );
+    
+    public function beforeSave($options = array()) {
+        $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+        return true;
+    }
 
     public function parentNode() {
         if (!$this->id && empty($this->data)) {

@@ -26,13 +26,17 @@ class UsersController extends AppController {
 	public $uses = array(
 		'User'
 	);
-
-    public function beforeSave($options = array()) {
-        $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
-        return true;
-    }
+	
+	public function beforeFilter() {
+	    parent::beforeFilter();
+	    $this->Auth->allow('*');
+	}
 	
 	public function login() {
+        if($this->Session->read('Auth.User')) {
+	        $this->set('user_info', $this->Session->read('Auth.User'));
+	    }
+		
 	    if ($this->request->is('post')) {
 	        if ($this->Auth->login()) {
 	            $this->redirect($this->Auth->redirect());
@@ -43,7 +47,8 @@ class UsersController extends AppController {
 	}
 	
 	public function logout() {
-	    //Leave empty for now.
+	    $this->Session->setFlash('Good-Bye');
+		$this->redirect($this->Auth->logout());
 	}
 }
   

@@ -28,6 +28,11 @@ class ArticlesController extends AppController {
 		'Publication',
 		'Subject'
 	);
+	
+	public function beforeFilter() {
+	    parent::beforeFilter();
+	    $this->Auth->allow('*');
+	}
 
 	public function index()
 	{
@@ -178,6 +183,19 @@ class ArticlesController extends AppController {
 		}
 		
 		return (json_encode($search_results));
+	}
+	
+	public function view($id = NULL)
+	{
+		if(!is_null($id) && $id > 0) {
+			$article = $this->Article->find('first', array(
+				'conditions' => array(
+					'Article.id' => $id
+				)
+			));
+			
+			$this->set('article', $article);
+		}
 	}
 }
   

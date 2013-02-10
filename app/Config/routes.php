@@ -31,7 +31,7 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	
-	Router::connect('/admin/', array('plugin' => 'admin', 'controller' => 'articles', 'action' => 'index'));
+	Router::connect('/admin', array('plugin' => 'admin', 'controller' => 'articles', 'action' => 'index'));
 	
 	//Router::connect('/admin/articles/getAll', array('controller' => 'articles', 'action' => 'getAll'));
 	//Router::connect('/admin/pubications/getAll', array('controller' => 'publications', 'action' => 'getAll'));
