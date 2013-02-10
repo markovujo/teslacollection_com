@@ -44,7 +44,7 @@ Ext.onReady(function() {
         pageSize: myPageSize, // items per page
         proxy: {
             type: 'ajax',
-            url: document.URL + 'articles/getAll',
+            url: document_url + 'articles/getAll',
             reader: {
                 type: 'json',
                 root: 'records',
@@ -70,7 +70,7 @@ Ext.onReady(function() {
         model: 'Publication',
         proxy: {
             type: 'ajax',
-            url: document.URL + 'publications/getAll',
+            url: document_url + 'publications/getAll',
             reader: {
                 type: 'json',
                 root: 'records'
@@ -97,7 +97,7 @@ Ext.onReady(function() {
         model: 'Author',
         proxy: {
             type: 'ajax',
-            url: document.URL + 'authors/getAll',
+            url: document_url + 'authors/getAll',
             reader: {
                 type: 'json',
                 root: 'records'
@@ -348,7 +348,7 @@ Ext.onReady(function() {
                         					'association_id' : recordId
                         				});
 
-                        				var url = document.URL + 'articles/deleteAssociations/Page';
+                        				var url = document_url + 'articles/deleteAssociations/Page';
                         				var url = url.replace('#', '');
                         				Ext.Ajax.request({
                     	    			   url: url,
@@ -500,7 +500,7 @@ Ext.onReady(function() {
                         					'association_id' : recordId
                         				});
 
-                        				var url = document.URL + 'articles/deleteAssociations/Subject';
+                        				var url = document_url + 'articles/deleteAssociations/Subject';
                         				var url = url.replace('#', '');
                         				Ext.Ajax.request({
                     	    			   url: url,
@@ -726,7 +726,7 @@ Ext.onReady(function() {
         }, {
         	header: 'Status',
             dataIndex: 'status',
-            width: 130,
+            width: 70,
             editor: new Ext.form.field.ComboBox({
                 typeAhead: true,
                 triggerAction: 'all',
@@ -749,7 +749,7 @@ Ext.onReady(function() {
             width:70,
             sortable: false,
             items: [{
-                icon: document.URL + 'img/delete.gif',
+                icon: document_url + 'img/delete.gif',
                 tooltip: 'Delete Article',
                 handler: function(grid, rowIndex, colIndex) {                	
                 	var record = store.getAt(rowIndex);
@@ -762,7 +762,7 @@ Ext.onReady(function() {
             				data.push(recordId);
             				//console.log(data);
             				Ext.Ajax.request({
-        	    			   url: document.URL + 'articles/delete',
+        	    			   url: document_url + 'articles/delete',
         	    			   success: function(response) {
         	    				   Ext.Msg.show({
         	    		                title: 'Success',
@@ -816,7 +816,7 @@ Ext.onReady(function() {
         		}
         		
         		Ext.Ajax.request({
-    			   url: document.URL + 'articles/saveAll',
+    			   url: document_url + 'articles/saveAll',
     			   success: function(response) {
     				   Ext.Msg.show({
     		                title: 'Success',
