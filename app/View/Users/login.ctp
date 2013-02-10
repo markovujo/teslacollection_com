@@ -1,7 +1,7 @@
 
 <?php 
 	if(isset($user_info)) {
-		echo '<div style="margin: 25px 0px">Currently logged in as ' . $user_info['username'] . ' (' . $user_info['Group']['name'] . ')</div>';
+		echo '<div style="margin: 25px 0px">Currently logged in as ' . $user_info['username'] . ' (' . $user_info['Group']['name'] . ') <a href="/users/logout">Logout</a></div>';
 	}
 ?>
 
