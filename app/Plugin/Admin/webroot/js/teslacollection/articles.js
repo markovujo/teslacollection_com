@@ -131,7 +131,17 @@ Ext.onReady(function() {
     });
     
     var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {
-        clicksToEdit: 1
+        clicksToEdit: 1,
+        listeners: {
+            beforeedit: function(editor, e, eOpts ) {
+            	if(e.colIdx == 0) {
+            		return false;  
+            	} else {
+            		return true;
+            	}
+          
+            }   
+        }
     });
     
     var filters = {
@@ -753,7 +763,7 @@ Ext.onReady(function() {
             items: [{
                 icon: document_url + 'img/delete.gif',
                 tooltip: 'Delete Article',
-                handler: function(grid, rowIndex, colIndex) {                	
+                handler: function(grid, rowIndex, colIndex) {         	
                 	var record = store.getAt(rowIndex);
                 	var recordId = record.get('id');
                 	var recordTitle = record.get('title');
