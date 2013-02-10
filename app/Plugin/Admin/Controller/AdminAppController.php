@@ -2,7 +2,27 @@
 
 class AdminAppController extends AppController 
 {	
-	var $components = array('RequestHandler');
+	/*
+	public $components = array(
+        'Acl',
+        'Auth' => array(
+            'authorize' => array(
+                'Actions' => array('actionPath' => 'controllers')
+            )
+        ),
+        'Session',
+        'RequestHandler'
+    );
+    */
+    
+    /*
+    public function beforeFilter() 
+    {
+        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'plugin' => null);
+        $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login', 'plugin' => null);
+        $this->Auth->loginRedirect = array('controller' => 'articles', 'action' => 'index', 'plugin' => null);
+    }
+    */
 	
 	public function saveAll() {
 		$this->autoRender = false;

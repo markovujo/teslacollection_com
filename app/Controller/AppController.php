@@ -33,7 +33,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller 
 {
-	var $components = array('RequestHandler');
+	var $components = array('RequestHandler', 'Session');
 		
 	public function getAll($params = NULL)
 	{
