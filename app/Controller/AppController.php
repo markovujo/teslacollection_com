@@ -36,8 +36,8 @@ class AppController extends Controller
 	public $components = array(
         'Acl',
         'Auth' => array(
-            'loginRedirect' => array('controller' => 'articles', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'articles', 'action' => 'index'),
+            'loginRedirect' => array('plugin' => NULL, 'controller' => 'articles', 'action' => 'index'),
+            'logoutRedirect' => array('plugin' => NULL, 'controller' => 'users', 'action' => 'login'),
 			'authError' => "Sorry, you're not allowed to do that.",
 			'authorize' => array('Controller')
         ),
