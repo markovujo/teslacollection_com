@@ -20,26 +20,8 @@ class ArticlesController extends AdminAppController {
 		parent::__construct($id, $table, $ds);
 	}
 	
-	public function beforeFilter() {
-	    parent::beforeFilter();
-	
-	    //$this->Auth->allow();
-	}
-	
 	public function index()
 	{
 		$this->layout = 'admin';
-	}
-	
-	public function addAssociations($type = 'Page') {
-		
-	}
-	
-	public function getAssociations($type = 'Page', $article_id) {
-		
-	}
-	
-	public function deleteAssociations($type = 'Page') {
-		
 	}
 }

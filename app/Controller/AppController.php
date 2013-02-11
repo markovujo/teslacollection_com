@@ -36,20 +36,24 @@ class AppController extends Controller
 	public $components = array(
         'Acl',
         'Auth' => array(
-            'authorize' => array(
-                'Actions' => array('actionPath' => 'controllers')
-            )
+            'loginRedirect' => array('controller' => 'articles', 'action' => 'index'),
+            'logoutRedirect' => array('controller' => 'articles', 'action' => 'index'),
+			'authError' => "Sorry, you're not allowed to do that.",
+			'authorize' => array('Controller')
         ),
         'Session',
         'RequestHandler'
     );
     
     public function beforeFilter() 
-    {
-        $this->Auth->loginAction = array('plugin' => null, 'controller' => 'users', 'action' => 'login');
-        $this->Auth->logoutRedirect = array('plugin' => null, 'controller' => 'articles', 'action' => 'index');
-        //$this->Auth->loginRedirect = array('plugin' => 'admin', 'controller' => 'articles', 'action' => 'index');
-    }
+    { 
+       $this->Auth->allow('*');
+    } 
+        
+    public function isAuthorized($user = null) 
+    { 
+    	return true; 
+   	} 
 		
 	public function getAll($params = NULL)
 	{
