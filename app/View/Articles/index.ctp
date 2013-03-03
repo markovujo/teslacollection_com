@@ -1,5 +1,5 @@
 
-<div id="search_header" style="width: 1050px">
+<div id="search_header">
 	<div id="information">
 		<div style="float: left; width: 500px"><?php echo $this->Html->image('the_genius_who_lit_the_world.jpg')?></div>
 		<div style="float: right; width: 400px; margin-right: 100px;">
@@ -87,7 +87,7 @@
 </div>
 -->
 
-<div id="articles_search_results" style="margin: 25px 0px; width: 75%;">
+<div id="articles_search_results">
 	<div id="articles_search_criteria" style="text-align: center">
 		<p><strong><span id="article_result_count"></span></strong> Article(s) found.</p>
 	</div>
