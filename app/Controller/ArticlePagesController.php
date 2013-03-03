@@ -26,11 +26,6 @@ class ArticlePagesController extends AppController {
 		'Page',
 		'Article'
 	);
-	
-	public function beforeFilter() {
-	    parent::beforeFilter();
-	    $this->Auth->allow('*');
-	}
 
 	public function index()
 	{
