@@ -92,16 +92,16 @@
 		<p><strong><span id="article_result_count"></span></strong> Article(s) found.</p>
 	</div>
 
-	<table id="search_results" class="tablesorter">
-		<col width="30%">
-  		<col width="4%">
-  		<col width="4%">
-  		<col width="15%">
-  		<col width="10%">
-  		<col width="10%">
-  		<col width="10%">
-  		<col width="5%">
-  		<col width="15%">
+	<table id="search_results" class="tablesorter" width="1250">
+		<col style="width: 450px;">
+		<col style="width: 50px;">
+		<col style="width: 50px;">
+		<col style="width: 150px;">
+		<col style="width: 100px;">
+		<col style="width: 100px;">
+		<col style="width: 100px;">
+		<col style="width: 50px;">
+		<col style="width: 200px;">
   		<thead>
 			<tr>
 				<th>Full Article</th>
