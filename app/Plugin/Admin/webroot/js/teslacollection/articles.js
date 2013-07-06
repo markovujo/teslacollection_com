@@ -980,7 +980,7 @@ Ext.onReady(function() {
                 icon: document_url + 'img/delete.gif',
                 tooltip: 'Delete Article',
                 handler: function(grid, rowIndex, colIndex) {         	
-                	var record = store.getAt(rowIndex);
+                	var record = publicationStore.getAt(rowIndex);
                 	var recordId = record.get('id');
                 	var recordTitle = record.get('title');
                 	
@@ -999,7 +999,7 @@ Ext.onReady(function() {
         	    		                icon: Ext.Msg.INFO,
         	    		                buttons: Ext.Msg.OK
         	    		            });
-        	    				   store.removeAt(rowIndex);
+        	    				   publicationStore.removeAt(rowIndex);
         	    			   },
         	    			   failture: function(response) {
         	    				   Ext.Msg.show({
@@ -1035,7 +1035,7 @@ Ext.onReady(function() {
         	text: 'Save',
         	handler : function() {
         		var records = [];
-        		var modified_records = store.getModifiedRecords();
+        		var modified_records = publicationStore.getModifiedRecords();
         		for (var i = 0, ln = modified_records.length; i < ln; i++) {
         		    var changes = modified_records[i].getChanges();
         		    changes['id'] = modified_records[i].getId();
@@ -1052,7 +1052,7 @@ Ext.onReady(function() {
     		                icon: Ext.Msg.INFO,
     		                buttons: Ext.Msg.OK
     		            });
-    				   store.commitChanges();
+    				   publicationStore.commitChanges();
     			   },
     			   failture: function(response) {
     				   Ext.Msg.show({
@@ -1074,7 +1074,7 @@ Ext.onReady(function() {
                     volume: 0,
                     page: 0
                 });
-                store.insert(0, r);
+                publicationStore.insert(0, r);
                 cellEditing.startEditByPosition({row: 0, column: 0});
             }
         }, 
@@ -1082,7 +1082,7 @@ Ext.onReady(function() {
         {
             text: 'Clear Changes',
             handler: function () {
-            	store.rejectChanges();
+            	publicationStore.rejectChanges();
             } 
         },
         {
