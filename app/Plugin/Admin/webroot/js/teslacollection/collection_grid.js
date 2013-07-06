@@ -2,11 +2,30 @@ Ext.ns('TeslaCollection');
 Ext.define('TeslaCollection.Grid' , {
     extend: 'Ext.grid.Panel',
     alias: 'teslacollection.grid',
+    store: store,
 
     initComponent: function() {
         Ext.apply(this, {
-            // complex configs (objects / arrays) go here  
-            store: store,
+        	features: [{
+                ftype: 'filters',
+                filters: [{
+                    type: 'numeric',
+                    dataIndex: 'id'
+                }, {
+                    type: 'string',
+                    dataIndex: 'name'
+                }, {
+                    type: 'list',
+                    dataIndex: 'status',
+                    options: ['active', 'inactive'],
+                    phpMode: true
+                }, {
+                    type: 'string',
+                    dataIndex: 'delete',
+                    disabled: true
+                }]
+            }],
+        	store: store,
             columns: [{
                 id: 'id',
                 header: 'ID',
@@ -63,13 +82,13 @@ Ext.define('TeslaCollection.Grid' , {
                     	var recordId = record.get('id');
                     	var recordTitle = record.get('title');
                     	
-                		Ext.Msg.confirm('Confirm Delete', 'Are you sure you want to delete Article (' + recordId +') - ' + recordTitle, function(btn) {
+                		Ext.Msg.confirm('Confirm Delete', 'Are you sure you want to delete Publication (' + recordId +') - ' + recordTitle, function(btn) {
                 			if(btn == 'yes'){
                 				var data = [];
                 				data.push(recordId);
                 				//console.log(data);
                 				Ext.Ajax.request({
-            	    			   url: document_url + 'articles/delete',
+            	    			   url: document_url + 'publications/delete',
             	    			   success: function(response) {
             	    				   Ext.Msg.show({
             	    		                title: 'Success',
@@ -105,10 +124,9 @@ Ext.define('TeslaCollection.Grid' , {
             selModel: {
                 selType: 'cellmodel'
             },
-            renderTo: 'article-grid',
             width: 1500,
             height: 800,
-            title: title,
+            title: 'Publications',
             frame: true,
             tbar: [
             {
@@ -123,7 +141,7 @@ Ext.define('TeslaCollection.Grid' , {
             		}
             		
             		Ext.Ajax.request({
-        			   url: document_url + model.name + '/saveAll',
+        			   url: document_url + 'publications/saveAll',
         			   success: function(response) {
         				   Ext.Msg.show({
         		                title: 'Success',
@@ -148,9 +166,9 @@ Ext.define('TeslaCollection.Grid' , {
             	}
             }       
             , {
-                text: 'Add ' . model.name,
+                text: 'Add Publication',
                 handler : function(){
-                    var r = Ext.create(store.name, {
+                    var r = Ext.create('Publication', {
                         volume: 0,
                         page: 0
                     });
@@ -172,7 +190,20 @@ Ext.define('TeslaCollection.Grid' , {
                 } 
             }
             ],
-            plugins: [cellEditing],
+            plugins: [
+              Ext.create('Ext.grid.plugin.CellEditing', {
+    	        clicksToEdit: 1,
+    	        listeners: {
+    	            beforeedit: function(editor, e, eOpts ) {
+    	            	if(e.colIdx == 0) {
+    	            		return false;  
+    	            	} else {
+    	            		return true;
+    	            	}
+    	          
+    	            }   
+    	        }
+              })]
         });
 
         this.callParent(arguments);
