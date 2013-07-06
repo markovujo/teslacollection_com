@@ -963,9 +963,9 @@ Ext.onReady(function() {
                         handler: function(grid, rowIndex, colIndex) {         	
                         	var record = store.getAt(rowIndex);
                         	var recordId = record.get('id');
-                        	var recordTitle = record.get('title');
+                        	var recordTitle = record.get('name');
                         	
-                    		Ext.Msg.confirm('Confirm Delete', 'Are you sure you want to delete ' + model + ' (' + recordId +') - ' + recordTitle, function(btn) {
+                    		Ext.Msg.confirm('Confirm Delete', 'Are you sure you want to delete ' + model + ' (' + recordId +') - ' + recordTitle + '?', function(btn) {
                     			if(btn == 'yes'){
                     				var data = [];
                     				data.push(recordId);
