@@ -891,21 +891,6 @@ Ext.onReady(function() {
         plugins: [cellEditing],
         
     });
-
-    
-    var publicationCellEditing = Ext.create('Ext.grid.plugin.CellEditing', {
-        clicksToEdit: 1,
-        listeners: {
-            beforeedit: function(editor, e, eOpts ) {
-            	if(e.colIdx == 0) {
-            		return false;  
-            	} else {
-            		return true;
-            	}
-          
-            }   
-        }
-    });
     
     var publicationGrid = Ext.create('Ext.grid.Panel', {
     	features: [{
@@ -1092,7 +1077,20 @@ Ext.onReady(function() {
             } 
         }
         ],
-        plugins: [publicationCellEditing],
+        plugins: [
+          Ext.create('Ext.grid.plugin.CellEditing', {
+	        clicksToEdit: 1,
+	        listeners: {
+	            beforeedit: function(editor, e, eOpts ) {
+	            	if(e.colIdx == 0) {
+	            		return false;  
+	            	} else {
+	            		return true;
+	            	}
+	          
+	            }   
+	        }
+          })]
     });
     
     
