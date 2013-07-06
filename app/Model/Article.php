@@ -146,7 +146,7 @@ class Article extends AppModel
 			, 'limit' => $limit
 		));
 		
-		/* DEBUGGING :: 
+		/* DEBUGGING ::
 		debug($params);
 		debug($conditions);
 		debug($joins);
@@ -154,6 +154,17 @@ class Article extends AppModel
 		die();
 		*/
 		
+		//die(debug($return['articles']));
+		//CAKEPHP CAN'T SORT BY filename FOR HABTM ASSOCIATED TABLE
+		if(!empty($return['articles'])) {
+			foreach($return['articles'] AS &$article) {
+				if(isset($article['Page']) && !empty($article['Page'])) {
+					$article['Page'] = Set::sort($article['Page'], '{n}.filename', 'asc');
+				}
+			}
+		}
+		
+		//die(debug($return));
 		return $return;
 	}
 }

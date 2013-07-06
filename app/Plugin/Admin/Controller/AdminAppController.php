@@ -39,6 +39,7 @@ class AdminAppController extends AppController
 						$errors[] = $this->ModelName->invalidFields();
 					}
 				} else {
+					$data['status'] = isset($data['status']) ? $data['status'] : 'active';
 					$this->Model->create(); 
 					if($this->Model->save($data)) { 
 						$response['records'][$this->Model->alias] = $data;

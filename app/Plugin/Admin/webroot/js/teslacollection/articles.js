@@ -39,9 +39,10 @@ Ext.onReady(function() {
 	var myPageSize = 50;
 	
     var store = Ext.create('Ext.data.Store', {
-    	autoLoad: false,
+    	autoLoad: true,
+    	storeId:'articleStore',
         model: 'Article',
-        pageSize: myPageSize, // items per page
+        pageSize: myPageSize,
         proxy: {
             type: 'ajax',
             url: document_url + 'articles/getAll',
@@ -61,19 +62,23 @@ Ext.onReady(function() {
         extend: 'Ext.data.Model',
         fields: [
              {name : 'id', mapping: 'Publication.id'},
-             {name : 'name', mapping: 'Publication.name'}
+             {name : 'name', mapping: 'Publication.name'},
+             {name : 'status', mapping: 'Publication.status'}
         ]
     });
 	
     var publicationStore = Ext.create('Ext.data.Store', {
-        autoDestroy: true,
+    	autoLoad: true,
+    	storeId: 'publicationStore',
         model: 'Publication',
+        pageSize: 10000,
         proxy: {
             type: 'ajax',
             url: document_url + 'publications/getAll',
             reader: {
                 type: 'json',
-                root: 'records'
+                root: 'records',
+                totalProperty: "totalCount"
             }
         },
         sorters: [{
@@ -81,26 +86,28 @@ Ext.onReady(function() {
             direction:'ASC'
         }]
     });
-    
-    publicationStore.load();
     
 	Ext.define('Author', {
         extend: 'Ext.data.Model',
         fields: [
              {name : 'id', mapping: 'Author.id'},
-             {name : 'name', mapping: 'Author.name'}
+             {name : 'name', mapping: 'Author.name'},
+             {name : 'status', mapping: 'Author.status'}
         ]
     });
 	
     var authorStore = Ext.create('Ext.data.Store', {
-        autoDestroy: true,
+    	autoLoad: true,
+    	storeId:'authorStore',
         model: 'Author',
+        pageSize: 10000,
         proxy: {
             type: 'ajax',
             url: document_url + 'authors/getAll',
             reader: {
                 type: 'json',
-                root: 'records'
+                root: 'records',
+                totalProperty: "totalCount"
             }
         },
         sorters: [{
@@ -108,8 +115,6 @@ Ext.onReady(function() {
             direction:'ASC'
         }]
     });
-    
-    authorStore.load();
     
 	Ext.define('Page', {
         extend: 'Ext.data.Model',
@@ -120,6 +125,26 @@ Ext.onReady(function() {
              {name : 'status', mapping: 'Page.status'}
         ]
     });
+	
+    var pageStore = Ext.create('Ext.data.Store', {
+    	autoLoad: true,
+    	storeId: 'pageStore',
+        model: 'Page',
+        pageSize: 10000,
+        proxy: {
+            type: 'ajax',
+            url: document_url + 'pages/getAll',
+            reader: {
+                type: 'json',
+                root: 'records',
+                totalProperty: "totalCount"
+            }
+        },
+        sorters: [{
+            property: 'common',
+            direction:'ASC'
+        }]
+    });
     
 	Ext.define('Subject', {
         extend: 'Ext.data.Model',
@@ -128,6 +153,26 @@ Ext.onReady(function() {
 	         {name : 'name', mapping: 'Subject.name'},
 	         {name : 'status', mapping: 'Subject.status'},
         ]
+    });
+	
+    var subjectStore = Ext.create('Ext.data.Store', {
+    	autoLoad: true,
+    	storeId:'subjectStore',
+        model: 'Subject',
+        pageSize: 10000,
+        proxy: {
+            type: 'ajax',
+            url: document_url + 'subjects/getAll',
+            reader: {
+                type: 'json',
+                root: 'records',
+                totalProperty: "totalCount"
+            }
+        },
+        sorters: [{
+            property: 'common',
+            direction:'ASC'
+        }]
     });
     
     var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {
@@ -190,55 +235,7 @@ Ext.onReady(function() {
     Ext.ns('TeslaCollection');
     TeslaCollection.ArticleModal = {
         openWindow: function(articleId)
-        {        	
-            /* Refactoring to remove code duplication
-        	Ext.define('TeslaCollection.ComboBox', {
-                extend: 'Ext.Grid',
-                alias: 'widget.mygrid',
-                
-                typeAhead: true,
-                triggerAction: 'all',
-                selectOnTab: true,
-                //store: pageComboStore,
-                //valueField : 'id',
-                //displayField : 'filename',
-                //emptyText:'Select Page',
-                request_url :  document_url + 'articles/addAssociations/Page',
-                autoShow: true,
-                width : 300,
-                listClass: 'x-combo-list-small',
-                buttonAlign: 'center',
-                listeners: {
-                	select: function(combo, record, index) {  
-                		var recordId = record[0].get('id');
-        				var data = [];
-        				data.push({
-        					'article_id' : articleId,
-        					'association_id' : recordId
-        				});
-        				
-                		Ext.Ajax.request({
-     	    			   url: this.request_url
-     	    			   success: function(response) {
-     	    				  pageStore.add(record);
-     	    			   },
-     	    			   failture: function(response) {
-     	    				   Ext.Msg.show({
-     	    		                title: 'Failure',
-     	    		                msg: 'Your data has FAILED to associate!',
-     	    		                modal: false,
-     	    		                icon: Ext.Msg.FAIL,
-     	    		                buttons: Ext.Msg.OK
-     	    		            });
-     	    			   },
-     	    			   jsonData : Ext.JSON.encode(data)
-     	    			});
-                	}
-                }
-                }
-        	);
-        	*/
-        	
+        {
         	var pageComboStore = Ext.create('Ext.data.Store', {
         		storeId:'pageComboStore',
                 autoDestroy: true,
@@ -584,7 +581,7 @@ Ext.onReady(function() {
         }
     }
     
-    var grid = Ext.create('Ext.grid.Panel', {
+    var articleGrid = Ext.create('Ext.grid.Panel', {
     	features: [filters],
         store: store,
         columns: [{
@@ -810,7 +807,6 @@ Ext.onReady(function() {
         selModel: {
             selType: 'cellmodel'
         },
-        renderTo: 'article-grid',
         width: 1500,
         height: 800,
         title: 'Articles',
@@ -873,7 +869,7 @@ Ext.onReady(function() {
         {
             text: 'Clear Filter Data',
             handler: function () {
-                grid.filters.clearFilters();
+                articleGrid.filters.clearFilters();
             } 
         }
         ],
@@ -881,10 +877,247 @@ Ext.onReady(function() {
         
     });
     
-    store.load({
-    	params:{
-            start: 0,
-            limit: myPageSize
+    Ext.ns('TeslaCollection');
+    Ext.define('TeslaCollection.Grid' , {
+        extend: 'Ext.grid.Panel',
+        alias: 'teslacollection.grid',
+
+        initComponent: function() {
+        	var model = this.model;
+        	var title = this.title;
+        	var store = this.store;
+        	
+            Ext.apply(this, {
+            	features: [{
+                    ftype: 'filters',
+                    filters: [{
+                        type: 'numeric',
+                        dataIndex: 'id'
+                    }, {
+                        type: 'string',
+                        dataIndex: 'name'
+                    }, {
+                        type: 'list',
+                        dataIndex: 'status',
+                        options: ['active', 'inactive'],
+                        phpMode: true
+                    }, {
+                        type: 'string',
+                        dataIndex: 'delete',
+                        disabled: true
+                    }]
+                }],
+            	store: store,
+                columns: [{
+                    id: 'id',
+                    header: 'ID',
+                    dataIndex: 'id',
+                    width: 70,
+                    editor: {
+                        allowBlank: true
+                    },
+                    filterable: true,
+                    filter: {
+                        type: 'numeric'
+                    }
+                }, {
+                    header: 'Name',
+                    dataIndex: 'name',
+                    width: 400,
+                    align: 'left',
+                    editor: {
+                        xtype: 'textfield',
+                    },
+                    filter: {
+                        type: 'string'
+                    }
+                }, {
+                	header: 'Status',
+                    dataIndex: 'status',
+                    width: 70,
+                    editor: new Ext.form.field.ComboBox({
+                        typeAhead: true,
+                        triggerAction: 'all',
+                        selectOnTab: true,
+                        store: [
+                            ['active','active'],
+                            ['inactive','inactive']
+                        ],
+                        lazyRender: true,
+                        listClass: 'x-combo-list-small'
+                    }),
+                    filter: {
+                        type: 'list',
+                        options: ['active', 'inactive']
+                    }
+                }, {
+                	header: 'Delete',
+                    dataIndex: 'delete',
+                    xtype: 'actioncolumn',
+                    width:70,
+                    sortable: false,
+                    model: model,
+                    items: [{
+                        icon: document_url + 'img/delete.gif',
+                        tooltip: 'Delete Article',
+                        handler: function(grid, rowIndex, colIndex) {         	
+                        	var record = store.getAt(rowIndex);
+                        	var recordId = record.get('id');
+                        	var recordTitle = record.get('name');
+                        	
+                    		Ext.Msg.confirm('Confirm Delete', 'Are you sure you want to delete ' + model + ' (' + recordId +') - ' + recordTitle + '?', function(btn) {
+                    			if(btn == 'yes'){
+                    				var data = [];
+                    				data.push(recordId);
+                    				//console.log(data);
+                    				Ext.Ajax.request({
+                	    			   url: document_url + model + 's/delete',
+                	    			   success: function(response) {
+                	    				   Ext.Msg.show({
+                	    		                title: 'Success',
+                	    		                msg: 'Your data has been successfully Deleted!',
+                	    		                modal: false,
+                	    		                icon: Ext.Msg.INFO,
+                	    		                buttons: Ext.Msg.OK
+                	    		            });
+                	    				   store.removeAt(rowIndex);
+                	    			   },
+                	    			   failture: function(response) {
+                	    				   Ext.Msg.show({
+                	    		                title: 'Failure',
+                	    		                msg: 'Your data has FAILED to delete!',
+                	    		                modal: false,
+                	    		                icon: Ext.Msg.FAIL,
+                	    		                buttons: Ext.Msg.OK
+                	    		            });
+                	    			   },
+                	    			   jsonData : Ext.JSON.encode(data)
+                	    			});
+        	                    }
+        	                }, this);
+                        }
+                    }]
+                }],
+                dockedItems: [{
+                    xtype: 'pagingtoolbar',
+                    store: store,
+                    dock: 'bottom',
+                    displayInfo: true
+                }],
+                selModel: {
+                    selType: 'cellmodel'
+                },
+                width: 1500,
+                height: 800,
+                title: title,
+                frame: true,
+                tbar: [
+                {
+                	text: 'Save',
+                	handler : function() {
+                		var records = [];
+                		var modified_records = store.getModifiedRecords();
+                		for (var i = 0, ln = modified_records.length; i < ln; i++) {
+                		    var changes = modified_records[i].getChanges();
+                		    changes['id'] = modified_records[i].getId();
+                		    records.push(changes);
+                		}
+                		
+                		Ext.Ajax.request({
+            			   url: document_url + model + 's/saveAll',
+            			   success: function(response) {
+            				   Ext.Msg.show({
+            		                title: 'Success',
+            		                msg: 'Your data has been successfully saved!',
+            		                modal: false,
+            		                icon: Ext.Msg.INFO,
+            		                buttons: Ext.Msg.OK
+            		            });
+            				   store.commitChanges();
+            			   },
+            			   failture: function(response) {
+            				   Ext.Msg.show({
+            		                title: 'Failure',
+            		                msg: 'Your data has FAILED to save!',
+            		                modal: false,
+            		                icon: Ext.Msg.FAIL,
+            		                buttons: Ext.Msg.OK
+            		            });
+            			   },
+            			   jsonData : Ext.JSON.encode(records)
+            			});
+                	}
+                }       
+                , {
+                    text: 'Add ' + model,
+                    handler : function(){
+                        var r = Ext.create(model, {
+                            status: 'active'
+                        });
+                        store.insert(0, r);
+                        cellEditing.startEditByPosition({row: 0, column: 0});
+                    }
+                }, 
+                '->',
+                {
+                    text: 'Clear Changes',
+                    handler: function () {
+                    	store.rejectChanges();
+                    } 
+                },
+                {
+                    text: 'Clear Filter Data',
+                    handler: function () {
+                        grid.filters.clearFilters();
+                    } 
+                }
+                ],
+                plugins: [
+                  Ext.create('Ext.grid.plugin.CellEditing', {
+        	        clicksToEdit: 1,
+        	        listeners: {
+        	            beforeedit: function(editor, e, eOpts ) {
+        	            	if(e.colIdx == 0) {
+        	            		return false;  
+        	            	} else {
+        	            		return true;
+        	            	}
+        	          
+        	            }   
+        	        }
+                  })]
+            });
+
+            this.callParent(arguments);
         }
+    });
+    
+    var authorGrid = new TeslaCollection.Grid({
+    	store: authorStore,
+    	title: 'Authors',
+    	model: 'Author'
+    });
+    
+    var publicationGrid = new TeslaCollection.Grid({
+    	store: publicationStore,
+    	title: 'Publications',
+    	model: 'Publication'
+    });
+    
+    var subjectGrid = new TeslaCollection.Grid({
+    	store: subjectStore,
+    	title: 'Subjects',
+    	model: 'Subject'
+    });
+    
+    var tabs = Ext.create('Ext.tab.Panel', {
+        renderTo: document.body,
+        activeTab: 0,
+        items: [
+           articleGrid,
+           publicationGrid,
+           authorGrid,
+           subjectGrid
+        ]
     });
 });

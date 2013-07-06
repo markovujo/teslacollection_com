@@ -38,6 +38,7 @@
 	//Router::connect('/admin/authors/getAll', array('controller' => 'authors', 'action' => 'getAll'));
 	
 	//Router::connect('/article_pages/view/:id', array('controller' => 'article_pages', 'action' => 'view'), array('id' => '[0-9]+'));
+	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on
