@@ -109,7 +109,7 @@ class AppController extends Controller
 			
 			if(!is_null($search_field)) {
 				$query = Sanitize::escape($this->params->query['query']);
-				$conditions['or'][] = array($model . '.' . $search_field . ' LIKEE' => "%$query%");
+				$conditions['or'][] = array($model . '.' . $search_field . ' LIKE' => "%$query%");
 				$conditions['or'][] = array($model . '.' . $search_field => $query);
 			}
 		} else {

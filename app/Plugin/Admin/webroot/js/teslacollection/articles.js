@@ -42,7 +42,7 @@ Ext.onReady(function() {
     	autoLoad: true,
     	storeId:'articleStore',
         model: 'Article',
-        pageSize: myPageSize, // items per page
+        pageSize: myPageSize,
         proxy: {
             type: 'ajax',
             url: document_url + 'articles/getAll',
@@ -62,7 +62,8 @@ Ext.onReady(function() {
         extend: 'Ext.data.Model',
         fields: [
              {name : 'id', mapping: 'Publication.id'},
-             {name : 'name', mapping: 'Publication.name'}
+             {name : 'name', mapping: 'Publication.name'},
+             {name : 'status', mapping: 'Publication.status'}
         ]
     });
 	
@@ -70,7 +71,7 @@ Ext.onReady(function() {
     	autoLoad: true,
     	storeId: 'publicationStore',
         model: 'Publication',
-        pageSize: myPageSize,
+        pageSize: 10000,
         proxy: {
             type: 'ajax',
             url: document_url + 'publications/getAll',
@@ -90,7 +91,8 @@ Ext.onReady(function() {
         extend: 'Ext.data.Model',
         fields: [
              {name : 'id', mapping: 'Author.id'},
-             {name : 'name', mapping: 'Author.name'}
+             {name : 'name', mapping: 'Author.name'},
+             {name : 'status', mapping: 'Author.status'}
         ]
     });
 	
@@ -98,7 +100,7 @@ Ext.onReady(function() {
     	autoLoad: true,
     	storeId:'authorStore',
         model: 'Author',
-        pageSize: myPageSize,
+        pageSize: 10000,
         proxy: {
             type: 'ajax',
             url: document_url + 'authors/getAll',
@@ -128,7 +130,7 @@ Ext.onReady(function() {
     	autoLoad: true,
     	storeId: 'pageStore',
         model: 'Page',
-        pageSize: myPageSize,
+        pageSize: 10000,
         proxy: {
             type: 'ajax',
             url: document_url + 'pages/getAll',
@@ -157,7 +159,7 @@ Ext.onReady(function() {
     	autoLoad: true,
     	storeId:'subjectStore',
         model: 'Subject',
-        pageSize: myPageSize,
+        pageSize: 10000,
         proxy: {
             type: 'ajax',
             url: document_url + 'subjects/getAll',
@@ -582,15 +584,6 @@ Ext.onReady(function() {
     var articleGrid = Ext.create('Ext.grid.Panel', {
     	features: [filters],
         store: store,
-        header: {
-            tag: 'div',
-            cls: 'x-panel-header',
-            children: [
-                { tag: 'div', cls: 'panel_header_main', 'html': 'Shopping Cart' },
-                { tag: 'div', cls: 'panel_header_icon1', 'html': '<img src="images/icon_plus.png" />' },
-                { tag: 'div', cls: 'panel_header_extra', 'html': 'Order Number: 2837428347' }
-            ]
-        },
         columns: [{
             id: 'id',
             header: 'ID',
@@ -876,7 +869,7 @@ Ext.onReady(function() {
         {
             text: 'Clear Filter Data',
             handler: function () {
-                grid.filters.clearFilters();
+                articleGrid.filters.clearFilters();
             } 
         }
         ],
