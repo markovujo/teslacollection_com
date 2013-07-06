@@ -45,10 +45,10 @@ class PagesController extends AppController {
  */
 	public $uses = array();
 	
-	public function beforeFilter() {
-	    parent::beforeFilter();
-	    $this->Auth->allow('*');
-	}
+    public function beforeFilter() 
+    { 
+       $this->Auth->allow('*');
+    } 
 
 /**
  * Displays a view
@@ -76,5 +76,26 @@ class PagesController extends AppController {
 		}
 		$this->set(compact('page', 'subpage', 'title_for_layout'));
 		$this->render(implode('/', $path));
+	}
+	
+	public function gallery() {
+		$images = $this->_getImages();
+		
+		$this->set('images', $images);
+	}
+	
+	protected function _getImages()
+	{
+		$images = array();
+		
+		$image_glob_path = WWW_ROOT .'/images/gallery/*.jpg';
+		foreach(glob($image_glob_path) as $filename){
+		   $images[] = array(
+		   		'filename' => basename($filename)
+		   );
+		}
+		
+		//die(debug($images));
+		return $images;
 	}
 }
