@@ -125,26 +125,6 @@ Ext.onReady(function() {
              {name : 'status', mapping: 'Page.status'}
         ]
     });
-	
-    var pageStore = Ext.create('Ext.data.Store', {
-    	autoLoad: true,
-    	storeId: 'pageStore',
-        model: 'Page',
-        pageSize: 10000,
-        proxy: {
-            type: 'ajax',
-            url: document_url + 'pages/getAll',
-            reader: {
-                type: 'json',
-                root: 'records',
-                totalProperty: "totalCount"
-            }
-        },
-        sorters: [{
-            property: 'common',
-            direction:'ASC'
-        }]
-    });
     
 	Ext.define('Subject', {
         extend: 'Ext.data.Model',
