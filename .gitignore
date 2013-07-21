@@ -9,3 +9,5 @@ app/Config/core.php
 .DS_Store
 /tags
 app/webroot/error_log
+app/webroot/gallery.tar.gz
+app/webroot/gallery/*
