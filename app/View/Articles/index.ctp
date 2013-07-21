@@ -4,6 +4,23 @@
 		<p>Seen together "The Tesla Collection" not only sheds new light on the early days of electricity, and the development and widespread acceptance by the public and scientific community of Alternating Current, but also provides a one-of-a-kind look into the early days of X-Ray, Wireless, Remote Control, Robotics and the efforts and experiments made by Tesla into the development and delivery of wireless Electricity.</p>
 		<br style="clear:both" />
 	</div>
+	
+	<style>
+		.ui-widget-overlay { opacity: 1.0; filter:Alpha(Opacity=100); }
+	</style>
+	<div style="text-align: center"><a href="#" id="search_tutorial">Search Tutorial</a></div>
+	
+	<div id="tutorial-modal" title="Search Tutorial">
+		<div id="slides">
+	  		<?php echo $this->Html->image('tutorial/slideshow_1.jpg', array('width' => '850px')); ?>
+	  		<?php echo $this->Html->image('tutorial/slideshow_2.jpg', array('width' => '850px')); ?>
+	  		<?php echo $this->Html->image('tutorial/slideshow_3.jpg', array('width' => '850px')); ?>
+	  		<?php echo $this->Html->image('tutorial/slideshow_4.jpg', array('width' => '850px')); ?>
+	  		<?php echo $this->Html->image('tutorial/slideshow_5.jpg', array('width' => '850px')); ?>
+	  		<?php echo $this->Html->image('tutorial/slideshow_6.jpg', array('width' => '850px')); ?>
+	  		<?php echo $this->Html->image('tutorial/slideshow_7.jpg', array('width' => '850px')); ?>
+	  	</div>
+	</div>
 
 	<div id="selection_form">
 		<?php echo $this->Form->create('ArticleSearch', array('id' => 'article_search_form')); ?>

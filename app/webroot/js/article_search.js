@@ -135,4 +135,20 @@ $(function() {
 		$("#search_text").val('');
 		$('#articles_search_results').hide();
 	});
+	
+	$("#tutorial-modal").dialog({
+      width: 1000,
+      height: 647,
+      modal: true,
+      autoOpen: false
+    });
+	
+	$('#search_tutorial').click(function() {
+		$("#tutorial-modal").dialog( "open" );
+	});
+	
+    $('#slides').slidesjs({
+        width: 1000,
+        height: 647
+    });
 });

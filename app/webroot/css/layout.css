@@ -67,7 +67,7 @@
 	float:left;
 }
 
-#navigation_links ul a:link,a:visited
+#navigation_links ul a:link, #navigation_links ul a:visited
 {
 	display:block;
 	width: 130px;
@@ -80,7 +80,7 @@
 	background-color:#9e9e9e;
 }
 
-#navigation_links ul a:hover, a:active
+#navigation_links ul a:hover, #navigation_links ul a:active
 {
 	color:#000000;
 }
