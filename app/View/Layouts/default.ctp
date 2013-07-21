@@ -62,11 +62,11 @@ $siteDescription = '"The Tesla Collection" - the most comprehensive compilation 
 				</div>
 				<div id="navigation_links">
 					<ul>
-						<li><a href="<?= Configure::read('Server.uri');?>/">Articles</a></li>
-						<li><a href="<?= Configure::read('Server.uri');?>/images">Images</a></li>
-						<li><a href="<?= Configure::read('Server.uri');?>/directors">Directors</a></li>
-						<li><a href="<?= Configure::read('Server.uri');?>/about">About</a></li>
-						<li><a href="<?= Configure::read('Server.uri');?>/contact">Contact</a></li>
+						<li><a href="<?php echo Configure::read('Server.uri');?>/">Articles</a></li>
+						<li><a href="<?php echo Configure::read('Server.uri');?>/images">Images</a></li>
+						<li><a href="<?php echo Configure::read('Server.uri');?>/directors">Directors</a></li>
+						<li><a href="<?php echo Configure::read('Server.uri');?>/about">About</a></li>
+						<li><a href="<?php echo Configure::read('Server.uri');?>/contact">Contact</a></li>
 					</ul>
 				</div>
 			</div>
