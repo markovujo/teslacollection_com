@@ -71,9 +71,9 @@ $(function() {
 				   for (var i = 0; i < article['Page'].length; i++) {
 					   var link = '<a href="' + document.URL  + '/article_pages/view/' + article['Page'][i]['id'] + '" ' +
 				   		'class="tooltip_selector" ' +
-				   		'title="' + article['Page'][i]['title'] + '" ' +
+				   		'title="' + article['Article']['title'] + ' - ' + i + '" ' +
 				   		'data-geo="" ' +
-						'data-id= "' + article['Page'][i]['id'] + '">' + article['Page'][i]['filename'] + '</a><br/>';
+						'data-id= "' + article['Page'][i]['id'] + '">' + article['Page'][i]['filename'] + '</a><br /><br />';
 					   article_page_text += link;
 				   }
 				   
