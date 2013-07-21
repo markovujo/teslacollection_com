@@ -33,7 +33,9 @@
 	
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	
-	Router::connect('/gallery', array('controller' => 'pages', 'action' => 'gallery', 'gallery'));
+	Router::connect('/about', array('controller' => 'pages', 'action' => 'about', 'about'));
+	
+	Router::connect('/image_gallery', array('controller' => 'pages', 'action' => 'image_gallery', 'image_gallery'));
 	
 	//Router::connect('/admin/articles/getAll', array('controller' => 'articles', 'action' => 'getAll'));
 	//Router::connect('/admin/pubications/getAll', array('controller' => 'publications', 'action' => 'getAll'));
