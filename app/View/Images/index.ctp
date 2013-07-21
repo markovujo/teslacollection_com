@@ -1,8 +1,8 @@
-<link rel="stylesheet" type="text/css" href="/fpgallery/fpgallery.css" />
-<link rel="stylesheet" type="text/css" href="/colorbox/colorbox.css" />
+<link rel="stylesheet" type="text/css" href="<?= Configure::read('Server.uri');?>/fpgallery/fpgallery.css" />
+<link rel="stylesheet" type="text/css" href="<?= Configure::read('Server.uri');?>/colorbox/colorbox.css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script type="text/javascript" src="/fpgallery/fpgallery.js"></script>
-<script type="text/javascript" src="/colorbox/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="<?= Configure::read('Server.uri');?>/fpgallery/fpgallery.js"></script>
+<script type="text/javascript" src="<?= Configure::read('Server.uri');?>/colorbox/jquery.colorbox-min.js"></script>
 
 <div class="section_text">
 	<h1>TESLA PICTURE GALLERY</h1>
