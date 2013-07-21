@@ -8,8 +8,10 @@ $mainFolder   = 'gallery';            // main folder that holds subfolders - thi
 $itemsPerPage = '15';                // number of images per page if not already specified   
 $thumb_width  = '150';               // width of thumbnails
 $no_thumb     = 'no_img.jpg';        // show this when no thumbnail exists    
-$sort_by      = 'date';              // 'date' will sort albums by upload date -  change 'date' to anything else to sort by album name 
+$sort_by      = 'name';              // 'date' will sort albums by upload date -  change 'date' to anything else to sort by album name 
 $extensions   = array(".jpg",".png",".gif",".JPG",".PNG",".GIF"); // allowed extensions in photo gallery
+
+ini_set('memory_limit','2048M');
 
 $numPerPage = (!empty($_REQUEST['numperpage']) ? (int)$_REQUEST['numperpage'] : $itemsPerPage);
 $isFullAlbum = (!empty($_REQUEST['fullalbum']) ? 1 : 0);
