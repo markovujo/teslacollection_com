@@ -89,6 +89,11 @@ class PagesController extends AppController {
 		$this->set('images', $images);
 	}
 	
+	public function directors()
+	{
+		
+	}
+	
 	protected function _getImages()
 	{
 		$images = array();
