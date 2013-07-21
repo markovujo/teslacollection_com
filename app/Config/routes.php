@@ -35,8 +35,6 @@
 	
 	Router::connect('/about', array('controller' => 'pages', 'action' => 'about', 'about'));
 	
-	Router::connect('/gallery', array('controller' => 'pages', 'action' => 'gallery', 'gallery'));
-	
 	Router::connect('/directors', array('controller' => 'pages', 'action' => 'directors', 'directors'));
 	
 	Router::connect('/contact', array('controller' => 'pages', 'action' => 'contact', 'contact'));
