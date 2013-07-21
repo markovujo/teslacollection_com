@@ -60,12 +60,12 @@ $siteDescription = '"The Tesla Collection" - the most comprehensive compilation 
 				<div id="navigation_description">
 					<?php echo $this->Html->image('the_tesla_collection.jpg', array('id' => 'collection_text'))?>
 				</div>
-				<div id="navigation_links" style="text-align: center">
+				<div id="navigation_links">
 					<ul>
 						<li><a href="/">Articles</a></li>
 						<li><a href="/images">Images</a></li>
-						<li><a href="/about">About</a></li>
 						<li><a href="/directors">Directors</a></li>
+						<li><a href="/about">About</a></li>
 						<li><a href="/contact">Contact</a></li>
 					</ul>
 				</div>

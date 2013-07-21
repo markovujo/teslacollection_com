@@ -55,7 +55,7 @@ function loadGallery(fpgallerydir,targetdiv,album,numperpage,pagenum,fullalbum) 
 	$.ajax
 	({
 		type: 'POST',
-		url: '/images/search?'+album+'&p='+pagenum,
+		url: document.URL + '/search?'+album+'&p='+pagenum,
 		data: {
 			album: album,
 			numperpage: numperpage,

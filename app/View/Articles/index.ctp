@@ -41,14 +41,14 @@
 				echo $this->element('selection_text', array(
 					'selection_id' => 'title_text'
 					, 'id' => 'title_text'
-					, 'selection_name' => 'Article Title'
+					, 'selection_name' => 'Search Title'
 					, 'name' => 'data[ArticleSearch][title_text]'
 				));
 				
 				echo $this->element('selection_text', array(
 					'selection_id' => 'search_text'
 					, 'id' => 'search_text'
-					, 'selection_name' => 'Article Body'
+					, 'selection_name' => 'Search Body'
 					, 'name' => 'data[ArticleSearch][text_search]'
 				));
 			?>
