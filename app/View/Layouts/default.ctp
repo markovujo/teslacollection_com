@@ -58,7 +58,7 @@ $siteDescription = '"The Tesla Collection" - the most comprehensive compilation 
 			</div>
 			<div style="float: left; height: 200px;">
 				<div id="navigation_description">
-					<?php echo $this->Html->image('the_tesla_collection.jpg', array('id' => 'collection_text'))?>
+					<a href="<?php echo Configure::read('Server.uri');?>/" style="border: 0"><?php echo $this->Html->image('the_tesla_collection.jpg', array('id' => 'collection_text'))?></a>
 				</div>
 				<div id="navigation_links">
 					<ul>
