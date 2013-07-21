@@ -94,6 +94,11 @@ class PagesController extends AppController {
 		
 	}
 	
+	public function contact()
+	{
+		
+	}
+	
 	protected function _getImages()
 	{
 		$images = array();

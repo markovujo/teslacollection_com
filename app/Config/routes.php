@@ -39,6 +39,8 @@
 	
 	Router::connect('/directors', array('controller' => 'pages', 'action' => 'directors', 'directors'));
 	
+	Router::connect('/contact', array('controller' => 'pages', 'action' => 'contact', 'contact'));
+	
 	//Router::connect('/admin/articles/getAll', array('controller' => 'articles', 'action' => 'getAll'));
 	//Router::connect('/admin/pubications/getAll', array('controller' => 'publications', 'action' => 'getAll'));
 	//Router::connect('/admin/authors/getAll', array('controller' => 'authors', 'action' => 'getAll'));
