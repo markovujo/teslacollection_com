@@ -16,7 +16,7 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-$siteDescription = '"The Tesla Collection" - the most comprehensive compilation of newspaper and periodical material ever assembled by or about Nikola Tesla';
+$siteDescription = "'The Tesla Collection' - the most comprehensive compilation of newspaper and periodical material ever assembled by or about Nikola Tesla";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -26,6 +26,7 @@ $siteDescription = '"The Tesla Collection" - the most comprehensive compilation 
 		<?php echo $siteDescription ?>:
 		<?php echo $title_for_layout; ?>
 	</title>
+	<meta name="description" content="<?php echo $siteDescription; ?>">
 	<?php
 		echo $this->Html->meta('icon');
 		
