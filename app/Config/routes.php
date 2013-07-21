@@ -41,11 +41,6 @@
 	
 	Router::connect('/contact', array('controller' => 'pages', 'action' => 'contact', 'contact'));
 	
-	//Router::connect('/admin/articles/getAll', array('controller' => 'articles', 'action' => 'getAll'));
-	//Router::connect('/admin/pubications/getAll', array('controller' => 'publications', 'action' => 'getAll'));
-	//Router::connect('/admin/authors/getAll', array('controller' => 'authors', 'action' => 'getAll'));
-	
-	//Router::connect('/article_pages/view/:id', array('controller' => 'article_pages', 'action' => 'view'), array('id' => '[0-9]+'));
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 
 /**

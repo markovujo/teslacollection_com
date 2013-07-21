@@ -1,0 +1,10 @@
+#galleria { 
+	width: 700px; 
+	height: 400px; 
+	background: #000;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	display: block;
+}

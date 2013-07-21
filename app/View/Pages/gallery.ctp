@@ -1,15 +1,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
 <script src="js/galleria/galleria-1.2.9.min.js"></script>
 
-<style>
-    #galleria { 
-    	width: 700px; 
-    	height: 400px; 
-    	background: #000 
-   	}
-</style>
-
 <div id="galleria"></div>
+
 <script>
 var data = [
     {
