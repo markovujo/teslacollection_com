@@ -92,6 +92,8 @@ $(function() {
 
                $("#search_results").append(html_rows); 
                $('#articles_search_results').show();
+               $('html,body').animate({scrollTop: $('#article_result_count').offset().top});
+               
                $("#search_results").trigger("update");
                $("#search_results").trigger("applyWidgets");
                
