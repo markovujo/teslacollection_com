@@ -9,13 +9,30 @@
    	}
 </style>
 
-<div id="galleria">
-    <?php foreach($images AS $image) : ?>
-    	<img src="/images/gallery/<?php echo $image['filename']; ?>" data-title="" data-description="">
-    <?php endforeach; ?>
-</div>
-
+<div id="galleria"></div>
 <script>
-	Galleria.loadTheme('js/galleria/themes/classic/galleria.classic.min.js');
-    Galleria.run('#galleria');
+var data = [
+    {
+        thumb: 'thumb.jpg',
+        image: 'image.jpg',
+        big: 'big.jpg',
+        title: 'My title',
+        description: 'My description',
+        link: 'http://my.destination.com',
+        layer: '<div><h2>This image is gr8</h2><p>And this text will be on top of the image</p>'
+    },
+    {
+        video: 'http://www.youtube.com/watch?v=GCZrz8siv4Q',
+        title: 'My second title',
+        description: 'My second description'
+    },
+    {
+        thumb: 'thumb.jpg',
+        iframe: 'http://aino.com',
+        title: 'My third title'
+    }
+];
+Galleria.run('#galleria', {
+    dataSource: data
+});
 </script>

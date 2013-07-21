@@ -1,66 +1,86 @@
-body{
-margin:0;
-padding:0;
-line-height: 1.5em;
-}
-
-b{font-size: 110%;}
-em{color: red;}
-
-#topsection{
-background: #EAEAEA;
-height: 90px; /*Height of top section*/
-}
-
-#topsection h1{
-margin: 0;
-padding-top: 15px;
-}
-
-#contentwrapper{
-float: left; 
-width: 100%;
-}
-
 #container {
   width: 1100px;
   margin-left: auto;
   margin-right: auto;
 }
 
-#contentcolumn{
-margin: 0 15% 0 20%; /*Margins for content column. Should be "0 RightColumnWidth 0 LeftColumnWidth*/
+#header {
+	width: 80%;
+    position: relative;
+    margin-left: auto;
+  	margin-right: auto;
 }
 
-#leftcolumn{
-float: left;
-width: 20%; /*Width of left column in percentage*/
-margin-left: -100%;
-background: #C8FC98;
+#logo {
+	float: left;
+	display: block;
 }
 
-#rightcolumn{
-float: left;
-width: 15%; /*Width of right column in pixels*/
-margin-left: -15%; /*Set margin to that of -(RightColumnWidth)*/
-background: #FDE95E;
+#navigation {
+	float: left;
+	position: relative;	
 }
 
-#footer{
-clear: left;
-width: 1000px;
-background: #E6EEEE;
-text-align: center;
-padding: 4px 0;
+#navigation_description {
+	height: 175px;
 }
 
-#footer a{
-color: #FFFF80;
+#collection_text {
+	padding: 45px 60px;
+	display: block;
+	width: 500px;
 }
 
-.innertube{
-margin: 10px; /*Margins for inner DIV inside each column (to provide padding)*/
-margin-top: 0;
+.collection_desc {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width: 70%;	
 }
 
-.ui-widget { font-size: .8em; }
+.collection_desc p {
+	width: 325px;
+	padding: 20px 20px 0px 20px;
+	float: left;
+	font-size: 16.5px;
+	text-align:justify;
+}
+
+#navigation_links {
+	padding: 0px 50px 0px 0px;
+	float: left;
+	margin-left: auto;
+	margin-right: auto; 
+	display:block;
+	height: 25px;
+}
+
+#navigation_links ul
+{
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+}
+#navigation_links ul li
+{
+	float:left;
+}
+
+#navigation_links ul a:link,a:visited
+{
+	display:block;
+	width: 125px;
+	font-weight:bold;
+	color: #FFFFFF;
+	text-align:center;
+	padding:4px;
+	text-decoration:none;
+	text-transform:uppercase;
+	background-color:#9e9e9e;
+}
+
+#navigation_links ul a:hover, a:active
+{
+	color:#000000;
+}

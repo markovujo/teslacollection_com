@@ -51,12 +51,27 @@ $siteDescription = '"The Tesla Collection" - the most comprehensive compilation 
 <body>
 	<div id="container">
 		<div id="header">
-			
+			<div style="float: left; height: 200px">
+				<?php echo $this->Html->image('tesla.jpg', array('height' => '200px'))?>
+			</div>
+			<div style="float: left; height: 200px;">
+				<div id="navigation_description">
+					<?php echo $this->Html->image('the_tesla_collection.jpg', array('id' => 'collection_text'))?>
+				</div>
+				<div id="navigation_links" style="text-align: center">
+					<ul>
+						<li><a href="#home">Home</a></li>
+						<li><a href="#news">About</a></li>
+						<li><a href="#news">Images</a></li>
+						<li><a href="#contact">Biography</a></li>
+						<li><a href="#about">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+			<div style="clear: both"></div>
 		</div>
 		<div id="content">
-
 			<?php echo $this->Session->flash(); ?>
-
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer" style="width: 1000px">
