@@ -78,7 +78,7 @@
 		<col style="width: 100px;">
 		<col style="width: 100px;">
 		<col style="width: 50px;">
-		<col style="width: 200px;">
+		<col style="width: 215px;">
   		<thead>
 			<tr>
 				<th>Full Article</th>
