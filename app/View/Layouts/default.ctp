@@ -62,7 +62,7 @@ $siteDescription = '"The Tesla Collection" - the most comprehensive compilation 
 				</div>
 				<div id="navigation_links" style="text-align: center">
 					<ul>
-						<li><a href="/">Home</a></li>
+						<li><a href="/">Articles</a></li>
 						<li><a href="/about">About</a></li>
 						<li><a href="/images">Images</a></li>
 						<li><a href="/directors">Directors</a></li>
