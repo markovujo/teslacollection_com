@@ -23,5 +23,9 @@ class ImagesController extends AppController {
 		
 	}
 
+	public function search()
+	{
+		
+	}
 }
   
