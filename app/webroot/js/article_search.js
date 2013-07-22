@@ -136,6 +136,7 @@ $(function() {
 		$('#articles_search_results').hide();
 	});
 	
+	/*
 	$("#tutorial-modal").dialog({
       width: 1000,
       height: 647,
@@ -148,7 +149,8 @@ $(function() {
 	});
 	
     $('#slides').slidesjs({
-        width: 1000,
+        width: 850,
         height: 647
     });
+    */
 });

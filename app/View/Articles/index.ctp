@@ -5,22 +5,25 @@
 		<br style="clear:both" />
 	</div>
 	
+	<!-- 
 	<style>
 		.ui-widget-overlay { opacity: 1.0; filter:Alpha(Opacity=100); }
 	</style>
 	<div style="text-align: center"><a href="#" id="search_tutorial">Search Tutorial</a></div>
-	
-	<div id="tutorial-modal" title="Search Tutorial">
-		<div id="slides">
-	  		<?php echo $this->Html->image('tutorial/slideshow_1.jpg', array('width' => '850px')); ?>
-	  		<?php echo $this->Html->image('tutorial/slideshow_2.jpg', array('width' => '850px')); ?>
-	  		<?php echo $this->Html->image('tutorial/slideshow_3.jpg', array('width' => '850px')); ?>
-	  		<?php echo $this->Html->image('tutorial/slideshow_4.jpg', array('width' => '850px')); ?>
-	  		<?php echo $this->Html->image('tutorial/slideshow_5.jpg', array('width' => '850px')); ?>
-	  		<?php echo $this->Html->image('tutorial/slideshow_6.jpg', array('width' => '850px')); ?>
-	  		<?php echo $this->Html->image('tutorial/slideshow_7.jpg', array('width' => '850px')); ?>
-	  	</div>
+	<div id="tutorial-modal">
+		<div class="container" title="Search Tutorial">
+			<div id="slides">
+		  		<?php echo $this->Html->image('tutorial/slideshow_1.jpg', array('width' => '750px')); ?>
+		  		<?php echo $this->Html->image('tutorial/slideshow_2.jpg', array('width' => '750px')); ?>
+		  		<?php echo $this->Html->image('tutorial/slideshow_3.jpg', array('width' => '750px')); ?>
+		  		<?php echo $this->Html->image('tutorial/slideshow_4.jpg', array('width' => '750px')); ?>
+		  		<?php echo $this->Html->image('tutorial/slideshow_5.jpg', array('width' => '750px')); ?>
+		  		<?php echo $this->Html->image('tutorial/slideshow_6.jpg', array('width' => '750px')); ?>
+		  		<?php echo $this->Html->image('tutorial/slideshow_7.jpg', array('width' => '750px')); ?>
+		  	</div>
+		</div>
 	</div>
+	-->
 
 	<div id="selection_form">
 		<?php echo $this->Form->create('ArticleSearch', array('id' => 'article_search_form')); ?>
