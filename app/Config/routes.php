@@ -40,6 +40,8 @@
 	Router::connect('/contact', array('controller' => 'pages', 'action' => 'contact', 'contact'));
 	
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
+	
+	Router::connect('/articles/*', array('controller' => 'articles', 'action' => 'viewBySlug'));
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on

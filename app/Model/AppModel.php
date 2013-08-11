@@ -103,4 +103,58 @@ class AppModel extends Model {
         
 		return false;
 	}
+	
+	function beforeSave() 
+    { 
+        if (empty($this->id)) 
+        { 
+            $this->data[$this->name]['url'] = $this->getUniqueUrl($this->data[$this->name]['title'], 'url'); 
+        } 
+         
+        return true; 
+    }
+	
+	function getUniqueUrl($string, $field) 
+    { 
+        // Build URL
+        //$currentUrl = $this->_getStringAsURL($string);
+        $currentUrl = Inflector::slug(strtolower($string)); 
+         
+        // Look for same URL, if so try until we find a unique one 
+         
+        $conditions = array($this->name . '.' . $field => 'LIKE ' . $currentUrl . '%'); 
+         
+        $result = $this->findAll($conditions, $this->name . '.*', null); 
+         
+        if ($result !== false && count($result) > 0) 
+        { 
+            $sameUrls = array(); 
+             
+            foreach($result as $record) 
+            { 
+                $sameUrls[] = $record[$this->name][$field]; 
+            } 
+        } 
+     
+        if (isset($sameUrls) && count($sameUrls) > 0) 
+        { 
+            $currentBegginingUrl = $currentUrl; 
+     
+            $currentIndex = 1; 
+     
+            while($currentIndex > 0) 
+            { 
+                if (!in_array($currentBegginingUrl . '_' . $currentIndex, $sameUrls)) 
+                { 
+                    $currentUrl = $currentBegginingUrl . '_' . $currentIndex; 
+     
+                    $currentIndex = -1; 
+                } 
+     
+                $currentIndex++; 
+            } 
+        } 
+         
+        return $currentUrl; 
+    }
 }
