@@ -104,13 +104,19 @@ class AppModel extends Model {
 		return false;
 	}
 	
-	function beforeSave() 
+	function beforeSave($options = array()) 
     { 
-        if (empty($this->id)) 
-        { 
-            $this->data[$this->name]['url'] = $this->getUniqueUrl($this->data[$this->name]['title'], 'url'); 
-        } 
-         
+    	if(!empty($this->id)) {
+        	if($this->hasField('url')) {
+        		if(isset($this->data[$this->name]['name'])) {
+        			$this->data[$this->name]['url'] = $this->getUniqueUrl($this->data[$this->name]['name'], 'name');
+        		} else if(isset($this->data[$this->name]['title'])) {
+        			$this->data[$this->name]['url'] = $this->getUniqueUrl($this->data[$this->name]['title'], 'title');
+        		}
+        	}
+        }
+        
+        //die(debug($this->data));
         return true; 
     }
 	
@@ -124,7 +130,11 @@ class AppModel extends Model {
          
         $conditions = array($this->name . '.' . $field => 'LIKE ' . $currentUrl . '%'); 
          
-        $result = $this->findAll($conditions, $this->name . '.*', null); 
+        //$result = $this->findAll($conditions, $this->name . '.*', null); 
+        $result = $this->find('all', array(
+        	'conditions' => $conditions,
+        	'contain' => false
+        )); 
          
         if ($result !== false && count($result) > 0) 
         { 

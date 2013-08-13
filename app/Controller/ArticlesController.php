@@ -193,6 +193,11 @@ class ArticlesController extends AppController {
 		}
 	}
 	
+	public function viewAll($articles)
+	{
+		$this->set('articles', $articles);
+	}
+	
 	function viewByUrl($url) 
 	{ 
 	    $post = $this->findByUrl($url); 
@@ -202,39 +207,62 @@ class ArticlesController extends AppController {
 	
 	/**
 	 * Slug format
-	 * year/publication/author/article
+	 * 		articles/year/publication/author/article_slug
 	 * @throws NotFoundException
 	 */
 	public function viewBySlug()
-	{
-		// Get n parameters from url (1)
+	{	
 		$args = func_get_args();
 		$last_arg = $args[count($args) - 1];
 		
-		// Check if this is an article (2)
 		$article = $this->Article->find('first', array(
-			'conditions' => array('Article.slug' => $last_arg
-		));
+			'conditions' => array('Article.url' => $last_arg
+		)));
 		
 		if (!empty($article)) {
 			$this->set('article', $article);
 			$this->render('view');
+		} else {
+			$articles = array();
+			
+			$author = $this->Author->find('first', array(
+				'conditions' => array('Author.url' => $last_arg),
+				'contain' => false
+			));
+			
+			if (!empty($author)) {
+	      		$articles = $this->Article->search($conditions = array('author_id' => array($author['Author']['id'])));
+	    	} else {
+	    		$publication = $this->Publication->find('first', array(
+					'conditions' => array('Publication.url' => $last_arg),
+					'contain' => false
+				));
+				
+				if (!empty($publication)) {
+					$articles = $this->Article->search($conditions = array('publication_id' => array($publication['Publication']['id'])));
+				} else {
+					if(is_numeric($last_arg) && $last_arg > 0 && $last_arg < 9999) {
+						$year = (int) $last_arg;
+						$articles = $this->Article->search($conditions = array('year_id' => array($year)));
+					}
+				}
+	    	}
+	    	
+	    	if(empty($articles)) {
+	    		$this->redirect('/');
+	    	} else {
+	    		$this->set('criteria', $articles['criteria']);
+	    		$this->set('articles', $articles['articles']);
+	    	}
 		}
-		
-		// Check if this is an author (2)
-		$category = $this->Category->find('first', array(
-			'conditions' => array('Category.slug' => $last_arg
-		));
-		
-		if (!empty($category)) {
-      		$this->set('category', $category);
-      		$this->render('category');
-    	}
-
-    	// Page not found
-    	if (empty($article) and empty($category)) {
-			throw new NotFoundException();
-    	}
+	}
+	
+	function sitemap()
+	{
+	    $articles = $this->Article->find('all');
+	
+	    $this->set(compact('articles'));
+	    $this->RequestHandler->respondAs('xml');
 	}
 }
   

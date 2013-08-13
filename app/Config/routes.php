@@ -41,7 +41,10 @@
 	
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	
-	Router::connect('/articles/*', array('controller' => 'articles', 'action' => 'viewBySlug'));
+	Router::connect('/tesla_articles/*', array('controller' => 'articles', 'action' => 'viewBySlug'));
+	
+	Router::parseExtensions('xml');
+	Router::connect('/sitemap', array('controller' => 'articles', 'action' => 'sitemap', 'ext' => 'xml'));
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on

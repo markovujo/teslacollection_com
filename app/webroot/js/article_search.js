@@ -78,7 +78,8 @@ $(function() {
 				   }
 				   
 				   html_rows += "<tr>" +
-				   		"<td><a href='" + document.URL + "articles/view/" + article['Article']['id'] + "' style='color : #d82323'>" + article['Article']['title'] + "</a></td>" +
+				   		//"<td><a href='" + document.URL + "articles/view/" + article['Article']['id'] + "' style='color : #d82323'>" + article['Article']['title'] + "</a></td>" +
+				        "<td><a href='" + document.URL + article['Article']['full_url'] + "' style='color : #d82323'>" + article['Article']['title'] + "</a></td>" +
 				   		"<td>" + article['Article']['volume'] + "</td>" +
 				   		"<td>" + article['Article']['page'] + "</td>" +
 				   		"<td>" + article['Publication']['name'] + "</td>" +

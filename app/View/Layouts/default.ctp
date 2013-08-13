@@ -36,15 +36,6 @@ $siteDescription = '"The Tesla Collection" - the most comprehensive compilation 
 		echo $this->Html->css('table');
 		echo $this->Html->css('gallery');
 		echo $this->Html->css('tablesorter/style.css');
-		
-		echo $this->Html->script('http://code.jquery.com/jquery-1.8.3.js');
-		echo $this->Html->script('http://code.jquery.com/ui/1.9.2/jquery-ui.js');
-		
-		echo $this->Html->script('tablesorter/jquery.metadata.js');
-		echo $this->Html->script('tablesorter/jquery.tablesorter.min.js');
-		echo $this->Html->script('tablesorter/jquery.tablesorter.pager.js');
-		echo $this->Html->script('Slides-SlidesJS-3/source/jquery.slides.min.js');
-		echo $this->Html->script('article_search.js');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -97,5 +88,16 @@ $siteDescription = '"The Tesla Collection" - the most comprehensive compilation 
 
 	</script>
 	<?php echo $this->element('sql_dump'); ?>
+	
+	<?php 
+		echo $this->Html->script('http://code.jquery.com/jquery-1.8.3.js');
+		echo $this->Html->script('http://code.jquery.com/ui/1.9.2/jquery-ui.js');
+		
+		echo $this->Html->script('tablesorter/jquery.metadata.js');
+		echo $this->Html->script('tablesorter/jquery.tablesorter.min.js');
+		echo $this->Html->script('tablesorter/jquery.tablesorter.pager.js');
+		echo $this->Html->script('Slides-SlidesJS-3/source/jquery.slides.min.js');
+		echo $this->Html->script('article_search.js');
+	?>
 </body>
 </html>

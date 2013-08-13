@@ -24,6 +24,23 @@ class Article extends AppModel
     
     public $actsAs = array('Containable');
     
+    public function afterFind($results, $primary = false)
+    {
+    	if($results) {
+    		foreach($results AS &$result) {
+    			$year = isset($result['Article']['year']) ? $result['Article']['year'] : '';
+    			$publication = isset($result['Publication']['url']) ? $result['Publication']['url'] : '';
+    			$author = isset($result['Author']['url']) ? $result['Author']['url'] : '';
+    			$article_url = isset($result['Article']['url']) ? $result['Article']['url'] : '';
+    			
+    			$result['Article']['full_url'] = "tesla_articles/" . $year . '/' . $publication . '/' . $author . '/' . $article_url;
+    		}
+    	}
+    	
+    	//die(debug($results));
+    	return $results;
+    }
+    
 	public function search($params)
 	{
 		$conditions = array();
@@ -37,13 +54,14 @@ class Article extends AppModel
 			'Article.page',
 			'Article.date',
 			'Article.year',
-			'Article.range_text'
+			'Article.range_text',
+			'Article.url'
 		);
 		
 		$contain = array(
-			'Author' => array('fields' => array('id', 'name')),
-			'Publication' => array('fields' => array('id', 'name')),
-			'Subject' => array('fields' => array('id', 'name')),
+			'Author' => array('fields' => array('id', 'name', 'url')),
+			'Publication' => array('fields' => array('id', 'name', 'url')),
+			'Subject' => array('fields' => array('id', 'name', 'url')),
 			'Page' => array(
 				'fields' => array('id', 'filename', 'ArticlesPage.id')
 			),
