@@ -220,6 +220,7 @@ class ArticlesController extends AppController {
 		)));
 		
 		if (!empty($article)) {
+			$this->set('title_for_layout', $article['Article']['title']);
 			$this->set('article', $article);
 			$this->render('view');
 		} else {

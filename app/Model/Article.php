@@ -41,6 +41,23 @@ class Article extends AppModel
     	return $results;
     }
     
+    /*
+	function beforeSave($options = array()) 
+    { 
+    	parent::beforeSave($options);
+    	
+    	$year = isset($result['Article']['year']) ? $result['Article']['year'] : '';
+    	$publication = isset($result['Publication']['url']) ? $result['Publication']['url'] : '';
+    	$author = isset($result['Author']['url']) ? $result['Author']['url'] : '';
+    	$article_url = isset($result['Article']['url']) ? $result['Article']['url'] : '';
+    			
+    	$result['Article']['full_url'] = $year . '/' . $publication . '/' . $author . '/' . $article_url;
+        
+        //die(debug($this->data));
+        return true; 
+    }
+    */
+    
 	public function search($params)
 	{
 		$conditions = array();
