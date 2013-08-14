@@ -37,6 +37,6 @@
 	<?php endif;?>
 	
 	<div itemprop="articleBody" style="width: 550px;">
-		<?php echo $article_text; ?>
+		<?php echo $full_article_text; ?>
 	</div>
 </div>
