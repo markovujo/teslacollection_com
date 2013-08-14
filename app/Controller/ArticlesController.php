@@ -212,8 +212,10 @@ class ArticlesController extends AppController {
 	 */
 	public function viewBySlug()
 	{	
+		ini_set('memory_limit','512M');
 		$args = func_get_args();
-		$last_arg = $args[count($args) - 1];
+		$args_count = count($args);
+		$last_arg = $args[$args_count - 1];
 		
 		$this->Article->unbindModel(
 	        array('hasAndBelongsToMany' => array('Page'))
@@ -236,37 +238,35 @@ class ArticlesController extends AppController {
 			$this->set('article', $article);
 			$this->render('view');
 		} else {
-			$articles = array();
-			
-			$author = $this->Author->find('first', array(
-				'conditions' => array('Author.url' => $last_arg),
-				'contain' => false
-			));
-			
-			if (!empty($author)) {
-	      		$articles = $this->Article->search($conditions = array('author_id' => array($author['Author']['id'])));
-	    	} else {
-	    		$publication = $this->Publication->find('first', array(
-					'conditions' => array('Publication.url' => $last_arg),
-					'contain' => false
-				));
+			//die(debug($args));
+			if($args_count > 1) {
+				$conditions = array();
 				
-				if (!empty($publication)) {
-					$articles = $this->Article->search($conditions = array('publication_id' => array($publication['Publication']['id'])));
-				} else {
-					if(is_numeric($last_arg) && $last_arg > 0 && $last_arg < 9999) {
-						$year = (int) $last_arg;
-						$articles = $this->Article->search($conditions = array('year_id' => array($year)));
-					}
+				if(isset($args[0])) {
+					$conditions['year_id'] = array((int) $args[0]);
 				}
-	    	}
-	    	
-	    	if(empty($articles)) {
-	    		$this->redirect('/');
-	    	} else {
-	    		$this->set('criteria', $articles['criteria']);
-	    		$this->set('articles', $articles['articles']);
-	    	}
+				
+				if(isset($args[1])) {
+					$conditions['publication_url'] = array($args[1]);
+				}
+				
+				if(isset($args[2])) {
+					$conditions['author_url'] = array($args[2]);
+				}
+		    	
+		    	$articles = $this->Article->search($conditions);
+		    	//die(debug($conditions));
+		    	//die(debug($articles));
+		    	
+		    	if($articles) {
+		    		$this->set('criteria', $articles['criteria']);
+		    		$this->set('articles', $articles['articles']);
+		    	} else {
+		    		$this->redirect('/');
+		    	}
+			} else {
+				$this->redirect('/');
+			}
 		}
 	}
 	

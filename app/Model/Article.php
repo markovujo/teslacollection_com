@@ -101,11 +101,21 @@ class Article extends AppModel
 			}
 		}
 		
+		if(isset($params['author_url']) && !empty($params['author_url'])) {
+			$conditions['Author.url'] = (array) $params['author_url'];
+			$return['criteria']['author_url'] = $params['author_url'];
+		}
+		
 		if(isset($params['publication_id']) && !empty($params['publication_id'])) {
 			if(!in_array('ALL', $params['publication_id'])) {
 				$conditions['Publication.id'] = (array) $params['publication_id'];
 				$return['criteria']['publication'] = $params['publication_id'];
 			}
+		}
+		
+		if(isset($params['publication_url']) && !empty($params['publication_url'])) {
+			$conditions['Publication.url'] = (array) $params['publication_url'];
+			$return['criteria']['publication_url'] = $params['publication_url'];
 		}
 		
 		if(isset($params['subject_id']) && !empty($params['subject_id'])) {
