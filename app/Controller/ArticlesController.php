@@ -215,9 +215,20 @@ class ArticlesController extends AppController {
 		$args = func_get_args();
 		$last_arg = $args[count($args) - 1];
 		
+		$this->Article->unbindModel(
+	        array('hasAndBelongsToMany' => array('Page'))
+	    );
+	    
+	    $this->Article->bindModel(
+	        array('hasAndBelongsToMany' => array(
+	                'Page'
+	            )
+	        )
+	    );
+		
 		$article = $this->Article->find('first', array(
-			'conditions' => array('Article.url' => $last_arg
-		)));
+			'conditions' => array('Article.url' => $last_arg),
+		));
 		
 		if (!empty($article)) {
 			$this->set('title_for_layout', $article['Article']['title']);
