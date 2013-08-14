@@ -55,7 +55,7 @@
 </div>
 
 <script type="text/javascript">
-	$(function() {
-		$('#articles_search_results').show();
-	}
+	//$(function() {
+		//$('#articles_search_results').show();
+	//});
 </script>
