@@ -87,7 +87,6 @@ $siteDescription = '"The Tesla Collection" - the most comprehensive compilation 
 	  })();
 
 	</script>
-	<?php echo $this->element('sql_dump'); ?>
 	
 	<?php 
 		echo $this->Html->script('http://code.jquery.com/jquery-1.8.3.js');
@@ -99,5 +98,7 @@ $siteDescription = '"The Tesla Collection" - the most comprehensive compilation 
 		echo $this->Html->script('Slides-SlidesJS-3/source/jquery.slides.min.js');
 		echo $this->Html->script('article_search.js?timestamp=' . Configure::read('Server.deploy_hash'));
 	?>
+	
+	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>
