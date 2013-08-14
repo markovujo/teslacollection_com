@@ -20,7 +20,7 @@
 		</table>
 	</div>
 	<?php 
-	$article_text = '';
+	$full_article_text = '';
 	$i = 1;
 	if(isset($article['Page']) && !empty($article['Page'])): ?>
 		<?php foreach($article['Page'] AS $page) :?>
@@ -29,7 +29,8 @@
 				<img src="<?php echo Configure::read('Server.uri');?>/article_pages/view/<?php echo $page['id']?>" alt="<?php echo $article['Article']['title'] . '_' . $i; ?>" <?php echo $itemprop; ?> />
 			</div>
 			<?php 
-				$article_text = $article_text . ' <p>' . $page['text'] . '</p>';
+				$article_text = isset($page['text']) ? $page['text'] : '';
+				$full_article_text .= ' <p>' . $article_text  . '</p>'; 
 				$i++;
 			?>
 		<?php endforeach;?>

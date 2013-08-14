@@ -97,7 +97,7 @@ $siteDescription = '"The Tesla Collection" - the most comprehensive compilation 
 		echo $this->Html->script('tablesorter/jquery.tablesorter.min.js');
 		echo $this->Html->script('tablesorter/jquery.tablesorter.pager.js');
 		echo $this->Html->script('Slides-SlidesJS-3/source/jquery.slides.min.js');
-		echo $this->Html->script('article_search.js');
+		echo $this->Html->script('article_search.js?timestamp=' . Configure::read('Server.deploy_hash'));
 	?>
 </body>
 </html>
