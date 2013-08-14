@@ -231,7 +231,8 @@ class ArticlesController extends AppController {
 		));
 		
 		if (!empty($article)) {
-			$this->set('title_for_layout', $article['Article']['title']);
+			$title = '"' . $article['Article']['title'] . '" - ' . date('F j, Y', strtotime($article['Article']['date']));
+			$this->set('title_for_layout', $title);
 			$this->set('article', $article);
 			$this->render('view');
 		} else {
