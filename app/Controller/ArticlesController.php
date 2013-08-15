@@ -241,7 +241,7 @@ class ArticlesController extends AppController {
 			$this->render('view');
 		} else {
 			//die(debug($args));
-			if($args_count > 1) {
+			if($args_count >= 1) {
 				$conditions = array();
 				
 				if(isset($args[0])) {
