@@ -3,6 +3,10 @@ $(function() {
 		widgets: ['zebra']
 	});
 	
+	$('#article_results').tablesorter({
+		widgets: ['zebra']
+	});
+	
 	$('#articles_search_results').hide();
 	$('#article_result_ajax').hide();
 	

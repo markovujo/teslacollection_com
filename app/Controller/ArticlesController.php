@@ -31,6 +31,8 @@ class ArticlesController extends AppController {
 
 	public function index()
 	{
+		$this->set('title_for_layout', 'the most comprehensive compilation of newspaper and periodical material ever assembled by or about Nikola Tesla');
+		
 		$selections = array(
 			'author' => array()
 			, 'publication' => array()
@@ -233,7 +235,7 @@ class ArticlesController extends AppController {
 		));
 		
 		if (!empty($article)) {
-			$title = '"' . $article['Article']['title'] . '" - ' . date('F j, Y', strtotime($article['Article']['date']));
+			$title = '"' . $article['Article']['title'] . '". ' . $article['Publication']['name'] . ', ' . date('F j, Y', strtotime($article['Article']['date']) . '.');
 			$this->set('title_for_layout', $title);
 			$this->set('article', $article);
 			$this->render('view');

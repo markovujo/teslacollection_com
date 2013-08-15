@@ -80,10 +80,12 @@ class PagesController extends AppController {
 	}
 	
 	public function about() {
-		
+		$this->set('title_for_layout', 'About');
 	}
 	
 	public function gallery() {
+		$this->set('title_for_layout', 'Image Gallery');
+		
 		$images = $this->_getImages();
 		
 		$this->set('images', $images);
@@ -91,12 +93,12 @@ class PagesController extends AppController {
 	
 	public function directors()
 	{
-		
+		$this->set('title_for_layout', 'Directors');
 	}
 	
 	public function contact()
 	{
-		
+		$this->set('title_for_layout', 'Contact');
 	}
 	
 	protected function _getImages()

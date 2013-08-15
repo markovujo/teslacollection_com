@@ -1,11 +1,11 @@
 <?php //die(debug($articles)); ?>
 
-<div id="articles_search_results">
+<div id="article_results_container">
 	<div id="articles_search_criteria" style="text-align: center">
-		<p><strong><span id="article_result_count"></span></strong> Article(s) found.</p>
+		<p><strong><span id="article_result_count"><?php echo count($articles); ?></span></strong> Article(s) found.</p>
 	</div>
 
-	<table id="search_results" class="tablesorter" width="1250">
+	<table id="article_results" class="tablesorter" width="1250">
 		<col style="width: 450px;">
 		<col style="width: 50px;">
 		<col style="width: 50px;">
