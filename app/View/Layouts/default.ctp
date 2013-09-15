@@ -32,7 +32,7 @@ $siteDescription = '"The Tesla Collection"';
 		
 
 		echo $this->Html->css('http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css');
-		echo $this->Html->css('layout');
+		echo $this->Html->css('layout.css?timestamp=' . Configure::read('Server.deploy_timestamp'));
 		echo $this->Html->css('table');
 		echo $this->Html->css('gallery');
 		echo $this->Html->css('tablesorter/style.css');
@@ -97,7 +97,7 @@ $siteDescription = '"The Tesla Collection"';
 		echo $this->Html->script('tablesorter/jquery.tablesorter.min.js');
 		echo $this->Html->script('tablesorter/jquery.tablesorter.pager.js');
 		echo $this->Html->script('Slides-SlidesJS-3/source/jquery.slides.min.js');
-		echo $this->Html->script('article_search.js?timestamp=' . Configure::read('Server.deploy_hash'));
+		echo $this->Html->script('article_search.js?timestamp=' . Configure::read('Server.deploy_timestamp'));
 	?>
 	
 	<?php echo $this->element('sql_dump'); ?>
