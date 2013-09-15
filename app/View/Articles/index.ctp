@@ -5,6 +5,10 @@
 		<br style="clear:both" />
 	</div>
 	
+	<div id="citation_description">
+		<p>When citing from this web site the following citation format should be used:<br/> <em>Rudinska, Iwona. Editor "The Tesla Collection." Original Article Author, "Article Title." Publication Publication Date: Page(s). (http://www.teslacollection.com)</em></p>
+	</div>
+	
 	<!-- 
 	<style>
 		.ui-widget-overlay { opacity: 1.0; filter:Alpha(Opacity=100); }

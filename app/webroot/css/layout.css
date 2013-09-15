@@ -129,3 +129,19 @@
 	width: 550px;
 	text-align: center; 
 }
+
+#citation_description {
+	width: 650px;
+	text-align: center;
+	margin: 0px auto;
+}
+
+#iwona_director_image {
+	text-align: center; 
+	width: 550px; 
+	margin: 10px auto;
+}
+
+#iwona_director_image_description {
+	float: right;
+}

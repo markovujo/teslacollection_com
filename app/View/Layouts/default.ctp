@@ -70,7 +70,8 @@ $siteDescription = '"The Tesla Collection"';
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer" style="width: 1000px">
-			&copy; <?php echo date('Y'); ?> - "The Tesla Collection"
+			&copy; <?php echo date('Y'); ?> - "The Tesla Collection".  
+			<!-- <p>When citing from this web site the following citation format should be used:<br/> <em>Rudinska, Iwona. Editor "The Tesla Collection." Original Article Author, "Article Title." Publication Publication Date: Page(s). (http://www.teslacollection.com)</em></p> -->
 		</div>
 	</div>
 	<script type="text/javascript">
