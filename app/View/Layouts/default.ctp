@@ -90,14 +90,18 @@ $siteDescription = '"The Tesla Collection"';
 	</script>
 	
 	<?php 
-		echo $this->Html->script('http://code.jquery.com/jquery-1.8.3.js');
-		echo $this->Html->script('http://code.jquery.com/ui/1.9.2/jquery-ui.js');
+		if(isset($layout_no_script) && $layout_no_script == true) {
+
+		} else {
+			echo $this->Html->script('http://code.jquery.com/jquery-1.8.3.js');
+			echo $this->Html->script('http://code.jquery.com/ui/1.9.2/jquery-ui.js');
 		
-		echo $this->Html->script('tablesorter/jquery.metadata.js');
-		echo $this->Html->script('tablesorter/jquery.tablesorter.min.js');
-		echo $this->Html->script('tablesorter/jquery.tablesorter.pager.js');
-		echo $this->Html->script('Slides-SlidesJS-3/source/jquery.slides.min.js');
-		echo $this->Html->script('article_search.js?timestamp=' . Configure::read('Server.deploy_timestamp'));
+			echo $this->Html->script('tablesorter/jquery.metadata.js');
+			echo $this->Html->script('tablesorter/jquery.tablesorter.min.js');
+			echo $this->Html->script('tablesorter/jquery.tablesorter.pager.js');
+			echo $this->Html->script('Slides-SlidesJS-3/source/jquery.slides.min.js');
+			echo $this->Html->script('article_search.js?timestamp=' . Configure::read('Server.deploy_timestamp'));
+		}
 	?>
 	
 	<?php echo $this->element('sql_dump'); ?>
