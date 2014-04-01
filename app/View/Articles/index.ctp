@@ -28,11 +28,13 @@
 		</div>
 	</div>
 	-->
+	
+	<div id="article_search_header"><h4>Article Search</h4></div>
 
 	<div id="selection_form">
 		<?php echo $this->Form->create('ArticleSearch', array('id' => 'article_search_form')); ?>
 		
-		<div id="" style="margin: 50px 0px">
+		<div id="" style="margin: 25px 0px">
 			<?php 
 				echo $this->element('selection', array(
 			   		'selection_id' => 'publication_id'
