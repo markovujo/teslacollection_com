@@ -1,5 +1,13 @@
-      <img src="/img/tesla.jpg" height="200px" alt="">
-      <img src="/img/the_tesla_collection.jpg" id="collection_text" alt="">
+      <div class="row featurette">
+        <div class="col-md-3">
+          <img class="featurette-image img-responsive" src="/img/tesla.jpg" height="200px" alt="">
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" src="/img/the_tesla_collection.jpg" alt="The Tesla Collection">  
+        </div>
+      </div>
+      
+      
       
       <hr class="featurette-divider">
       
@@ -11,33 +19,41 @@
           <p class="lead">Seen together "The Tesla Collection" not only sheds new light on the early days of electricity, and the development and widespread acceptance by the public and scientific community of Alternating Current, but also provides a one-of-a-kind look into the early days of X-Ray, Wireless, Remote Control, Robotics and the efforts and experiments made by Tesla into the development and delivery of wireless Electricity.</p>
         </div>
       </div>
+      
+      <div class="row featurette">
+        <div class="col-md-12" style="text-align:center; margin: 15px">
+          <blockquote>When citing from this web site the following citation format should be used:<br/> <em>Rudinska, Iwona. Editor "The Tesla Collection." Original Article Author, "Article Title." Publication Publication Date: Page(s). (http://www.teslacollection.com)</em></blockquote>
+        </div>
+      </div>
 
       <hr class="featurette-divider">
+      
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Article <span class="text-muted">Search.</span></h2>
+        </div>
+      </div>
 
       <!-- Three columns of text below the carousel -->
       <div class="row">
-        <div class="col-lg-3">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+        <div class="col-sm-3">
           <h2>Heading</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
         </div><!-- /.col-lg-4 -->
-        <div class="col-lg-3">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+        <div class="col-sm-3">
           <h2>Heading</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
         </div><!-- /.col-lg-4 -->
-        <div class="col-lg-3">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+        <div class="col-sm-3">
           <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
         </div><!-- /.col-lg-4 -->
-        <div class="col-lg-3">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+        <div class="col-sm-3">
           <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
+      
+      <div class="row">
+      	<p><a class="btn btn-default" href="#" role="button">Search &raquo;</a><a class="btn btn-default" href="#" role="button">Reset &raquo;</a></p>
+      </div>
