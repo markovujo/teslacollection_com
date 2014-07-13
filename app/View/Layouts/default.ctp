@@ -1,109 +1,78 @@
-<?php
-/**
- *
- * PHP 5
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       Cake.View.Layouts
- * @since         CakePHP(tm) v 0.10.0.1076
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- */
 
-//$siteDescription = '"The Tesla Collection" - the most comprehensive compilation of newspaper and periodical material ever assembled by or about Nikola Tesla';
-$siteDescription = '"The Tesla Collection"';
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
 		<?php echo $siteDescription ?> - <?php echo $title_for_layout; ?>
 	</title>
-	<meta name="description" content="<?php echo str_replace('"', '\'', $siteDescription); ?>">
-	<?php
-		echo $this->Html->meta('icon');
-		
+	<meta name="description" content="<?php //echo str_replace('"', '\'', $siteDescription); ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+    <?php echo $this->Html->meta('icon'); ?>
 
-		echo $this->Html->css('http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css');
-		echo $this->Html->css('layout.css?timestamp=' . Configure::read('Server.deploy_timestamp'));
-		echo $this->Html->css('table');
-		echo $this->Html->css('gallery');
-		echo $this->Html->css('tablesorter/style.css');
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.teslacollection.css" rel="stylesheet">
 
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-	?>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-</head>
-<body>
-	<div id="container">
-		<div id="header">
-			<div style="float: left; height: 200px">
-				<?php echo $this->Html->image('tesla.jpg', array('height' => '200px'))?>
-			</div>
-			<div style="float: left; height: 200px;">
-				<div id="navigation_description">
-					<a href="<?php echo Configure::read('Server.uri');?>/" style="border: 0"><?php echo $this->Html->image('the_tesla_collection.jpg', array('id' => 'collection_text'))?></a>
-				</div>
-				<div id="navigation_links">
-					<ul>
-						<li><a href="<?php echo Configure::read('Server.uri');?>/">Articles</a></li>
-						<li><a href="<?php echo Configure::read('Server.uri');?>/images">Images</a></li>
-						<li><a href="<?php echo Configure::read('Server.uri');?>/directors">Directors</a></li>
-						<li><a href="<?php echo Configure::read('Server.uri');?>/about">About</a></li>
-						<li><a href="<?php echo Configure::read('Server.uri');?>/contact">Contact</a></li>
-					</ul>
-				</div>
-			</div>
-			<div style="clear: both"></div>
-		</div>
-		<div id="content">
-			<?php echo $this->Session->flash(); ?>
-			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer" style="width: 1000px">
-			&copy; <?php echo date('Y'); ?> - "The Tesla Collection".  
-			<!-- <p>When citing from this web site the following citation format should be used:<br/> <em>Rudinska, Iwona. Editor "The Tesla Collection." Original Article Author, "Article Title." Publication Publication Date: Page(s). (http://www.teslacollection.com)</em></p> -->
-		</div>
-	</div>
-	<script type="text/javascript">
+    <?php echo $this->Html->css('carousel'); ?>
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+  
+      <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+	      <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <img class="featurette-image img-responsive" style="height: 35px; width: auto; margin: 6px;" src="/img/the_tesla_collection.jpg" alt="The Tesla Collection"> 
+	        </div>
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav">
+	            <li class="active"><a href="<?php echo Configure::read('Server.uri');?>/">Articles</a></li>
+				<li><a href="<?php echo Configure::read('Server.uri');?>/images">Images</a></li>
+				<li><a href="<?php echo Configure::read('Server.uri');?>/directors">Directors</a></li>
+				<li><a href="<?php echo Configure::read('Server.uri');?>/about">About</a></li>
+				<li><a href="<?php echo Configure::read('Server.uri');?>/contact">Contact</a></li>
+	          </ul>
+	          <form class="navbar-form navbar-right">
+	            <input type="text" class="form-control" placeholder="Search by text ...">
+	          </form>
+	        <!--/.navbar-collapse -->
+	      </div>
+      </div>
+    </div>
 
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-37434445-1']);
-	  _gaq.push(['_setDomainName', 'teslacollection.com']);
-	  _gaq.push(['_trackPageview']);
+    <div class="container">
+      <?php echo $this->Session->flash(); ?>
+	  <?php echo $this->fetch('content'); ?>
 
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; <?php echo date('Y'); ?> - "The Tesla Collection".  &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
 
-	</script>
-	
-	<?php 
-		if(isset($layout_no_script) && $layout_no_script == true) {
+    </div><!-- /.container -->
 
-		} else {
-			echo $this->Html->script('http://code.jquery.com/jquery-1.8.3.js');
-			echo $this->Html->script('http://code.jquery.com/ui/1.9.2/jquery-ui.js');
-		
-			echo $this->Html->script('tablesorter/jquery.metadata.js');
-			echo $this->Html->script('tablesorter/jquery.tablesorter.min.js');
-			echo $this->Html->script('tablesorter/jquery.tablesorter.pager.js');
-			echo $this->Html->script('Slides-SlidesJS-3/source/jquery.slides.min.js');
-			echo $this->Html->script('article_search.js?timestamp=' . Configure::read('Server.deploy_timestamp'));
-		}
-	?>
-	
-	<?php echo $this->element('sql_dump'); ?>
-</body>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>

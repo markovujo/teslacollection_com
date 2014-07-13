@@ -22,15 +22,16 @@ class SearchController extends AppController {
  * $uses
  * @var array
  */
-	public $uses = array();
-
+	public $uses = array(
+		'Article',
+		'Author',
+		'Publication',
+		'Subject'
+	);
+	
 	public function index()
 	{
-		$this->layout = 'responsive';
 		
-		$search_results = array();
-		
-		return (json_encode($search_results));
 	}
 	
 	public function term()
