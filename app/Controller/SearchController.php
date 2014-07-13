@@ -23,17 +23,15 @@ class SearchController extends AppController {
  * @var array
  */
 	public $uses = array(
-		'Article',
-		'Author',
-		'Publication',
-		'Subject'
+		'Search'
 	);
 	
 	public function index()
 	{
 		if(isset($this->request->query['q'])) {
 			$query = $this->request->query['q'];
-			debug($query);
+			
+			$this->Search->searchByQuery($query);
 		} else {
 			return $this->redirect(
 					array('controller' => 'articles', 'action' => 'index')
@@ -41,7 +39,7 @@ class SearchController extends AppController {
 		}
 	}
 	
-	public function term()
+	public function autocomplete()
 	{
 		$this->autoRender = false;
 		$this->layout = 'ajax';
