@@ -31,7 +31,14 @@ class SearchController extends AppController {
 	
 	public function index()
 	{
-		
+		if(isset($this->request->query['q'])) {
+			$query = $this->request->query['q'];
+			debug($query);
+		} else {
+			return $this->redirect(
+					array('controller' => 'articles', 'action' => 'index')
+			);
+		}
 	}
 	
 	public function term()

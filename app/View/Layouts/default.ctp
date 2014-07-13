@@ -38,7 +38,7 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <img class="featurette-image img-responsive" style="height: 35px; width: auto; margin: 6px;" src="/img/the_tesla_collection.jpg" alt="The Tesla Collection"> 
+	          <a href="/" style="border: 0px;"><img class="featurette-image img-responsive" style="height: 35px; width: auto; margin: 6px;" src="/img/the_tesla_collection.jpg" alt="The Tesla Collection"></a> 
 	        </div>
 	        <div class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav">
@@ -48,8 +48,8 @@
 				<li><a href="<?php echo Configure::read('Server.uri');?>/about">About</a></li>
 				<li><a href="<?php echo Configure::read('Server.uri');?>/contact">Contact</a></li>
 	          </ul>
-	          <form class="navbar-form navbar-right">
-	            <input type="text" class="form-control" placeholder="Search by text ...">
+	          <form class="navbar-form navbar-right" action="/search" method="GET">
+	            <input type="text" class="form-control" name="q" placeholder="Search by text ...">
 	          </form>
 	        <!--/.navbar-collapse -->
 	      </div>
