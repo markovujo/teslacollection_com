@@ -180,7 +180,6 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 
-//CakePlugin::load('Admin', array('bootstrap' => true, 'routes' => true));
-
-CakePlugin::load('Admin');
+CakePlugin::load('Admin', array('bootstrap' => true, 'routes' => true));
+//CakePlugin::load('Admin');
 CakePlugin::load('AclExtras');

@@ -5,10 +5,9 @@ class AdminAppController extends AppController
     public function beforeFilter() 
     { 
        $this->Auth->deny('*');
-    } 
+    }
 	
-    public function isAuthorized($user = null) 
-    { 
+    public function isAuthorized($user = null) { 
     	if(isset($user['group_id']) && $user['group_id'] == 1) {
     		return true; 
     	} else {
