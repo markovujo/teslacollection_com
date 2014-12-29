@@ -1,5 +1,5 @@
 Ext.Loader.setConfig({enabled: true});
-Ext.Loader.setPath('Ext.ux', 'js/ext/ext-4.1.1a/examples/ux/');
+Ext.Loader.setPath('Ext.ux', '/admin/js/ext/ext-4.1.1a/examples/ux/');
 Ext.require([
     'Ext.selection.CellModel',
     'Ext.grid.*',
@@ -18,7 +18,12 @@ Ext.onReady(function() {
     	return value;
     }
     
-    var document_url = document.URL.replace('#', '');
+    endsWith = function(suffix) {
+        return this.indexOf(suffix, this.length - suffix.length) !== -1;
+    };
+    
+    //var document_url = document.URL.replace('#', '');
+    var document_url = '//' + document.domain + '/admin/';
 	
 	Ext.define('Article', {
         extend: 'Ext.data.Model',
@@ -143,6 +148,26 @@ Ext.onReady(function() {
         proxy: {
             type: 'ajax',
             url: document_url + 'subjects/getAll',
+            reader: {
+                type: 'json',
+                root: 'records',
+                totalProperty: "totalCount"
+            }
+        },
+        sorters: [{
+            property: 'common',
+            direction:'ASC'
+        }]
+    });
+    
+    var pageStore = Ext.create('Ext.data.Store', {
+    	autoLoad: true,
+    	storeId:'pageStore',
+        model: 'Page',
+        pageSize: 10000,
+        proxy: {
+            type: 'ajax',
+            url: document_url + 'pages/getAll',
             reader: {
                 type: 'json',
                 root: 'records',
@@ -1088,6 +1113,102 @@ Ext.onReady(function() {
     	store: subjectStore,
     	title: 'Subjects',
     	model: 'Subject'
+    });
+    
+    var pageGrid = new TeslaCollection.Grid({
+    	store: pageStore,
+    	title: 'Pages',
+    	model: 'Page',
+        columns: [{
+            id: 'id',
+            header: 'ID',
+            dataIndex: 'id',
+            width: 70,
+            editor: {
+                allowBlank: true
+            },
+            filterable: true,
+            filter: {
+                type: 'numeric'
+            }
+        }, {
+            header: 'Namee',
+            dataIndex: 'name',
+            width: 400,
+            align: 'left',
+            editor: {
+                xtype: 'textfield',
+            },
+            filter: {
+                type: 'string'
+            }
+        }, {
+        	header: 'Status',
+            dataIndex: 'status',
+            width: 70,
+            editor: new Ext.form.field.ComboBox({
+                typeAhead: true,
+                triggerAction: 'all',
+                selectOnTab: true,
+                store: [
+                    ['active','active'],
+                    ['inactive','inactive']
+                ],
+                lazyRender: true,
+                listClass: 'x-combo-list-small'
+            }),
+            filter: {
+                type: 'list',
+                options: ['active', 'inactive']
+            }
+        }, {
+        	header: 'Delete',
+            dataIndex: 'delete',
+            xtype: 'actioncolumn',
+            width:70,
+            sortable: false,
+            model: 'Page',
+            items: [{
+                icon: document_url + 'img/delete.gif',
+                tooltip: 'Delete Article',
+                handler: function(grid, rowIndex, colIndex) {         	
+                	var record = store.getAt(rowIndex);
+                	var recordId = record.get('id');
+                	var recordTitle = record.get('name');
+                	
+            		Ext.Msg.confirm('Confirm Delete', 'Are you sure you want to delete ' + model + ' (' + recordId +') - ' + recordTitle + '?', function(btn) {
+            			if(btn == 'yes'){
+            				var data = [];
+            				data.push(recordId);
+            				//console.log(data);
+            				Ext.Ajax.request({
+        	    			   url: document_url + model + 's/delete',
+        	    			   success: function(response) {
+        	    				   Ext.Msg.show({
+        	    		                title: 'Success',
+        	    		                msg: 'Your data has been successfully Deleted!',
+        	    		                modal: false,
+        	    		                icon: Ext.Msg.INFO,
+        	    		                buttons: Ext.Msg.OK
+        	    		            });
+        	    				   store.removeAt(rowIndex);
+        	    			   },
+        	    			   failture: function(response) {
+        	    				   Ext.Msg.show({
+        	    		                title: 'Failure',
+        	    		                msg: 'Your data has FAILED to delete!',
+        	    		                modal: false,
+        	    		                icon: Ext.Msg.FAIL,
+        	    		                buttons: Ext.Msg.OK
+        	    		            });
+        	    			   },
+        	    			   jsonData : Ext.JSON.encode(data)
+        	    			});
+	                    }
+	                }, this);
+                }
+            }]
+        }],
     });
     
     var tabs = Ext.create('Ext.tab.Panel', {
