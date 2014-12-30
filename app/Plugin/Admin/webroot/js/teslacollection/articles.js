@@ -315,6 +315,70 @@ Ext.onReady(function() {
                 }
         	});
         	
+        	var browseUpload = Ext.create('Ext.form.Panel', {
+                width: 500,
+                frame: true,
+                title: 'File Upload Form',
+                bodyPadding: '10 10 0',
+                articleId: articleId,
+                defaults: {
+                    anchor: '100%',
+                    allowBlank: false,
+                    msgTarget: 'side',
+                    labelWidth: 50
+                },
+                items: [
+                {
+                    xtype: 'filefield',
+                    id: 'form-file',
+                    emptyText: 'Select an image',
+                    fieldLabel: 'Page',
+                    name: 'filename',
+                    buttonText: 'Upload'
+                },
+                {
+                    xtype: 'textarea',
+                    name: 'article-text',
+                    fieldLabel: 'Text',
+                    allowBlank: true
+                },
+                {
+                    xtype: 'textfield',
+                    name: 'article-id',
+                    hidden: true,
+                    value: articleId,
+                    allowBlank: true
+                }
+                ],
+
+                buttons: [{
+                    text: 'Save',
+                    handler: function(){
+                        var form = this.up('form').getForm();
+                        if(form.isValid()) {
+                            form.submit({
+                                url: '//' + document.domain + '/admin/pages/upload',
+                                waitMsg: 'Uploading article page...',
+                                success: function(fp, o) {
+                            		console.log(o);
+                            		var filename = ''; //o.result.page['Page']['filename']
+                                    msg('Success', 'Processed file "' + filename + '" on the server');
+                                    return true;
+                                },
+                                failure: function() {
+                                	console.log('Failed');
+                                }
+                            });
+                        }
+                    }
+                },{
+                    text: 'Reset',
+                    handler: function() {
+                        this.up('form').getForm().reset();
+                    }
+                }]
+            });
+        	
         	var pagesGrid = Ext.create('Ext.grid.Panel', {
                 store: pageStore,
                 columns: [
@@ -567,6 +631,7 @@ Ext.onReady(function() {
                 	   xtype : 'panel',
                 	   title: 'Article Pages',
                 	   items : [
+                	      browseUpload,
                 	      pageCombo,
                 	      pagesGrid
                 	   ]
@@ -616,7 +681,7 @@ Ext.onReady(function() {
                 xtype: 'numberfield',
                 allowBlank: false,
                 minValue: 0,
-                maxValue: 23
+                maxValue: 24
             },
             filter: {
                 type: 'numeric'

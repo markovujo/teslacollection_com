@@ -1,8 +1,8 @@
 <?php
 
 class AdminAppController extends AppController 
-{	
-    public function beforeFilter() 
+{
+	public function beforeFilter() 
     { 
        $this->Auth->deny('*');
     }
