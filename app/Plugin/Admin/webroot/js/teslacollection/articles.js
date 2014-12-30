@@ -316,6 +316,7 @@ Ext.onReady(function() {
         	});
         	
         	var browseUpload = Ext.create('Ext.form.Panel', {
+        		pageStore: pageStore,
                 width: 500,
                 frame: true,
                 title: 'File Upload Form',
@@ -353,6 +354,7 @@ Ext.onReady(function() {
 
                 buttons: [{
                     text: 'Save',
+                    pageStore: pageStore,
                     handler: function(){
                         var form = this.up('form').getForm();
                         if(form.isValid()) {
@@ -360,13 +362,26 @@ Ext.onReady(function() {
                                 url: '//' + document.domain + '/admin/pages/upload',
                                 waitMsg: 'Uploading article page...',
                                 success: function(fp, o) {
-                            		console.log(o);
-                            		var filename = ''; //o.result.page['Page']['filename']
-                                    msg('Success', 'Processed file "' + filename + '" on the server');
+                            		pageStore.reload();
+                            		//this.up('form').getForm().reset();
+                                    Ext.Msg.show({
+        	    		                title: 'Success',
+        	    		                msg: 'Successfully uploaded file "' + o.result.page['Page']['filename'] + '" on the server',
+        	    		                modal: false,
+        	    		                icon: Ext.Msg.INFO,
+        	    		                buttons: Ext.Msg.OK
+        	    		            });
                                     return true;
                                 },
                                 failure: function() {
-                                	console.log('Failed');
+                                    Ext.Msg.show({
+        	    		                title: 'Success',
+        	    		                msg: 'Failed to upload file on the server',
+        	    		                modal: false,
+        	    		                icon: Ext.Msg.FAIL,
+        	    		                buttons: Ext.Msg.OK
+        	    		            });
+                                    return true;
                                 }
                             });
                         }
