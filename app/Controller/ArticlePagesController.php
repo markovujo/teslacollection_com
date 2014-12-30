@@ -42,7 +42,7 @@ class ArticlePagesController extends AppController {
 		
 		if($article_page) {
 			$this->viewClass = 'Media';
-			$path = str_replace(APP, '', $article_page['Page']['full_path']);
+			$path = str_replace('/var/www/html/teslacollection_com/app/', '', $article_page['Page']['full_path']);
 			$path = substr($path, 0, strrpos($path, '/')) . DS;
 			$name = str_replace('.jpg', '', $article_page['Page']['filename']);
 			
