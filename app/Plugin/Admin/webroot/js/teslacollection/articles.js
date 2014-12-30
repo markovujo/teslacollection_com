@@ -373,10 +373,11 @@ Ext.onReady(function() {
         	    		            });
                                     return true;
                                 },
-                                failure: function() {
+                                failure: function(fp, o) {
+                                	var errors = o.result.errors.join();
                                     Ext.Msg.show({
-        	    		                title: 'Success',
-        	    		                msg: 'Failed to upload file on the server',
+        	    		                title: 'Failed!',
+        	    		                msg: 'Failed to upload file on the server.  ' + errors,
         	    		                modal: false,
         	    		                icon: Ext.Msg.FAIL,
         	    		                buttons: Ext.Msg.OK
