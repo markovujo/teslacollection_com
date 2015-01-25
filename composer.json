@@ -1,0 +1,18 @@
+{
+	"name": "markovujo/teslacollection_com",
+	"description": "The TeslaCollection CakePHP web application",
+	"type": "project",
+	"homepage": "http://teslacollection.com",
+	"authors": [
+		{
+			"name": "Marko Vujovic",
+			"homepage": "https://github.com/markovujo"
+		}
+	],
+	"require": {
+		"phpunit/phpunit": "3.7.*"
+	},
+	"config": {
+		"bin-dir": "/usr/local/bin"
+	}
+}
