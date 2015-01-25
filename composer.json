@@ -9,6 +9,10 @@
 			"homepage": "https://github.com/markovujo"
 		}
 	],
+	"support": {
+		"issues": "https://github.com/markovujo/teslacollection_com/issues",
+		"source": "https://github.com/markovujo/teslacollection_com"
+	},
 	"require": {
 		"phpunit/phpunit": "3.7.*"
 	},
