@@ -15,7 +15,7 @@ before_script:
   - cp app/Config/core_default.php app/Config/core.php
   - which composer
   - cd app
-  - sudo composer install
+  - composer install
   - cd ..
   - phpenv rehash
   - set +H
