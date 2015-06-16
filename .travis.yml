@@ -17,6 +17,9 @@ before_script:
   - mkdir -p ./app/tmp/cache/persistent
   - chmod -R 777 ./app/tmp
   - cp app/Config/core_default.php app/Config/core.php
+  - cd app
+  - composer install
+  - cd ..
   - phpenv rehash
   - set +H
   - echo "<?php
