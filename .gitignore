@@ -10,4 +10,3 @@ composer.lock
 composer.phar
 vendor/
 app/tmp/logs/*
-app/tmp/persistent/*
