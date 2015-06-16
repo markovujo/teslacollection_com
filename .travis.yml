@@ -13,6 +13,7 @@ before_script:
   - mkdir -p ./app/tmp/cache/persistent
   - chmod -R 777 ./app/tmp
   - cp app/Config/core_default.php app/Config/core.php
+  - which composer
   - cd app
   - sudo composer install
   - cd ..
