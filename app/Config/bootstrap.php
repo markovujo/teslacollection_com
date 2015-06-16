@@ -183,3 +183,5 @@ CakeLog::config('error', array(
 CakePlugin::load('Admin', array('bootstrap' => true, 'routes' => true));
 //CakePlugin::load('Admin');
 CakePlugin::load('AclExtras');
+
+App::import('Vendor', array('file' => 'autoload'));
