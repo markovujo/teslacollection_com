@@ -1,8 +1,4 @@
 app/Config/core.php
-/app/tmp/logs/
-/app/tmp/sessions/
-/app/tmp/tests/
-/lib/Cake/Console/Templates/skel/tmp/
 /build
 /dist
 .DS_Store
@@ -13,4 +9,4 @@ app/webroot/gallery/*
 composer.lock
 composer.phar
 vendor/
-!/app/tmp
+!/app/tmp/
