@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/cakephp/cakephp.png?branch=master)](http://travis-ci.org/cakephp/cakephp)
+[![Build Status](https://travis-ci.org/markovujo/teslacollection_com.svg?branch=master)](https://travis-ci.org/markovujo/teslacollection_com)
 
 TeslaCollection.com
 =======
