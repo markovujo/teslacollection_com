@@ -13,3 +13,4 @@ app/webroot/gallery/*
 composer.lock
 composer.phar
 vendor/
+!/app/tmp
