@@ -27,15 +27,19 @@ before_script:
   - echo "<?php
     class DATABASE_CONFIG {
     public \$default = array(
+      'datasource' => 'Database/Mysql',
       'persistent' => false,
       'host' => '0.0.0.0',
+      'port' => '3306',
       'login' => 'travis',
       'database' => 'teslacollection_com',
       'prefix' => ''
     );
     public \$test = array(
+      'datasource' => 'Database/Mysql',
       'persistent' => false,
       'host' => '0.0.0.0',
+      'port' => '3306',
       'login' => 'travis',
       'database' => 'teslacollection_com_test',
       'prefix' => ''
@@ -46,4 +50,5 @@ script:
   - app/Console/cake test app AllTests --debug
 
 notifications:
-  email: true
+  email:
+    - marko.vujo@gmail.com
