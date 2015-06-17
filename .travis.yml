@@ -49,7 +49,7 @@ before_script:
     }" > app/Config/database.php
 
 script:
-  - app/Console/cake test app AllTests --debug
+  - app/Console/cake test app AllTests --debug --coverage-clover build/logs/clover.xml --configuration phpunit.xml 
 
 after_success:
   - ls -ls build/logs
