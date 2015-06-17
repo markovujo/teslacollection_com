@@ -11,8 +11,10 @@ env:
 
 before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE teslacollection_com;'; fi"
-  - mysql teslacollection_com < ddl/teslacollection_com.sql;
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE teslacollection_com_test;'; fi"
+  - mysql teslacollection_com < ddl/teslacollection_com.sql;
+  - mysql -h 0.0.0.0 -u travis teslacollection_com -e 'show tables;'
+  - mysql -h 0.0.0.0 -u travis teslacollection_com_test -e 'show tables;'
   - mkdir -p ./app/tmp/cache/models
   - mkdir -p ./app/tmp/cache/persistent
   - chmod -R 777 ./app/tmp
