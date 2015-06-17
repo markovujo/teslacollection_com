@@ -24,17 +24,15 @@ before_script:
     class DATABASE_CONFIG {
     public \$default = array(
       'persistent' => false,
-      'host' => '',
-      'login' => '',
-      'password' => '',
+      'host' => '0.0.0.0',
+      'login' => 'travis',
       'database' => 'teslacollection_com',
       'prefix' => ''
     );
     public \$test = array(
       'persistent' => false,
-      'host' => '',
-      'login' => '',
-      'password' => '',
+      'host' => '0.0.0.0',
+      'login' => 'travis',
       'database' => 'teslacollection_com_test',
       'prefix' => ''
     );
