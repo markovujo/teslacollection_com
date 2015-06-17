@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/markovujo/teslacollection_com.svg?branch=master)](https://travis-ci.org/markovujo/teslacollection_com)
+[![Coverage Status](https://coveralls.io/repos/markovujo/teslacollection_com/badge.svg)](https://coveralls.io/r/markovujo/teslacollection_com)
 
 TeslaCollection.com
 =======
