@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit>
 <filter>
+	<whitelist>
+		<directory suffix=".php">app/Console</directory>
+		<directory suffix=".php">app/Controller</directory>
+		<directory suffix=".php">app/Model</directory>
+		<directory suffix=".php">app/Plugin/Admin/Console</directory>
+		<directory suffix=".php">app/Plugin/Admin/Controller</directory>
+		<directory suffix=".php">app/Plugin/Admin/Model</directory>
+	</whitelist>
 	<blacklist>
 		<directory suffix=".php">lib</directory>
-		<directory suffix=".php">app/Vendor</directory>
-		<directory suffix=".php">app/Test</directory>
 	</blacklist>
 </filter>
 </phpunit>
