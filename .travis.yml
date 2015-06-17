@@ -3,6 +3,9 @@ language: php
 php:
   - 5.3
 
+services:
+  - mysql 
+
 env:
   - DB=mysql
 
