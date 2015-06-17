@@ -1,6 +1,5 @@
 <?php 
-class Article extends AppModel 
-{
+class Article extends AppModel {
 	public $belongsTo = array(
         'Author' => array(
             'className'    => 'Author',
