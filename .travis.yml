@@ -52,6 +52,8 @@ script:
   - app/Console/cake test app AllTests --debug
 
 after_success:
+  - ls -ls build/logs
+  - cat .coveralls.yml
   - php vendor/bin/coveralls -c .coveralls.yml -v;
 
 notifications:
