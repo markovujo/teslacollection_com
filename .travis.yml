@@ -22,7 +22,7 @@ before_script:
   - cd app
   - composer install
   - cd ..
-  #- sudo yum install php-pecl-xdebug
+  - pecl install xdebug
   #- composer require --dev satooshi/php-coveralls:dev-master
   - phpenv rehash
   - set +H
