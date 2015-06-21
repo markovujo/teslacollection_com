@@ -34,6 +34,7 @@ class AppModel extends Model {
 
 /**
  * BeforeFind logic
+ * 
  * @param array $queryData - Query data
  * @return array
  */

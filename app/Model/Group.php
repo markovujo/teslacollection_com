@@ -7,7 +7,12 @@ class Group extends AppModel {
 		'User'
 	);
 
-    public function parentNode() {
+/**
+ * Parent node function used for ACL functionality
+ * 
+ * @return mixed
+ */
+	public function parentNode() {
 		return null;
 	}
 }

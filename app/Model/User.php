@@ -11,12 +11,23 @@ class User extends AppModel {
 		'Acl' => array('type' => 'requester')
 	);
 
+/**
+ * Before save logic
+ * 
+ * @param array $options - Save options
+ * @return bool
+ */
 	public function beforeSave($options = array()) {
 		$this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
 		return true;
 	}
 
-    public function parentNode() {
+/**
+ * Parent node function used for ACL functionality
+ * 
+ * @return mixed
+ */
+	public function parentNode() {
 		if (!$this->id && empty($this->data)) {
 			return null;
 		}
@@ -32,7 +43,13 @@ class User extends AppModel {
 		}
 	}
 
-	public function bindNode($user) {
+/**
+ * Bind node logic
+ * 
+ * @param array $user - User record
+ * @return array
+ */
+	public function bindNode(array $user) {
 		return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
 	}
 }
