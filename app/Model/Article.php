@@ -34,9 +34,10 @@ class Article extends AppModel {
  * After find logic
  * 
  * @param array $results - Find result records
+ * @param bool $primary - Whether this model is being queried directly (vs. being queried as an association)
  * @return array
  */
-	public function afterFind($results) {
+	public function afterFind($results, $primary = false) {
 		if ($results) {
 			foreach ($results as &$result) {
 				$year = isset($result['Article']['year']) ? $result['Article']['year'] : '';
