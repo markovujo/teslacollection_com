@@ -1,12 +1,11 @@
 <?php 
-class Publication extends AppModel 
-{
+class Publication extends AppModel {
+
 	public $hasMany = array(
-        'Article' => array(
-            'className'  => 'Article',
-        )
-    );
-    
-    public $actsAs = array('Containable');
+		'Article' => array(
+			'className' => 'Article',
+		)
+	);
+
+	public $actsAs = array('Containable');
 }
-?>

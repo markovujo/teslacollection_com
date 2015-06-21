@@ -1,13 +1,12 @@
 <?php 
-class Page extends AppModel 
-{
+class Page extends AppModel {
+
 	public $hasAndBelongsToMany = array(
-        'Article' => array(
-            'className' => 'Article',
+		'Article' => array(
+			'className' => 'Article',
 			'fields' => array(),
-        )
-    );
-    
-    public $actsAs = array('Containable');
+		)
+	);
+
+	public $actsAs = array('Containable');
 }
-?>
