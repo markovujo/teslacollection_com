@@ -9,10 +9,11 @@
  *
  */
 class AllTestsTest extends CakeTestSuite {
-    public static function suite() {
-        $suite = new CakeTestSuite('All unit tests');
-        $suite->addTestDirectory(TESTS . 'Case/Model');
-        
-        return $suite;
-    }
+
+	public static function suite() {
+		$suite = new CakeTestSuite('All unit tests');
+		$suite->addTestDirectory(TESTS . 'Case/Model');
+
+		return $suite;
+	}
 }
