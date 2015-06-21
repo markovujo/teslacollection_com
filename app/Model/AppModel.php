@@ -34,7 +34,7 @@ class AppModel extends Model {
 
 /**
  * BeforeFind logic
- * @param array $queryData
+ * @param array $queryData - Query data
  * @return array
  */
 	public function beforeFind($queryData = array()) {
@@ -48,8 +48,8 @@ class AppModel extends Model {
 /**
  * Delete logic
  * 
- * @param int $id
- * @param bool $cascade
+ * @param int $id - Model id
+ * @param bool $cascade - bool for cascasing delete
  * @return bool
  */
 	public function delete($id = null, $cascade = true) {
@@ -100,6 +100,12 @@ class AppModel extends Model {
 		return false;
 	}
 
+/**
+ * Before save logic
+ * 
+ * @param array $options - Save options
+ * @return bool
+ */
 	public function beforeSave($options = array()) {
 		if (!empty($this->id)) {
 			if ($this->hasField('url')) {
@@ -115,6 +121,13 @@ class AppModel extends Model {
 		return true;
 	}
 
+/**
+ * Get unique url for model record
+ * 
+ * @param string $string - Unique string
+ * @param string $field - Field url is generated for
+ * @return string
+ */
 	public function getUniqueUrl($string, $field) {
 		$currentUrl = Inflector::slug(strtolower($string));
 
