@@ -32,6 +32,11 @@ App::uses('Model', 'Model');
  */
 class AppModel extends Model {
 
+/**
+ * BeforeFind logic
+ * @param array $queryData
+ * @return array
+ */
 	public function beforeFind($queryData = array()) {
 		if ($this->hasField('status')) {
 			$queryData['conditions'][$this->name . '.status !='] = 'deleted';
@@ -40,6 +45,13 @@ class AppModel extends Model {
 		return $queryData;
 	}
 
+/**
+ * Delete logic
+ * 
+ * @param int $id
+ * @param bool $cascade
+ * @return bool
+ */
 	public function delete($id = null, $cascade = true) {
 		if (!empty($id)) {
 			$this->id = $id;
@@ -73,7 +85,6 @@ class AppModel extends Model {
 			}
 			if (!empty($updates)) {
 				if ($this->beforeDelete($cascade)) {
-					// Soft Delete
 					$updateFields = array_keys($updates);
 					$this->set($updates);
 					if ($this->save(null, false, $updateFields)) {
@@ -107,7 +118,9 @@ class AppModel extends Model {
 	public function getUniqueUrl($string, $field) {
 		$currentUrl = Inflector::slug(strtolower($string));
 
-		// Look for same URL, if so try until we find a unique one
+		/*
+		 * Look for same URL, if URL exists already try until we find a unique one
+		 */
 		$conditions = array($this->name . '.' . $field => 'LIKE ' . $currentUrl . '%');
 		$result = $this->find('all', array(
 			'conditions' => $conditions,
