@@ -31,67 +31,52 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
-	
-	public function beforeFind($queryData = array())
-	{
-		if($this->hasField('status')) {
+
+	public function beforeFind($queryData = array()) {
+		if ($this->hasField('status')) {
 			$queryData['conditions'][$this->name . '.status !='] = 'deleted';
 		}
-		
+
 		return $queryData;
 	}
-	
-	function delete($id = null, $cascade = true)
-	{
+
+	public function delete($id = null, $cascade = true) {
 		if (!empty($id)) {
-            $this->id = $id;
-        }
-        
-        if($this->exists()) {
-	        $id = $this->id;
+			$this->id = $id;
+		}
+
+		if ($this->exists()) {
+			$id = $this->id;
 			$updates = array();
-			if($this->hasField('deleted')) {
-				if(!$this->field('deleted')){
-					$set_value = null;
+			if ($this->hasField('deleted')) {
+				if (!$this->field('deleted')) {
+					$setValue = null;
 					switch ($this->getColumnType('deleted')){
 						case 'datetime':
-							$set_value = date("Y-m-d H:i:s");
+							$setValue = date("Y-m-d H:i:s");
 							break;
 						case 'boolean':
-							$set_value = 1;
+							$setValue = 1;
 							break;
 						case 'integer':
-							$set_value = time();
+							$setValue = time();
 							break;
 					}
-					if(!empty($set_value)) {
-						$updates['deleted'] = $set_value;
+					if (!empty($setValue)) {
+						$updates['deleted'] = $setValue;
 					}
 				}
 			}
 
-			if($this->hasField('status')) {
+			if ($this->hasField('status')) {
 				$updates['status'] = 'deleted';
 			}
-			if(!empty($updates)) {
+			if (!empty($updates)) {
 				if ($this->beforeDelete($cascade)) {
-					/*
-					$filters = $this->Behaviors->trigger($this, 'beforeDelete', array($cascade), array(
-						'break' => true, 
-						'breakOn' => false
-					));
-					
-					if (!$filters || !$this->exists()) {
-						return false;
-					}
-					*/
-
 					// Soft Delete
-					$update_fields = array_keys($updates);
+					$updateFields = array_keys($updates);
 					$this->set($updates);
-					if($this->save(null, false, $update_fields)) {
-						//$this->Behaviors->trigger($this, 'afterDelete');
-						//$this->afterDelete();
+					if ($this->save(null, false, $updateFields)) {
 						$this->id = false;
 						return true;
 					}
@@ -99,72 +84,57 @@ class AppModel extends Model {
 			} else {
 				return parent::delete($id, $cascade);
 			}
-        }
-        
+		}
+
 		return false;
 	}
-	
-	function beforeSave($options = array()) 
-    { 
-    	if(!empty($this->id)) {
-        	if($this->hasField('url')) {
-        		if(isset($this->data[$this->name]['name'])) {
-        			$this->data[$this->name]['url'] = $this->getUniqueUrl($this->data[$this->name]['name'], 'name');
-        		} else if(isset($this->data[$this->name]['title'])) {
-        			$this->data[$this->name]['url'] = $this->getUniqueUrl($this->data[$this->name]['title'], 'title');
-        		}
-        	}
-        }
-        
-        //die(debug($this->data));
-        return true; 
-    }
-	
-	function getUniqueUrl($string, $field) 
-    { 
-        // Build URL
-        //$currentUrl = $this->_getStringAsURL($string);
-        $currentUrl = Inflector::slug(strtolower($string)); 
-         
-        // Look for same URL, if so try until we find a unique one 
-         
-        $conditions = array($this->name . '.' . $field => 'LIKE ' . $currentUrl . '%'); 
-         
-        //$result = $this->findAll($conditions, $this->name . '.*', null); 
-        $result = $this->find('all', array(
-        	'conditions' => $conditions,
-        	'contain' => false
-        )); 
-         
-        if ($result !== false && count($result) > 0) 
-        { 
-            $sameUrls = array(); 
-             
-            foreach($result as $record) 
-            { 
-                $sameUrls[] = $record[$this->name][$field]; 
-            } 
-        } 
-     
-        if (isset($sameUrls) && count($sameUrls) > 0) 
-        { 
-            $currentBegginingUrl = $currentUrl; 
-     
-            $currentIndex = 1; 
-     
-            while($currentIndex > 0) 
-            { 
-                if (!in_array($currentBegginingUrl . '_' . $currentIndex, $sameUrls)) 
-                { 
-                    $currentUrl = $currentBegginingUrl . '_' . $currentIndex; 
-     
-                    $currentIndex = -1; 
-                } 
-     
-                $currentIndex++; 
-            } 
-        } 
-         
-        return $currentUrl; 
-    }
+
+	public function beforeSave($options = array()) {
+		if (!empty($this->id)) {
+			if ($this->hasField('url')) {
+				if (isset($this->data[$this->name]['name'])) {
+					$this->data[$this->name]['url'] = $this->getUniqueUrl($this->data[$this->name]['name'], 'name');
+				} elseif (isset($this->data[$this->name]['title'])) {
+					$this->data[$this->name]['url'] = $this->getUniqueUrl($this->data[$this->name]['title'], 'title');
+				}
+			}
+		}
+
+		//die(debug($this->data));
+		return true;
+	}
+
+	public function getUniqueUrl($string, $field) {
+		$currentUrl = Inflector::slug(strtolower($string));
+
+		// Look for same URL, if so try until we find a unique one
+		$conditions = array($this->name . '.' . $field => 'LIKE ' . $currentUrl . '%');
+		$result = $this->find('all', array(
+			'conditions' => $conditions,
+			'contain' => false
+		));
+
+		if ($result !== false && count($result) > 0) {
+			$sameUrls = array();
+
+			foreach ($result as $record) {
+				$sameUrls[] = $record[$this->name][$field];
+			}
+		}
+
+		if (isset($sameUrls) && count($sameUrls) > 0) {
+			$currentBeginningUrl = $currentUrl;
+			$currentIndex = 1;
+			while ($currentIndex > 0) {
+				if (!in_array($currentBeginningUrl . '_' . $currentIndex, $sameUrls)) {
+					$currentUrl = $currentBeginningUrl . '_' . $currentIndex;
+					$currentIndex = -1;
+				}
+
+				$currentIndex++;
+			}
+		}
+
+		return $currentUrl;
+	}
 }
