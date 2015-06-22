@@ -44,16 +44,19 @@ class PagesController extends AppController {
  * @var array
  */
 	public $uses = array();
-	
-    public function beforeFilter() 
-    { 
-       $this->Auth->allow('*');
-    } 
+
+/**
+ * Before filter
+ * 
+ * @return void
+ */
+	public function beforeFilter() {
+		$this->Auth->allow('*');
+	}
 
 /**
  * Displays a view
  *
- * @param mixed What page to display
  * @return void
  */
 	public function display() {
@@ -78,40 +81,58 @@ class PagesController extends AppController {
 		$this->set(compact('page', 'subpage', 'title_for_layout'));
 		$this->render(implode('/', $path));
 	}
-	
+
+/**
+ * About page
+ * 
+ * @return void
+ */
 	public function about() {
 		$this->set('title_for_layout', 'About');
 	}
-	
+
+/**
+ * Gallery page
+ * 
+ * @return void
+ */
 	public function gallery() {
 		$this->set('title_for_layout', 'Image Gallery');
-		
 		$images = $this->_getImages();
-		
 		$this->set('images', $images);
 	}
-	
-	public function directors()
-	{
+
+/**
+ * Directors page
+ * 
+ * @return void
+ */
+	public function directors() {
 		$this->set('title_for_layout', 'Directors');
 	}
-	
-	public function contact()
-	{
+
+/**
+ * Contact page
+ * 
+ * @return void
+ */
+	public function contact() {
 		$this->set('title_for_layout', 'Contact');
 	}
-	
-	protected function _getImages()
-	{
+
+/**
+ * Get Images
+ * 
+ * @return array
+ */
+	protected function _getImages() {
 		$images = array();
-		
-		$image_glob_path = WWW_ROOT .'/images/gallery/*.jpg';
-		foreach(glob($image_glob_path) as $filename){
-		   $images[] = array(
-		   		'filename' => basename($filename)
-		   );
+
+		$imageGlobPath = WWW_ROOT . '/images/gallery/*.jpg';
+		foreach (glob($imageGlobPath) as $filename) {
+			$images[] = array('filename' => basename($filename));
 		}
-		
+
 		//die(debug($images));
 		return $images;
 	}
