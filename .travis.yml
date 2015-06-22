@@ -52,7 +52,7 @@ before_script:
 
 script:
   - vendor/bin/phpcs --config-set installed_paths vendor/cakephp/cakephp-codesniffer
-  - vendor/bin/phpcs -p --extensions=php --standard=CakePHP --ignore=vendor/ app/Model/
+  - vendor/bin/phpcs -p --extensions=php --standard=CakePHP --ignore=vendor/ app/Console app/Model
   - app/Console/cake test app AllTests --debug --coverage-clover build/logs/clover.xml --configuration phpunit.xml 
 
 after_success:
