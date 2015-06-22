@@ -61,6 +61,7 @@ class ArticlePagesController extends AppController {
  * View thumbnail
  * 
  * @param int $id - Page.id
+ * @return void
  */
 	public function view_thumbnail($id) {
 		$articlePage = $this->Page->find('first', array(

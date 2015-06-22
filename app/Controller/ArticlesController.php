@@ -192,7 +192,7 @@ class ArticlesController extends AppController {
 /**
  * View
  * 
- * @param int $id
+ * @param int $id - Article.id
  * @return void
  */
 	public function view($id = null) {
@@ -210,7 +210,7 @@ class ArticlesController extends AppController {
 /**
  * View All 
  * 
- * @param array $articles
+ * @param array $articles - Articles array
  * @return void
  */
 	public function viewAll($articles) {

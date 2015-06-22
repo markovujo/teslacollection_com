@@ -31,142 +31,159 @@ App::uses('Controller', 'Controller');
  * @package       app.Controller
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller 
-{	
+class AppController extends Controller {
+
+/**
+ * Components
+ * 
+ * @var array 
+ */
 	public $components = array(
-        'Acl',
-        'Auth' => array(
-            'loginRedirect' => array('plugin' => NULL, 'controller' => 'articles', 'action' => 'index'),
-            'logoutRedirect' => array('plugin' => NULL, 'controller' => 'users', 'action' => 'login'),
+		'Acl',
+		'Auth' => array(
+			'loginRedirect' => array('plugin' => null, 'controller' => 'articles', 'action' => 'index'),
+			'logoutRedirect' => array('plugin' => null, 'controller' => 'users', 'action' => 'login'),
 			'authError' => "Sorry, you're not allowed to do that.",
 			'authorize' => array('Controller')
-        ),
-        'Session',
-        'RequestHandler'
-    );
-    
-    public function beforeFilter() 
-    { 
-       $this->Auth->allow('*');
-    } 
-        
-    public function isAuthorized($user = null) 
-    { 
-    	return true; 
-   	} 
-		
-	public function getAll($params = NULL)
-	{
+		),
+		'Session',
+		'RequestHandler'
+	);
+
+/**
+ * Before filter
+ * 
+ * @return void
+ */
+	public function beforeFilter() {
+		$this->Auth->allow('*');
+	}
+
+/**
+ * isAuthorized Logic for ACL
+ * 
+ * @param array $user - User record
+ * @return bool
+ */
+	public function isAuthorized($user = null) {
+		return true;
+	}
+
+/**
+ * Get All
+ * 
+ * @param array $params
+ * @return void
+ */
+	public function getAll($params = null) {
 		$this->autoRender = false;
 		$this->layout = 'ajax';
 		$this->RequestHandler->respondAs('json');
-		
+
 		$model = substr($this->name, 0, -1);
 		$Model = $this->{$model};
 		$conditions = array();
-		$search_field = NULL;
-			
-		
+		$searchField = null;
+
 		App::uses('Sanitize', 'Utility');
-		
 		if (!empty($this->params->query['start'])) {
-			$start = (int) $this->params->query['start'];
+			$start = (int)$this->params->query['start'];
 		} else {
 			$start = null;
 		}
-		
+
 		if (!empty($this->params->query['limit'])) {
-			$limit = (int) $this->params->query['limit'];
+			$limit = (int)$this->params->query['limit'];
 		} else {
 			$limit = null;
 		}
-		
+
 		if (!empty($this->params->query['page'])) {
-			$page = (int) $this->params->query['page'];
+			$page = (int)$this->params->query['page'];
 		} else {
 			$page = null;
 		}
-		
+
 		if (!empty($this->params->query['page'])) {
-			$offset = ((int) $this->params->query['page'] - 1) * $limit;
+			$offset = ((int)$this->params->query['page'] - 1) * $limit;
 		} else {
 			$offset = null;
 		}
-		
+
 		if (!empty($this->params->query['query'])) {
-			$model_search_fields = array(
+			$modelSearchFields = array(
 				'filename',
 				'name'
 			);
-			
-			if(!empty($model_search_fields)) {
-				foreach($model_search_fields AS $model_search_field) {
-					if($Model->hasField($model_search_field)) {
-						$search_field = $model_search_field;
+
+			if (!empty($modelSearchFields)) {
+				foreach ($modelSearchFields as $modelSearchField) {
+					if ($Model->hasField($modelSearchField)) {
+						$searchField = $modelSearchField;
 					}
 				}
 			}
-			
-			if(!is_null($search_field)) {
+
+			if (!is_null($searchField)) {
 				$query = Sanitize::escape($this->params->query['query']);
-				$conditions['or'][] = array($model . '.' . $search_field . ' LIKE' => "%$query%");
-				$conditions['or'][] = array($model . '.' . $search_field => $query);
+				$conditions['or'][] = array($model . '.' . $searchField . ' LIKE' => "%$query%");
+				$conditions['or'][] = array($model . '.' . $searchField => $query);
 			}
 		} else {
 			$page = null;
 		}
-		
+
 		if (!empty($this->params->query['filter'])) {
-			foreach($this->params->query['filter'] AS $filter) {
-				if(isset($filter['data']['comparison'])) {
+			foreach ($this->params->query['filter'] as $filter) {
+				if (isset($filter['data']['comparison'])) {
 					$value = Sanitize::escape($filter['data']['value']);
-					$field_name = $model . '.' . $filter['field'];
+					$fieldName = $model . '.' . $filter['field'];
 					switch($filter['data']['comparison']) {
 						case 'lte':
-							$conditions[$field_name . ' <='] = $value;
+							$conditions[$fieldName . ' <='] = $value;
 							break;
 						case 'gte':
-							$conditions[$field_name . ' >='] = $value;
+							$conditions[$fieldName . ' >='] = $value;
 							break;
 						case 'lt':
-							$conditions[$field_name . ' <='] = $value;
+							$conditions[$fieldName . ' <='] = $value;
 							break;
 						case 'gt':
-							$conditions[$field_name . ' >='] = $value;
+							$conditions[$fieldName . ' >='] = $value;
 							break;
 						case 'eq':
-							$conditions[$field_name] = $value;
+							$conditions[$fieldName] = $value;
 							break;
 						default:
-							$conditions[$field_name] = $value;
+							$conditions[$fieldName] = $value;
 							break;
 					}
 				}
 			}
 		}
-		
+
 		$order = array($this->Model->name . '.id');
-		if(!is_null($search_field)) {
-			$order = array($this->Model->name . '.' . $search_field);
+		if (!is_null($searchField)) {
+			$order = array($this->Model->name . '.' . $searchField);
 		}
-		
+
 		//die(debug($conditions));
 		$records = $Model->find('all', array(
 			'conditions' => $conditions,
 			'contain' => false,
-			'limit' => $limit, 
+			'limit' => $limit,
 			'offset' => $offset,
 			'order' => $order
 		));
-		
+
 		$totalCount = $Model->find('count');
-		
+
 		$results = array(
 			'totalCount' => $totalCount,
 			'recordCount' => count($records),
 			'records' => $records
 		);
-		
+
 		return (json_encode($results));
 	}
 }
