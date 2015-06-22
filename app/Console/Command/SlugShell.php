@@ -16,6 +16,8 @@ class SlugShell extends AppShell {
 
 /**
  * Main logic
+ * 
+ * @return void
  */
 	public function main() {
 		$this->out('SAVING ARTICLES!!');

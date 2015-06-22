@@ -5,32 +5,36 @@
  * 
  * cake Import
  */
-class ImportShell extends AppShell 
-{
-    public $uses = array(
-    	'Author'
-    	, 'Publication'
-    	, 'Subject'
-    	, 'Article'
-    	, 'ArticlePage'
-    );
-	
-	public function main() 
-    {
-        $this->out('IMPORTING ARTICLES AND PAGES!!');
-        
-       	$authors = array();
+class ImportShell extends AppShell {
+
+	public $uses = array(
+		'Author',
+		'Publication',
+		'Subject',
+		'Article',
+		'ArticlePage'
+	);
+
+/**
+ * Main logic
+ * 
+ * @return void
+ */
+	public function main() {
+		$this->out('IMPORTING ARTICLES AND PAGES!!');
+
+		$authors = array();
 		$publications = array();
 		$subjects = array();
-		$article_mapping = array();
-        
-        $con = mysql_connect("localhost","root","");
+		$articleMapping = array();
+
+		$con = mysql_connect("localhost", "root", "");
 		if (!$con) {
-  			die('Could not connect: ' . mysql_error());
+			die('Could not connect: ' . mysql_error());
 		}
 
 		mysql_select_db("teslacollection", $con);
-		
+
 		#TRUNCATE TABLES FOR IMPORT
 		$result = $this->Article->query("TRUNCATE TABLE articles");
 		$result = $this->Article->query("TRUNCATE TABLE article_pages");
@@ -38,122 +42,121 @@ class ImportShell extends AppShell
 		$result = $this->Article->query("TRUNCATE TABLE authors");
 		$result = $this->Article->query("TRUNCATE TABLE subjects");
 		$result = $this->Article->query("TRUNCATE TABLE articles_subjects");
-		
+
 		$result = mysql_query("select * from tmp_articles ORDER BY volume, page");
-		
+
 		while ($article = mysql_fetch_assoc($result)) {
-			$author_name = trim($article['author']);
-			$publication_name = trim($article['publication']);
-			$subject_name = trim($article['subject']);
-			 
-			if(array_key_exists($author_name, $authors)) {
-				$author_id = $authors[$author_name];
+			$authorName = trim($article['author']);
+			$publicationName = trim($article['publication']);
+			$subjectName = trim($article['subject']);
+
+			if (array_key_exists($authorName, $authors)) {
+				$authorId = $authors[$authorName];
 			} else {
-				if($author_name != '') {
+				if ($authorName != '') {
 					$this->Author->create();
 					$this->Author->save(array(
-						'name' => $author_name
+						'name' => $authorName
 					));
-					
-					$author_id = $this->Author->id;
-					$authors[$author_name] = $author_id;
+
+					$authorId = $this->Author->id;
+					$authors[$authorName] = $authorId;
 				}
 			}
-			
-			if(array_key_exists($publication_name, $publications)) {
-				$publication_id = $publications[$publication_name];
+
+			if (array_key_exists($publicationName, $publications)) {
+				$publicationId = $publications[$publicationName];
 			} else {
-				if($publication_name != '') {
+				if ($publicationName != '') {
 					$this->Publication->create();
 					$this->Publication->save(array(
-						'name' => $publication_name
+						'name' => $publicationName
 					));
-					
-					$publication_id = $this->Publication->id;
-					$publications[$publication_name] = $publication_id;
+
+					$publicationId = $this->Publication->id;
+					$publications[$publicationName] = $publicationId;
 				}
 			}
-			
-			if(array_key_exists($subject_name, $subjects)) {
-				$subject_id = $subjects[$subject_name];
+
+			if (array_key_exists($subjectName, $subjects)) {
+				$subjectId = $subjects[$subjectName];
 			} else {
-				if($subject_name != '') {
+				if ($subjectName != '') {
 					$this->Subject->create();
 					$this->Subject->save(array(
-						'name' => $subject_name
+						'name' => $subjectName
 					));
-					
-					$subject_id = $this->Subject->id;
-					$subjects[$subject_name] = $subject_id;
+
+					$subjectId = $this->Subject->id;
+					$subjects[$subjectName] = $subjectId;
 				}
 			}
-			
+
 			$this->Article->saveAll(array(
-			 	'Article' => array(
-			    	'volume' => trim($article['volume']), 
-			    	'page' => trim($article['page']),
+				'Article' => array(
+					'volume' => trim($article['volume']),
+					'page' => trim($article['page']),
 					'title' => trim($article['title']),
 					'date' => date('Y-m-d', strtotime(trim($article['date']))),
 					'year' => date('Y', strtotime(trim($article['date']))),
 					'range_text' => trim($article['range_text']),
 					'status' => 'created',
-					'publication_id' => $publication_id,
-					'author_id' => $author_id,
+					'publication_id' => $publicationId,
+					'author_id' => $authorId,
 				),
-			    'Subject' => array(
-			    	'Subject' => array(
-						$subject_id
+				'Subject' => array(
+					'Subject' => array(
+						$subjectId
 					)
 				)
 			));
-			
-			$this->out("\n\nArticle Id :: " . $this->Article->id . 
+
+			$this->out("\n\nArticle Id :: " . $this->Article->id .
 				' title : ' . $article['title'] . "\n" .
-				' volume : ' . $article['volume'] . 
+				' volume : ' . $article['volume'] .
 				' page : ' . $article['page']
 			);
-			$article_mapping[$article['id']] = $this->Article->id;
+			$articleMapping[$article['id']] = $this->Article->id;
 		}
-		
+
 		$result = mysql_query("select * from tmp_article_images");
-		
-		while ($article_page = mysql_fetch_assoc($result)) {
+
+		while ($articlePage = mysql_fetch_assoc($result)) {
 			$article = array(
-				'id' => NULL,
-				'volume' => NULL,
-				'page' => NULL,
-				'title' => NULL
+				'id' => null,
+				'volume' => null,
+				'page' => null,
+				'title' => null
 			);
-			
-			if(isset($article_mapping[$article_page['article_id']])) {
-				$article_id = $article_mapping[$article_page['article_id']];
-				$article_result = $this->Article->find('first', array(
+
+			if (isset($articleMapping[$articlePage['article_id']])) {
+				$articleId = $articleMapping[$articlePage['article_id']];
+				$articleResult = $this->Article->find('first', array(
 					'conditions' => array(
-						'Article.id' => $article_id
+						'Article.id' => $articleId
 					)
 				));
-				
-				if($article_result) {
-					$article = $article_result['Article'];
+
+				if ($articleResult) {
+					$article = $articleResult['Article'];
 				}
 			}
-			
+
 			$this->ArticlePage->create();
 			$this->ArticlePage->save(array(
-				'article_id' => $article_id,
-				'filename' => trim($article_page['filename']),
-				'full_path' => trim($article_page['full_path']),
+				'article_id' => $articleId,
+				'filename' => trim($articlePage['filename']),
+				'full_path' => trim($articlePage['full_path']),
 				'title' => trim($article['title']),
-				'text' => trim($article_page['text'])
+				'text' => trim($articlePage['text'])
 			));
-			
-			$this->out('Article Id :: ' . $this->ArticlePage->id . 
-				' Article Page :: ' . $article_page['filename'] .
+
+			$this->out('Article Id :: ' . $this->ArticlePage->id .
+				' Article Page :: ' . $articlePage['filename'] .
 				' Title :: ' . $article['title'] .
-				' volume : ' . $article['volume'] . 
+				' volume : ' . $article['volume'] .
 				' page : ' . $article['page']
 			);
 		}
-    }
+	}
 }
-?>
