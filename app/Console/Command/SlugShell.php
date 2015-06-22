@@ -14,6 +14,9 @@ class SlugShell extends AppShell {
 		'Subject'
 	);
 
+/**
+ * Main logic
+ */
 	public function main() {
 		$this->out('SAVING ARTICLES!!');
 
@@ -23,50 +26,50 @@ class SlugShell extends AppShell {
 		));
 
 		$i = 1;
-		$total_count = count($articles);
+		$totalCount = count($articles);
 
-        //die(debug($articles));
-        if($articles) {
-        	foreach($articles AS $article) {
-        		$data = array(
-        			'id' => $article['Article']['id'],
-        			'title' => $article['Article']['title']
-        		);
-        		
-        		if($this->Article->save($data)) {
-        			$this->out('SUCCESSFULLY SAVED ARTICLE (' . $article['Article']['id'] . ')! - ' . $i . '/' . $total_count);
-        		}
-        		$i++;
-        	}
-        }
-        
-        $models = array(
-        	'Author',
-        	'Publication',
-        	'Subject'
-        );
-        
-        if($models) {
-        	foreach($models AS $model) {
-        		$records = $this->{$model}->find('all', array('contain' => false));
-        		
-        		$i = 1;
-        		$record_count = count($records);
-        		
-        	    if($records) {
-		        	foreach($records AS $record) {
-		        		$data = array(
-		        			'id' => $record[$model]['id'],
-		        			'name' => $record[$model]['name']
-		        		);
-		        		
-		        		if($this->{$model}->save($data)) {
-		        			$this->out('SUCCESSFULLY SAVED ' . strtoupper($model) . ' (' . $record[$model]['id'] . ')! - ' . $i . '/' . $record_count);
-		        		}
-		        		$i++;
-		        	}
-		        }
-        	}
-        }
-    }
+		//die(debug($articles));
+		if ($articles) {
+			foreach ($articles as $article) {
+				$data = array(
+					'id' => $article['Article']['id'],
+					'title' => $article['Article']['title']
+				);
+
+				if ($this->Article->save($data)) {
+					$this->out('SUCCESSFULLY SAVED ARTICLE (' . $article['Article']['id'] . ')! - ' . $i . '/' . $totalCount);
+				}
+				$i++;
+			}
+		}
+
+		$models = array(
+			'Author',
+			'Publication',
+			'Subject'
+		);
+
+		if ($models) {
+			foreach ($models as $model) {
+				$records = $this->{$model}->find('all', array('contain' => false));
+
+				$i = 1;
+				$recordCount = count($records);
+
+				if ($records) {
+					foreach ($records as $record) {
+						$data = array(
+							'id' => $record[$model]['id'],
+							'name' => $record[$model]['name']
+						);
+
+						if ($this->{$model}->save($data)) {
+							$this->out('SUCCESSFULLY SAVED ' . strtoupper($model) . ' (' . $record[$model]['id'] . ')! - ' . $i . '/' . $recordCount);
+						}
+						$i++;
+					}
+				}
+			}
+		}
+	}
 }
