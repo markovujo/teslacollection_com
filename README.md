@@ -11,4 +11,4 @@ The "Tesla Collection" is the most comprehensive compilation of newspaper and pe
 Contact
 ------------
 
-contact@teslacollection.com - community mailing list and forum
+contact@teslacollection.com - Contact/support email
