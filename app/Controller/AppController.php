@@ -72,7 +72,7 @@ class AppController extends Controller {
 /**
  * Get All
  * 
- * @param array $params
+ * @param array $params - Params array
  * @return void
  */
 	public function getAll($params = null) {
