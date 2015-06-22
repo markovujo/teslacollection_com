@@ -17,16 +17,13 @@ class ImagesController extends AppController {
  * @var string
  */
 	public $name = 'Images';
-	
-	public function index()
-	{
-		
-		$this->set('layout_no_script', true);	
-	}
 
-	public function search()
-	{
-		
+/**
+ * Index 
+ * 
+ * @return void
+ */
+	public function index() {
+		$this->set('layout_no_script', true);
 	}
 }
-  
