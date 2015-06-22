@@ -1,6 +1,6 @@
 <?php
 /**
- * Subjectss Controller
+ * Users Controller
  */
 
 App::uses('AppController', 'Controller');
@@ -26,29 +26,43 @@ class UsersController extends AppController {
 	public $uses = array(
 		'User'
 	);
-	
+
+/**
+ * Before filter logic
+ * 
+ * @return void
+ */
 	public function beforeFilter() {
-	    parent::beforeFilter();
-	    $this->Auth->allow('*');
+		parent::beforeFilter();
+		$this->Auth->allow('*');
 	}
-	
+
+/**
+ * Login
+ * 
+ * @return void
+ */
 	public function login() {
-        if($this->Session->read('Auth.User')) {
-	        $this->set('user_info', $this->Session->read('Auth.User'));
-	    }
-		
-	    if ($this->request->is('post')) {
-	        if ($this->Auth->login()) {
-	            $this->redirect('/admin/');
-	        } else {
-	            $this->Session->setFlash('Your username or password was incorrect.');
-	        }
-	    }
+		if ($this->Session->read('Auth.User')) {
+			$this->set('user_info', $this->Session->read('Auth.User'));
+		}
+
+		if ($this->request->is('post')) {
+			if ($this->Auth->login()) {
+				$this->redirect('/admin/');
+			} else {
+				$this->Session->setFlash('Your username or password was incorrect.');
+			}
+		}
 	}
-	
+
+/**
+ * Logout
+ * 
+ * @return void
+ */
 	public function logout() {
-	    $this->Session->setFlash('Good-Bye');
+		$this->Session->setFlash('Good-Bye');
 		$this->redirect($this->Auth->logout());
 	}
 }
-  

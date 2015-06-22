@@ -1,6 +1,6 @@
 <?php
 /**
- * Subjectss Controller
+ * Subjects Controller
  */
 
 App::uses('AppController', 'Controller');
