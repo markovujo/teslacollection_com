@@ -20,10 +20,10 @@ before_script:
   - chmod -R 777 ./app/tmp
   - cp app/Config/core_default.php app/Config/core.php
   - cd app
+  - composer self-update
   - composer install
   - cd ..
   - pecl install xdebug
-  - composer self-update
   - composer require 'cakephp/cakephp-codesniffer:1.*'
   - composer require --dev satooshi/php-coveralls:dev-master
   - phpenv rehash
