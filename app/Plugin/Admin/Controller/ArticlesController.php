@@ -1,5 +1,6 @@
 <?php
 App::uses('AdminAppController', 'Admin.Controller');
+
 /**
  * Articles Controller
  *
@@ -7,21 +8,11 @@ App::uses('AdminAppController', 'Admin.Controller');
 class ArticlesController extends AdminAppController {
 
 /**
- * Scaffold
- *
- * @var mixed
+ * Index action
+ * 
+ * @return void
  */
-	//public $scaffold;
-	var $uses = array('Article', 'ArticlesPage', 'ArticlesSubject', 'Page');
-	
-	public function __construct($id = false, $table = NULL, $ds = NULL)
-	{
-		$this->Model = $this->Article;
-		parent::__construct($id, $table, $ds);
-	}
-	
-	public function index()
-	{
-		$this->layout = 'admin';
+	public function index() {
+		$this->set('title_for_layout', 'Admin Panel');
 	}
 }

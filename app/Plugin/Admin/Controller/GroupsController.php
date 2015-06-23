@@ -1,5 +1,6 @@
 <?php
 App::uses('AdminAppController', 'Admin.Controller');
+
 /**
  * Groups Controller
  *
@@ -7,23 +8,9 @@ App::uses('AdminAppController', 'Admin.Controller');
 class GroupsController extends AdminAppController {
 
 /**
- * Scaffold
+ * Uses
  *
- * @var mixed
+ * @var array
  */
-	public $scaffold;
-	
-	var $uses = array('Group');
-	
-	public function __construct($id = false, $table = NULL, $ds = NULL)
-	{
-		$this->Model = $this->User;
-		parent::__construct($id, $table, $ds);
-	}
-	
-	public function beforeFilter() {
-	    parent::beforeFilter();
-	    
-	    //$this->Auth->allow('*');
-	}
+	public $uses = array('Group');
 }

@@ -70,44 +70,33 @@ class AppController extends Controller {
 	}
 
 /**
+ * Set up json response
+ * 
+ * @return void
+ */
+	protected function _setUpJsonResponse() {
+		$this->autoRender = false;
+		$this->layout = 'ajax';
+		$this->RequestHandler->respondAs('json');
+	}
+
+/**
  * Get All
  * 
  * @param array $params - Params array
  * @return void
  */
 	public function getAll($params = null) {
-		$this->autoRender = false;
-		$this->layout = 'ajax';
-		$this->RequestHandler->respondAs('json');
-
-		$model = substr($this->name, 0, -1);
-		$Model = $this->{$model};
 		$conditions = array();
 		$searchField = null;
 
-		App::uses('Sanitize', 'Utility');
-		if (!empty($this->params->query['start'])) {
-			$start = (int)$this->params->query['start'];
-		} else {
-			$start = null;
-		}
+		$start = !empty($this->params->query['start']) ? (int)$this->params->query['start'] : null;
+		$limit = !empty($this->params->query['limit']) ? (int)$this->params->query['limit'] : null;
+		$page = !empty($this->params->query['page']) ? (int)$this->params->query['page'] : null;
 
-		if (!empty($this->params->query['limit'])) {
-			$limit = (int)$this->params->query['limit'];
-		} else {
-			$limit = null;
-		}
-
-		if (!empty($this->params->query['page'])) {
-			$page = (int)$this->params->query['page'];
-		} else {
-			$page = null;
-		}
-
+		$offset = null;
 		if (!empty($this->params->query['page'])) {
 			$offset = ((int)$this->params->query['page'] - 1) * $limit;
-		} else {
-			$offset = null;
 		}
 
 		if (!empty($this->params->query['query'])) {
@@ -133,6 +122,7 @@ class AppController extends Controller {
 			$page = null;
 		}
 
+		App::uses('Sanitize', 'Utility');
 		if (!empty($this->params->query['filter'])) {
 			foreach ($this->params->query['filter'] as $filter) {
 				if (isset($filter['data']['comparison'])) {
@@ -162,13 +152,14 @@ class AppController extends Controller {
 			}
 		}
 
+		$this->Model = ClassRegistry::init($this->modelClass);
 		$order = array($this->Model->name . '.id');
 		if (!is_null($searchField)) {
 			$order = array($this->Model->name . '.' . $searchField);
 		}
 
 		//die(debug($conditions));
-		$records = $Model->find('all', array(
+		$records = $this->Model->find('all', array(
 			'conditions' => $conditions,
 			'contain' => false,
 			'limit' => $limit,
@@ -176,7 +167,7 @@ class AppController extends Controller {
 			'order' => $order
 		));
 
-		$totalCount = $Model->find('count');
+		$totalCount = $this->Model->find('count');
 
 		$results = array(
 			'totalCount' => $totalCount,
@@ -184,6 +175,7 @@ class AppController extends Controller {
 			'records' => $records
 		);
 
+		$this->_setUpJsonResponse();
 		return (json_encode($results));
 	}
 }

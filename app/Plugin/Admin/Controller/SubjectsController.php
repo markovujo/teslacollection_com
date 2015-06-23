@@ -1,5 +1,6 @@
 <?php
 App::uses('AdminAppController', 'Admin.Controller');
+
 /**
  * Subjects Controller
  *
@@ -7,21 +8,9 @@ App::uses('AdminAppController', 'Admin.Controller');
 class SubjectsController extends AdminAppController {
 
 /**
- * Scaffold
+ * Uses
  *
- * @var mixed
+ * @var array
  */
-	//public $scaffold;
-	var $uses = array('Subject');
-	
-	public function __construct($id = false, $table = NULL, $ds = NULL)
-	{
-		$this->Model = $this->Subject;
-		parent::__construct($id, $table, $ds);
-	}
-	
-	public function index()
-	{
-		$this->layout = 'admin';
-	}
+	public $uses = array('Subject');
 }
