@@ -6,3 +6,5 @@ exclude_paths:
 - "app/Plugin/Admin/webroot/js/ext/*"
 - "app/Plugin/Admin/webroot/js/jqsuite/*"
 - "app/Plugin/acl_extras/*"
+- "app/webroot/index.php"
+- "app/webroot/test.php"
