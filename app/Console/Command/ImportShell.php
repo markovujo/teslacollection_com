@@ -14,6 +14,15 @@ class ImportShell extends AppShell {
 		'Article',
 		'ArticlePage'
 	);
+	
+	public function truncateTables() {
+		$this->Article->query("TRUNCATE TABLE articles");
+		$this->Article->query("TRUNCATE TABLE article_pages");
+		$this->Article->query("TRUNCATE TABLE publications");
+		$this->Article->query("TRUNCATE TABLE authors");
+		$this->Article->query("TRUNCATE TABLE subjects");
+		$this->Article->query("TRUNCATE TABLE articles_subjects");
+	}
 
 /**
  * Main logic
@@ -35,13 +44,7 @@ class ImportShell extends AppShell {
 
 		mysql_select_db("teslacollection", $con);
 
-		#TRUNCATE TABLES FOR IMPORT
-		$result = $this->Article->query("TRUNCATE TABLE articles");
-		$result = $this->Article->query("TRUNCATE TABLE article_pages");
-		$result = $this->Article->query("TRUNCATE TABLE publications");
-		$result = $this->Article->query("TRUNCATE TABLE authors");
-		$result = $this->Article->query("TRUNCATE TABLE subjects");
-		$result = $this->Article->query("TRUNCATE TABLE articles_subjects");
+		$this->truncateTables();
 
 		$result = mysql_query("select * from tmp_articles ORDER BY volume, page");
 
