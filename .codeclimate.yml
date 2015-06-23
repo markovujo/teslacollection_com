@@ -3,7 +3,7 @@ languages:
   JavaScript: true
   PHP: true
 exclude_paths:
-- "lib"
-- "app/Test"
-- "app/Plugin/Admin/webroot/js/ext/"
-- "app/Plugin/Admin/webroot/js/jqsuite"
+- "lib/*"
+- "app/Test/*"
+- "app/Plugin/Admin/webroot/js/ext/*"
+- "app/Plugin/Admin/webroot/js/jqsuite/*"
