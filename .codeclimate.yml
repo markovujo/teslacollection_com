@@ -5,3 +5,5 @@ languages:
 exclude_paths:
 - "lib"
 - "app/Test"
+- "app/Plugin/Admin/webroot/js/ext/"
+- "app/Plugin/Admin/webroot/js/jqsuite"
