@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/markovujo/teslacollection_com.svg?branch=master)](https://travis-ci.org/markovujo/teslacollection_com)
 [![Coverage Status](https://coveralls.io/repos/markovujo/teslacollection_com/badge.svg)](https://coveralls.io/r/markovujo/teslacollection_com)
+[![Code Climate](https://codeclimate.com/github/markovujo/teslacollection_com/badges/gpa.svg)](https://codeclimate.com/github/markovujo/teslacollection_com)
 
 TeslaCollection.com
 =======
