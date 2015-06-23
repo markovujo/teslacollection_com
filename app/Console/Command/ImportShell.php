@@ -14,7 +14,12 @@ class ImportShell extends AppShell {
 		'Article',
 		'ArticlePage'
 	);
-	
+
+/**
+ * Truncate tables
+ * 
+ * @return void
+ */
 	public function truncateTables() {
 		$this->Article->query("TRUNCATE TABLE articles");
 		$this->Article->query("TRUNCATE TABLE article_pages");
