@@ -3,6 +3,7 @@ languages:
 exclude_paths:
 - "lib/*"
 - "app/Test/*"
+- "app/Config/Schema/db_acl.php"
 - "app/Plugin/Admin/webroot/js/ext/*"
 - "app/Plugin/Admin/webroot/js/jqsuite/*"
 - "app/Plugin/acl_extras/*"
