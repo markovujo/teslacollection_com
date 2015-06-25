@@ -25,14 +25,4 @@ class PublicationsController extends AppController {
 	public $uses = array(
 		'Publication'
 	);
-
-/**
- * Before filter logic
- * 
- * @return void
- */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$this->Auth->allow('*');
-	}
 }

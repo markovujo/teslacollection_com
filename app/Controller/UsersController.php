@@ -28,16 +28,6 @@ class UsersController extends AppController {
 	);
 
 /**
- * Before filter logic
- * 
- * @return void
- */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$this->Auth->allow('*');
-	}
-
-/**
  * Login
  * 
  * @return void

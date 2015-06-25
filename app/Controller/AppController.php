@@ -56,6 +56,7 @@ class AppController extends Controller {
  * @return void
  */
 	public function beforeFilter() {
+		parent::beforeFilter();
 		$this->Auth->allow('*');
 	}
 
@@ -90,6 +91,9 @@ class AppController extends Controller {
 		$conditions = array();
 		$searchField = null;
 
+		$this->Model = ClassRegistry::init($this->modelClass);
+
+		App::uses('Sanitize', 'Utility');
 		$start = !empty($this->params->query['start']) ? (int)$this->params->query['start'] : null;
 		$limit = !empty($this->params->query['limit']) ? (int)$this->params->query['limit'] : null;
 		$page = !empty($this->params->query['page']) ? (int)$this->params->query['page'] : null;
@@ -107,7 +111,7 @@ class AppController extends Controller {
 
 			if (!empty($modelSearchFields)) {
 				foreach ($modelSearchFields as $modelSearchField) {
-					if ($Model->hasField($modelSearchField)) {
+					if ($this->Model->hasField($modelSearchField)) {
 						$searchField = $modelSearchField;
 					}
 				}
@@ -115,14 +119,13 @@ class AppController extends Controller {
 
 			if (!is_null($searchField)) {
 				$query = Sanitize::escape($this->params->query['query']);
-				$conditions['or'][] = array($model . '.' . $searchField . ' LIKE' => "%$query%");
-				$conditions['or'][] = array($model . '.' . $searchField => $query);
+				$conditions['or'][] = array($this->modelClass . '.' . $searchField . ' LIKE' => "%$query%");
+				$conditions['or'][] = array($this->modelClass . '.' . $searchField => $query);
 			}
 		} else {
 			$page = null;
 		}
 
-		App::uses('Sanitize', 'Utility');
 		if (!empty($this->params->query['filter'])) {
 			foreach ($this->params->query['filter'] as $filter) {
 				if (isset($filter['data']['comparison'])) {
@@ -152,7 +155,6 @@ class AppController extends Controller {
 			}
 		}
 
-		$this->Model = ClassRegistry::init($this->modelClass);
 		$order = array($this->Model->name . '.id');
 		if (!is_null($searchField)) {
 			$order = array($this->Model->name . '.' . $searchField);

@@ -61,9 +61,7 @@ class AdminAppController extends AppController {
 		return array(
 			'success' => true,
 			'errors' => array(),
-			'records' => array(
-				$this->modelClass => array()
-			)
+			'records' => array()
 		);
 	}
 
@@ -175,7 +173,7 @@ class AdminAppController extends AppController {
 								$response['records'][$type] = array();
 							}
 
-							$response['records'][$type][] = $result[$AssociationModel->name]['id'];
+							$response['records'][$type][] = $result[$AssociationModel->alias]['id'];
 						}
 					}
 				}
@@ -216,6 +214,7 @@ class AdminAppController extends AppController {
 			}
 		}
 
+		//die(debug($response));
 		$response['success'] = empty($response['errors']);
 		$this->_setUpJsonResponse();
 		return (json_encode($response));
@@ -238,11 +237,12 @@ class AdminAppController extends AppController {
 				if (isset($data['article_id']) && $data['article_id'] > 0 && isset($data['association_id']) && $data['association_id'] > 0) {
 					$results = $AssociationModel->find('all', array(
 						'conditions' => array(
-							'article_id' => $data['article_id'],
-							$associationKey => $data['association_id']
+							'article_id' => (int)$data['article_id'],
+							$associationKey => (int)$data['association_id']
 						)
 					));
 
+					//die(debug($results));
 					if ($results) {
 						foreach ($results as $result) {
 							if ($AssociationModel->delete($result[$AssociationModel->name]['id'])) {
@@ -256,6 +256,8 @@ class AdminAppController extends AppController {
 								$errors[] = $AssociationModel->invalidFields();
 							}
 						}
+					} else {
+						$response['errors'][] = 'Record (' . $associationKey . ' - ' . $data['association_id'] . ') not found!';
 					}
 				}
 			}

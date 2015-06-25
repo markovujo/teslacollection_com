@@ -34,27 +34,7 @@ class ArticlePagesController extends AppController {
  * @return void
  */
 	public function view($id) {
-		$articlePage = $this->Page->find('first', array(
-			'conditions' => array(
-				'Page.id' => (int)$id
-			)
-		));
-
-		if ($articlePage) {
-			$this->viewClass = 'Media';
-			$path = str_replace('/var/www/html/teslacollection_com/app/', '', $articlePage['Page']['full_path']);
-			$path = substr($path, 0, strrpos($path, '/')) . DS;
-			$name = str_replace('.jpg', '', $articlePage['Page']['filename']);
-
-			$params = array(
-				'id' => $articlePage['Page']['filename'],
-				'name' => $name,
-				'download' => true,
-				'extension' => 'jpg',
-				'path' => $path
-			);
-			$this->set($params);
-		}
+		return $this->__viewPage($id, $download = true);
 	}
 
 /**
@@ -64,6 +44,17 @@ class ArticlePagesController extends AppController {
  * @return void
  */
 	public function view_thumbnail($id) {
+		return $this->__viewPage($id, $download = false);
+	}
+
+/**
+ * View Page
+ * 
+ * @param type $id - Page.id
+ * @param bool $download - Boolean whether page is downloaded or not
+ * @return void
+ */
+	private function __viewPage($id, $download = false) {
 		$articlePage = $this->Page->find('first', array(
 			'conditions' => array(
 				'Page.id' => (int)$id
@@ -79,11 +70,12 @@ class ArticlePagesController extends AppController {
 			$params = array(
 				'id' => $articlePage['Page']['filename'],
 				'name' => $name,
-				'download' => false,
+				'download' => $download,
 				'extension' => 'jpg',
 				'path' => $path
 			);
 
+			//die(debug($articlePage['Page']['filename']));
 			$this->set($params);
 		}
 	}

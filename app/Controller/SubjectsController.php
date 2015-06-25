@@ -25,14 +25,4 @@ class SubjectsController extends AppController {
 	public $uses = array(
 		'Subject'
 	);
-
-/**
- * Before filter logic
- * 
- * @return void
- */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$this->Auth->allow('*');
-	}
 }

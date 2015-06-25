@@ -25,14 +25,4 @@ class AuthorsController extends AppController {
 	public $uses = array(
 		'Author'
 	);
-
-/**
- * Before filter logic
- * 
- * @return void
- */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$this->Auth->allow('*');
-	}
 }
