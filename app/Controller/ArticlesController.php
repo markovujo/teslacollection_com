@@ -30,13 +30,11 @@ class ArticlesController extends AppController {
 	);
 
 /**
- * Index 
+ * Get Search selections
  * 
- * @return void
+ * @return array
  */
-	public function index() {
-		$this->set('title_for_layout', 'the most comprehensive compilation of newspaper and periodical material ever assembled by or about Nikola Tesla');
-
+	protected function _getSearchSelections() {
 		$selections = array(
 			'author' => array(),
 			'publication' => array(),
@@ -59,10 +57,7 @@ class ArticlesController extends AppController {
 				$selections[$id]['ALL'] = '-- ALL --';
 				if ($results) {
 					foreach ($results as $result) {
-						$recordId = $result[$Model]['id'];
-						$recordValue = $result[$Model]['name'];
-
-						$selections[$id][$recordId] = $recordValue;
+						$selections[$id][$result[$Model]['id']] = $result[$Model]['name'];
 					}
 				}
 			}
@@ -78,11 +73,22 @@ class ArticlesController extends AppController {
 		$selections['year']['ALL'] = '-- ALL --';
 		if ($years) {
 			foreach ($years as $year) {
-				$id = $year['Article']['year'];
-				$value = $year['Article']['year'];
-				$selections['year'][$id] = $value;
+				$selections['year'][$year['Article']['year']] = $year['Article']['year'];
 			}
 		}
+
+		return $selections;
+	}
+
+/**
+ * Index 
+ * 
+ * @return void
+ */
+	public function index() {
+		$this->set('title_for_layout', 'the most comprehensive compilation of newspaper and periodical material ever assembled by or about Nikola Tesla');
+
+		$selections = $this->_getSearchSelections();
 
 		if (isset($this->data['ArticleSearch']) && !empty($this->data['ArticleSearch'])) {
 			$searchResults = $this->Article->search($this->data['ArticleSearch']);
@@ -116,55 +122,9 @@ class ArticlesController extends AppController {
  * @return void
  */
 	public function search() {
-		$this->autoRender = false;
-		$this->layout = 'ajax';
-		$this->RequestHandler->respondAs('json');
-
 		$searchResults = array();
 
-		$selections = array(
-			'author' => array(),
-			'publication' => array(),
-			'subject' => array()
-		);
-
-		$ids = array_keys($selections);
-		if (!empty($ids)) {
-			foreach ($ids as $id) {
-				$Model = ucwords($id);
-				$results = $this->{$Model}->find('all', array(
-					'fields' => array(
-						$Model . '.id',
-						$Model . '.name'
-					),
-					'contain' => array(),
-					'order' => array($Model . '.name')
-				));
-
-				if ($results) {
-					foreach ($results as $result) {
-						$recordId = $result[$Model]['id'];
-						$recordValue = $result[$Model]['name'];
-						$selections[$id][$recordId] = $recordValue;
-					}
-				}
-			}
-		}
-
-		$years = $this->Article->find('all', array(
-			'fields' => array('Article.year'),
-			'group' => 'Article.year',
-			'contain' => false,
-			'order' => array('Article.year')
-		));
-
-		if ($years) {
-			foreach ($years as $year) {
-				$id = $year['Article']['year'];
-				$value = $year['Article']['year'];
-				$selections['year'][$id] = $value;
-			}
-		}
+		$selections = $this->_getSearchSelections();
 
 		if (isset($this->data['ArticleSearch']) && !empty($this->data['ArticleSearch'])) {
 			$searchResults = $this->Article->search($this->data['ArticleSearch']);
@@ -186,6 +146,7 @@ class ArticlesController extends AppController {
 			}
 		}
 
+		$this->_setUpJsonResponse();
 		return (json_encode($searchResults));
 	}
 
