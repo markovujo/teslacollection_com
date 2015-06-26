@@ -60,7 +60,8 @@ after_success:
   - ls -ls build/logs
   - cat .coveralls.yml
 #  - php vendor/bin/coveralls -c .coveralls.yml -v;
-  - CODECLIMATE_REPO_TOKEN=b2e647d5b18416efb1957e123a3d61dc95f276fccebd83c3d777a0c9b983d6f8 ./vendor/bin/test-reporter
+  - CODECLIMATE_REPO_TOKEN=b2e647d5b18416efb1957e123a3d61dc95f276fccebd83c3d777a0c9b983d6f8 ./vendor/bin/test-reporter --stdout > codeclimate.json
+  - "curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports"
 
 notifications:
   email:
