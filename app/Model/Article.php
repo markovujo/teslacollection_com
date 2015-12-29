@@ -80,7 +80,7 @@ class Article extends AppModel {
 			'Publication' => array('fields' => array('id', 'name', 'url')),
 			'Subject' => array('fields' => array('id', 'name', 'url')),
 			'Page' => array(
-				'fields' => array('id', 'filename', 'ArticlesPage.id')
+				'fields' => array('id', 'filename', 'ArticlesPage.id', 'path')
 			),
 		);
 

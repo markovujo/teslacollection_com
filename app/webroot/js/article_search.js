@@ -73,7 +73,8 @@ $(function() {
 				   
 				   var article_page_text = '';
 				   for (var i = 0; i < article['Page'].length; i++) {
-					   var link = '<a href="' + document.URL  + '/article_pages/view/' + article['Page'][i]['id'] + '" ' +
+					   var image_url = 'http://s3.amazonaws.com/teslacollection/' + article['Page'][i]['path']; 
+					   var link = '<a href="' + image_url + '" ' +
 				   		'class="tooltip_selector" ' +
 				   		'title="' + article['Article']['title'] + ' - ' + i + '" ' +
 				   		'data-geo="" ' +
@@ -82,7 +83,6 @@ $(function() {
 				   }
 				   
 				   html_rows += "<tr>" +
-				   		//"<td><a href='" + document.URL + "articles/view/" + article['Article']['id'] + "' style='color : #d82323'>" + article['Article']['title'] + "</a></td>" +
 				        "<td><a href='" + document.URL + article['Article']['full_url'] + "' style='color : #d82323'>" + article['Article']['title'] + "</a></td>" +
 				   		"<td>" + article['Article']['volume'] + "</td>" +
 				   		"<td>" + article['Article']['page'] + "</td>" +
@@ -117,7 +117,8 @@ $(function() {
            			
            			if ( element.is( "[data-id]" ) ) {
            				var id = element.data('id');
-           				return '<img class="tooltip_thumbnail" alt="' + title + '" src="' + document.URL + '/article_pages/view_thumbnail/' + id + '">';
+					var image_url = element.attr('href');
+           				return '<img class="tooltip_thumbnail" alt="' + title + '" src="' + image_url + '">';
            			}
            		},
            		position: { my: "right-15 top-100", at: "left top", collision: "flip" }

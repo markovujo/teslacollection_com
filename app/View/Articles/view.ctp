@@ -26,11 +26,11 @@
 		<?php foreach($article['Page'] AS $page) :?>
 			<div>
 				<?php $itemprop = ($i == 1) ? 'itemprop="image"' : ''; ?>
-				<img src="<?php echo Configure::read('Server.uri');?>/article_pages/view/<?php echo $page['id']?>" alt="<?php echo $article['Article']['title'] . '_' . $i; ?>" <?php echo $itemprop; ?> />
+				<img src="<?php echo 'http://s3.amazonaws.com/teslacollection/' . $page['path']; ?>" alt="<?php echo $article['Article']['title'] . '_' . $i; ?>" <?php echo $itemprop; ?> width="850px" />
 			</div>
 			<?php 
-				$article_text = isset($page['text']) ? $page['text'] : '';
-				$full_article_text .= ' <p>' . $article_text  . '</p>'; 
+				//$article_text = isset($page['text']) ? $page['text'] : '';
+				//$full_article_text .= ' <p>' . $article_text  . '</p>'; 
 				$i++;
 			?>
 		<?php endforeach;?>
