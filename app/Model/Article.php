@@ -80,7 +80,7 @@ class Article extends AppModel {
 			'Publication' => array('fields' => array('id', 'name', 'url')),
 			'Subject' => array('fields' => array('id', 'name', 'url')),
 			'Page' => array(
-				'fields' => array('id', 'filename', 'ArticlesPage.id', 'path')
+				'fields' => array('id', 'filename', 'ArticlesPage.id', "full_path AS path")
 			),
 		);
 
@@ -201,6 +201,9 @@ class Article extends AppModel {
 		if (!empty($return['articles'])) {
 			foreach ($return['articles'] as &$article) {
 				if (isset($article['Page']) && !empty($article['Page'])) {
+					foreach($article['Page'] as &$page) {
+						$page['path'] = str_replace("/var/www/html/teslacollection_com/app/files/tesla_collection/","",$page['path']);
+					}
 					$article['Page'] = Set::sort($article['Page'], '{n}.filename', 'asc');
 				}
 			}

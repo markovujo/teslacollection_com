@@ -26,7 +26,7 @@
 		<?php foreach($article['Page'] AS $page) :?>
 			<div>
 				<?php $itemprop = ($i == 1) ? 'itemprop="image"' : ''; ?>
-				<img src="<?php echo 'http://s3.amazonaws.com/teslacollection/' . $page['path']; ?>" alt="<?php echo $article['Article']['title'] . '_' . $i; ?>" <?php echo $itemprop; ?> width="850px" />
+				<img src="<?php echo 'http://s3.amazonaws.com/teslacollection/' . str_replace("/var/www/html/teslacollection_com/app/files/tesla_collection/", "", $page['full_path']); ?>" alt="<?php echo $article['Article']['title'] . '_' . $i; ?>" <?php echo $itemprop; ?> width="850px" />
 			</div>
 			<?php 
 				//$article_text = isset($page['text']) ? $page['text'] : '';
