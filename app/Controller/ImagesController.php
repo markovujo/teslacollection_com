@@ -26,4 +26,8 @@ class ImagesController extends AppController {
 	public function index() {
 		$this->set('layout_no_script', true);
 	}
+
+	public function search() {
+
+	}
 }
